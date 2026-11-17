@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lumio</string>
+    <string name="explore">Explore</string>
+    <string name="swipe">Swipe</string>
+    <string name="genie">Genie</string>
+    <string name="arcade">Arcade</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="unseen">Not seen yet</string>
+    <string name="undo">Undo</string>
+    <string name="history">Your choices</string>
+    <string name="back">Back</string>
+    <string name="sound_on">Sound on</string>
+    <string name="sound_off">Sound off</string>
+    <string name="pause">Pause</string>
+    <string name="trivia">Trivia</string>
+    <string name="poster_puzzle">Poster Puzzle</string>
+    <string name="sort">Sort</string>
+    <string name="close">Close</string>
+    <string name="view_source">View source</string>
+    <string name="resume">Resume</string>
+    <string name="play_again">Play again</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+    <string name="offline">Offline</string>
+    <string name="loading">Loading</string>
+    <string name="selection_active">Selected</string>
+    <string name="genie_recommendations">Genie recommendations</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="loading_catalog">Connecting to the movie catalog…</string>
+    <string name="connection_error">Could not connect to the movie catalog. Check your connection and try again.</string>
+    <string name="retry">Retry</string>
+    <string name="catalog_connected">Catalog connected · Movies: %1$d</string>
+    <string name="check_connection">Check connection</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lumio</string>
+    <string name="explore">Entdecken</string>
+    <string name="swipe">Wischen</string>
+    <string name="genie">Genie</string>
+    <string name="arcade">Arcade</string>
+    <string name="settings">Einstellungen</string>
+    <string name="search">Suchen</string>
+    <string name="filter">Filtern</string>
+    <string name="like">Gefällt mir</string>
+    <string name="dislike">Gefällt mir nicht</string>
+    <string name="unseen">Noch nicht gesehen</string>
+    <string name="undo">Rückgängig</string>
+    <string name="history">Deine Auswahl</string>
+    <string name="back">Zurück</string>
+    <string name="sound_on">Ton an</string>
+    <string name="sound_off">Ton aus</string>
+    <string name="pause">Pausieren</string>
+    <string name="trivia">Filmquiz</string>
+    <string name="poster_puzzle">Poster-Puzzle</string>
+    <string name="sort">Sortieren</string>
+    <string name="close">Schließen</string>
+    <string name="view_source">Quelle ansehen</string>
+    <string name="resume">Fortsetzen</string>
+    <string name="play_again">Erneut spielen</string>
+    <string name="light">Hell</string>
+    <string name="dark">Dunkel</string>
+    <string name="system">System</string>
+    <string name="offline">Offline</string>
+    <string name="loading">Wird geladen</string>
+    <string name="selection_active">Ausgewählt</string>
+    <string name="genie_recommendations">Genie-Empfehlungen</string>
+    <string name="coming_soon">Demnächst</string>
+    <string name="loading_catalog">Verbindung zum Filmkatalog wird hergestellt…</string>
+    <string name="connection_error">Der Filmkatalog konnte nicht erreicht werden. Prüfe deine Verbindung und versuche es erneut.</string>
+    <string name="retry">Erneut versuchen</string>
+    <string name="catalog_connected">Katalog verbunden · Filme: %1$d</string>
+    <string name="check_connection">Verbindung prüfen</string>
+</resources>

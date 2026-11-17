@@ -25,3 +25,7 @@ The following references remain in the local workspace and are not included in t
 - [Stitch references](stitch/13911445762657244453/README.md): export metadata and local reference notes. Screen exports remain ignored because they may contain movie/poster imagery.
 
 Saving exploratory material does not approve its design or authorize native app implementation.
+
+## Native Android foundation
+
+Stage 0 applies the approved palette, typography and icons in the native shell. These [device screenshots](../validation/screenshots/stage-0/) document implementation checks, not new approved design decisions. See [validation](../validation/android.md) for scope and limitations.

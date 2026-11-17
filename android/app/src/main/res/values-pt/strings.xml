@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lumio</string>
+    <string name="explore">Explorar</string>
+    <string name="swipe">Deslizar</string>
+    <string name="genie">Genie</string>
+    <string name="arcade">Arcade</string>
+    <string name="settings">Configurações</string>
+    <string name="search">Buscar</string>
+    <string name="filter">Filtrar</string>
+    <string name="like">Gostei</string>
+    <string name="dislike">Não gostei</string>
+    <string name="unseen">Ainda não vi</string>
+    <string name="undo">Desfazer</string>
+    <string name="history">Suas escolhas</string>
+    <string name="back">Voltar</string>
+    <string name="sound_on">Som ativado</string>
+    <string name="sound_off">Som desativado</string>
+    <string name="pause">Pausar</string>
+    <string name="trivia">Trivia</string>
+    <string name="poster_puzzle">Quebra-cabeça de pôster</string>
+    <string name="sort">Ordenar</string>
+    <string name="close">Fechar</string>
+    <string name="view_source">Ver fonte</string>
+    <string name="resume">Retomar</string>
+    <string name="play_again">Jogar novamente</string>
+    <string name="light">Claro</string>
+    <string name="dark">Escuro</string>
+    <string name="system">Sistema</string>
+    <string name="offline">Sem conexão</string>
+    <string name="loading">Carregando</string>
+    <string name="selection_active">Selecionado</string>
+    <string name="genie_recommendations">Recomendações do Genie</string>
+    <string name="coming_soon">Em breve</string>
+    <string name="loading_catalog">Conectando ao catálogo de filmes…</string>
+    <string name="connection_error">Não foi possível conectar ao catálogo de filmes. Verifique sua conexão e tente novamente.</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="catalog_connected">Catálogo conectado · Filmes: %1$d</string>
+    <string name="check_connection">Verificar conexão</string>
+</resources>

@@ -4,13 +4,17 @@ At [Master.dev](https://master.dev) · By [Maximiliano Firtman](https://firt.dev
 
 [Workshop slides (PDF)](slides/MasterDev-AgenticMobile.pdf)
 
-Lumio is an offline-capable film discovery app where people explore a catalog, swipe to record preferences, get personal recommendations, and play cinema games. Use the design prompts below to define the rest of the app’s identity.
+Lumio is a film discovery app where people explore a catalog, swipe to record preferences, get personal recommendations, and play cinema games. Use the design prompts below to define the rest of the app’s identity.
 
 The owner selected **Lumio**, the **Taste Ticket** logo direction, and **variation C — Editorial**. See the [branding decision document](design/branding/DECISIONS.md) for the selected design, visual reference, and remaining decisions.
 
 The [design index](design/README.md) brings together approved colors, typography, icons, interactive previews, and exploratory screen references.
 
 This repository contains a UX brief, design prompts, and a local Node.js catalog API. Catalog data is downloaded during setup rather than bundled in the repository. Android and iOS are independent native apps using their respective SDKs.
+
+## Android implementation
+
+The owner’s [staged Android plan](docs/ANDROID-PLAN.md) uses native Kotlin and Compose, package `dev.master.lumio`, and SDK 26/36/36. Android catalog access is online-only: no bundled or persisted catalog. Ratings and settings remain on device as their stages are implemented. This owner decision supersedes the original brief’s offline behavior for Android. See [Android setup](android/README.md) and [validation](validation/android.md).
 
 ## App UX brief
 
