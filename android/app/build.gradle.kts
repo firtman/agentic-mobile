@@ -42,6 +42,7 @@ kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarg
 
 dependencies {
     implementation(platform(libs.compose.bom))
+    implementation(libs.datastore)
     implementation(libs.core)
     implementation(libs.activity)
     implementation(libs.lifecycle.runtime)

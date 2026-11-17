@@ -1,6 +1,7 @@
 package dev.master.lumio.ui.trivia
 
 import android.os.SystemClock
+import dev.master.lumio.ui.arcade.GameCue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.master.lumio.data.Catalog
@@ -24,6 +25,8 @@ class TriviaViewModel(
     private val questionCount: Int = 5,
     private val secondsPerQuestion: Int = 20,
 ) : ViewModel() {
+    private val cues = MutableSharedFlow<GameCue>(extraBufferCapacity = 4)
+    val sounds = cues.asSharedFlow()
     private val mutableState = MutableStateFlow<TriviaState>(TriviaState.Ready)
     val state = mutableState.asStateFlow()
     private var loadJob: Job? = null
@@ -85,7 +88,12 @@ class TriviaViewModel(
     fun next() { syncClock(); transform { it.next() }; lastTick = clock() }
 
     private fun transform(action: (TriviaRound) -> TriviaRound) {
-        mutableState.update { if (it is TriviaState.Playing) TriviaState.Playing(action(it.round)) else it }
+        val old = (state.value as? TriviaState.Playing)?.round ?: return
+        val next = action(old)
+        mutableState.value = TriviaState.Playing(next)
+        if (old.phase == TriviaPhase.QUESTION && next.phase == TriviaPhase.FEEDBACK) {
+            cues.tryEmit(if (next.selected == next.question.answerIndex) GameCue.CORRECT else GameCue.INCORRECT)
+        }
     }
 
     private fun syncClock() {

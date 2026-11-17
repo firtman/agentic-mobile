@@ -1,6 +1,6 @@
 # Lumio Android
 
-Stage 1 Explore implementation on the approved foundation for the [owner's plan](../docs/ANDROID-PLAN.md). Native Kotlin, Compose and Material 3; namespace/applicationId `dev.master.lumio`; min/compile/target SDK 26/36/36. Explore now provides search by title/director/cast, genre filters, six sort orders, spotlight, and a 24-item paged poster grid. Stage 2 adds movie details and on-device ratings: grid cards and the spotlight open details, where Like / Dislike / Not seen yet are saved in Room with Undo. Swipe, Genie, Arcade and Settings remain placeholders.
+Stages 0–8 implementation following the approved foundation for the [owner's plan](../docs/ANDROID-PLAN.md). Native Kotlin, Compose and Material 3; namespace/applicationId `dev.master.lumio`; min/compile/target SDK 26/36/36. Explore now provides search by title/director/cast, genre filters, six sort orders, spotlight, and a 24-item paged poster grid. Stage 2 adds movie details and on-device ratings: grid cards and the spotlight open details, where Like / Dislike / Not seen yet are saved in Room with Undo. Swipe, Your choices, Genie, Arcade/Trivia, Poster Puzzle and Settings are implemented.
 
 ## Build and run
 
@@ -28,7 +28,7 @@ Install `app/build/outputs/apk/debug/app-debug.apk` on an Android emulator. Debu
 
 `LumioApplication` owns a small manual container. `CatalogApi` models health, paged movies, details, genres and catalog responses. `CatalogRepository` lazily loads the full catalog once into process memory with concurrent requests serialized; failed loads can be retried. Its large response uses a dedicated stream decoder before Retrofit's normal converter. No HTTP disk cache, catalog asset, catalog database or catalog file is used.
 
-Ratings, the undo log, and rated-movie snapshots are stored on the device in Room (`lumio.db`, excluded from backup and device transfer); the exported schema lives in `app/schemas/` and must be committed with schema changes. Settings persistence belongs to a later stage. Catalog text is not translated. Missing metadata remains empty/zero in models for screens to hide; poster/source URLs are preserved verbatim. Source provenance remains documented in [SOURCE-ATTRIBUTION.md](../data/SOURCE-ATTRIBUTION.md).
+Ratings, the undo log, and rated-movie snapshots are stored on the device in Room (`lumio.db`, excluded from backup and device transfer); the exported schema lives in `app/schemas/` and must be committed with schema changes. Appearance and game sound preferences are stored locally in Preferences DataStore. Catalog text is not translated. Missing metadata remains empty/zero in models for screens to hide; poster/source URLs are preserved verbatim. Source provenance remains documented in [SOURCE-ATTRIBUTION.md](../data/SOURCE-ATTRIBUTION.md).
 
 Navigation Compose uses serializable routes and saved destination state. The adaptive navigation suite selects a bottom bar or rail; Settings opens full screen and Back restores the previous destination. Theme follows system appearance in stage 0. Bundled typefaces and 29 converted Lucide icons follow the approved specifications; the launcher uses the approved raster symbol as an **interim** asset. See [asset provenance](ASSETS.md).
 
@@ -43,7 +43,7 @@ Dependencies are pinned in `gradle/libs.versions.toml`. SDK 36 is an owner requi
 - [Retrofit 3.0.0 source](https://github.com/square/retrofit/tree/3.0.0)
 - [Kotlin serialization 1.9.0](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.9.0)
 
-Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved and pushed as `d47edb4` on 2026-11-17. Stage 5 (Genie) was approved and pushed as `864a7c5` on 2026-11-17. Stage 6 (Arcade hub and Trivia) was approved for commit/push on 2026-11-17 and stage 7 was authorized.
+Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved and pushed as `d47edb4` on 2026-11-17. Stage 5 (Genie) was approved and pushed as `864a7c5` on 2026-11-17. Stage 6 (Arcade hub and Trivia) was approved and pushed as `4a937a7` on 2026-11-17. The owner approved stages 7 (Poster Puzzle) and 8 (Settings) for commit and push on 2026-11-17. Stage 9 remains unstarted at the owner’s direction.
 
 ## Explore behavior
 
@@ -95,8 +95,27 @@ Changes from details, Swipe or history trigger fresh scoring on `Dispatchers.Def
 
 ## Arcade and Trivia behavior
 
-The owner selected five questions per round with 20 seconds each. The hub opens Trivia and marks Poster Puzzle as coming soon (stage 7). Trivia validates supplied questions (nonblank prompt/id, four distinct nonblank options, valid answer index), removes duplicate question ids, then samples five using Kotlin Random. Fewer than five valid questions produces an unavailable state. The existing lazy in-memory catalog is shared with Genie; no questions, rounds or scores are persisted or bundled.
+The owner selected five questions per round with 20 seconds each. The hub opens Trivia and Poster Puzzle. Trivia validates supplied questions (nonblank prompt/id, four distinct nonblank options, valid answer index), removes duplicate question ids, then samples five using Kotlin Random. Fewer than five valid questions produces an unavailable state. The existing lazy in-memory catalog is shared with Genie; no questions, rounds or scores are persisted or bundled.
 
 A correct answer gives 100 points. Consecutive correct answers add 25 per answer after the first, capped at 100 extra (five perfect answers total 750). A wrong answer or timeout gives zero and resets the streak. One 50:50 per round removes two wrong choices and stays used for the rest of that round. Feedback identifies the correct answer and earned points; it advances after four seconds unless Keep reading is selected. Next / See results allow explicit advance. Play again clears score, streak and lifeline and samples a fresh round (individual questions may recur between rounds).
 
 The controller synchronizes against `SystemClock.elapsedRealtime` before inputs as well as on periodic updates, so a tap after the deadline cannot earn points. Pause and lifecycle visibility changes stop timer polling; returning requires explicit Resume and paused screens hide the question. The ViewModel belongs to the Arcade back-stack entry, retaining an active round when leaving and returning within the live process and through configuration changes. It is intentionally lost on process death because catalog data remains memory-only. The first round waits for a resumed lifecycle before starting. Full-screen Trivia has back navigation to Arcade. Settings/sound remain stage 8; no game sounds were added in stage 6.
+
+
+## Poster Puzzle behavior
+
+Arcade opens a full-screen 3×3 puzzle only from a titled catalog movie with a valid supplied HTTP(S) poster URL. Duplicate movie ids are removed and Next avoids the immediately previous film when another eligible poster exists. Missing/invalid URLs are excluded. No artwork URL is fabricated or rewritten, and no pattern substitutes for a poster.
+
+Tap one tile to select it, then another to swap them; tapping the selection again cancels. Each swap counts once. Progress is the number of tiles in their original positions; it can decrease when a correctly placed tile is moved. Shuffles are guaranteed unsolved and arbitrary swaps make every permutation solvable. Completion disables tile moves, shows completion feedback, and offers Next puzzle or Back to Arcade. There is no timer. Show reference displays the coherent full artwork and clears selection; Hide reference returns to the unchanged board. Tile controls expose piece/position and selection labels to accessibility services.
+
+A single size-bounded Coil `AsyncImagePainter` loads the supplied poster (900×1350 decode request), shared by all tiles; canvas drawing clips nine regions of the same centered crop. No sliced bitmap copies, poster disk cache or catalog persistence are added. Coil’s [Compose painter guidance](https://coil-kt.github.io/coil/compose/) informed this usage; dependency versions remain pinned. Tiles and reference controls become playable only after the actual poster loads successfully. Artwork failures show Retry and Next puzzle; failed movies are skipped by Next. Retry uses a fresh attempt id so late callbacks from the old request cannot affect it. If no usable poster candidates remain, the unavailable screen offers Retry to recheck them.
+
+Puzzle state belongs to the Arcade back-stack entry, preserving the movie, permutation, selection, reference and swap count through navigation/configuration changes in the live process. It intentionally resets on process death. Catalog failures require Retry; empty catalogs show unavailable guidance. View details opens the existing online route, retaining access to source/dataset links. No local movie ratings are changed by puzzle actions. Settings and sound remain stage 8.
+
+## Settings behavior
+
+Stage 8 adds local Preferences DataStore settings for System / Light / Dark appearance and game sound (defaults: System, sound on). Saved appearance is loaded before the main UI appears. Changes apply across destinations immediately without recreating navigation or game state. Read errors show Retry and disable preference edits; failed writes retain the saved value and allow another attempt. Credits remain available without catalog access.
+
+Trivia emits short correct/incorrect tones, including timeouts; Poster Puzzle emits swap/completion tones. Sound uses Android media volume, is optional if the audio service fails, and releases its player when leaving the resumed lifecycle. Events are never replayed when returning to a game or changing appearance. The switch controls both games; there is no downloaded audio asset.
+
+Settings exposes the complete bundled Fraunces / DM Sans OFL and Lucide ISC/MIT notices, plus a bundled copy of `data/SOURCE-ATTRIBUTION.md` and source links. Movie details retain per-record attribution. Notices preserve their original language. DataStore 1.3.0 was selected from the [official release notes](https://developer.android.com/jetpack/androidx/releases/datastore); the [DataStore guide](https://developer.android.com/topic/libraries/architecture/datastore) documents the preferences API. Catalog data remains online-only and memory-only; DataStore holds only appearance and game sound.

@@ -21,3 +21,5 @@ python3 android/tools/convert_lucide.py
 The converter handles the element types present in the pinned masters and fails on unsupported elements. Native rendering and accessibility still require app-level validation.
 
 The interim adaptive launcher copies `design/branding/taste-ticket/lumio-c-symbol-dark.png` unchanged into `res/drawable-nodpi/launcher_symbol.png`, displayed with an inset on Paper. This is raster packaging, not a vector logo master or production launcher approval.
+
+Stage 8 exposes the bundled notices in Settings. `assets/licenses/catalog_sources.txt` is an exact text copy of the repository's `data/SOURCE-ATTRIBUTION.md`, with no downloaded catalog records or artwork. Keep the copy aligned when attribution changes. Game feedback tones use Android's `ToneGenerator`; no sound asset is bundled or downloaded.

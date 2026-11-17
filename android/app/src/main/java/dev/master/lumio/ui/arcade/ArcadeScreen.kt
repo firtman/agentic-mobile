@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import dev.master.lumio.R
 
 @Composable
-fun ArcadeScreen(hasRound: Boolean, play: () -> Unit) {
+fun ArcadeScreen(hasRound: Boolean, hasPuzzle: Boolean, play: () -> Unit, puzzle: () -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Text(stringResource(R.string.arcade_heading), style = MaterialTheme.typography.headlineLarge)
@@ -32,7 +32,7 @@ fun ArcadeScreen(hasRound: Boolean, play: () -> Unit) {
                 Icon(painterResource(R.drawable.lucide_puzzle), null, tint = MaterialTheme.colorScheme.secondary)
                 Text(stringResource(R.string.poster_puzzle), style = MaterialTheme.typography.headlineMedium)
                 Text(stringResource(R.string.puzzle_teaser))
-                Text(stringResource(R.string.coming_soon), style = MaterialTheme.typography.titleMedium)
+                Button(onClick = puzzle) { Text(stringResource(if (hasPuzzle) R.string.return_to_puzzle else R.string.start_puzzle)) }
             }
         }
     }

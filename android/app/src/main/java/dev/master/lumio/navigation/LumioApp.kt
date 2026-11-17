@@ -30,7 +30,10 @@ import dev.master.lumio.ui.swipe.*
 import dev.master.lumio.ui.history.*
 import dev.master.lumio.ui.genie.*
 import dev.master.lumio.ui.arcade.ArcadeScreen
+import dev.master.lumio.ui.arcade.GameSound
 import dev.master.lumio.ui.trivia.*
+import dev.master.lumio.ui.puzzle.*
+import dev.master.lumio.ui.settings.*
 import androidx.navigation.toRoute
 import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
@@ -39,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Serializable data object Explore
 @Serializable data object Swipe
 @Serializable data object Genie
+@Serializable data object PosterPuzzle
 @Serializable data object Trivia
 @Serializable data object Arcade
 @Serializable data object History
@@ -52,14 +56,16 @@ private val destinations = listOf(
     Destination(Arcade,R.string.arcade,R.drawable.lucide_gamepad_2),
 )
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable fun LumioApp(container: AppContainer) {
+@Composable fun LumioApp(container: AppContainer, settingsModel: SettingsViewModel) {
+    val preferences by settingsModel.state.collectAsStateWithLifecycle()
     val nav = rememberNavController()
     val entry by nav.currentBackStackEntryAsState()
     val settings = entry?.destination?.hasRoute<Settings>() == true
     // Details, settings (and later history and games) are full-screen with back navigation.
     val history = entry?.destination?.hasRoute<History>() == true
     val triviaRoute = entry?.destination?.hasRoute<Trivia>() == true
-    val fullScreen = settings || history || triviaRoute || entry?.destination?.hasRoute<MovieDetails>() == true
+    val puzzleRoute = entry?.destination?.hasRoute<PosterPuzzle>() == true
+    val fullScreen = settings || history || triviaRoute || puzzleRoute || entry?.destination?.hasRoute<MovieDetails>() == true
     val layout = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
         androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -86,7 +92,7 @@ private val destinations = listOf(
     ) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background,
             topBar = {
-                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else if(history) R.string.history else if(triviaRoute) R.string.trivia else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
+                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else if(history) R.string.history else if(triviaRoute) R.string.trivia else if(puzzleRoute) R.string.poster_puzzle else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
                     navigationIcon = { if(fullScreen) IconButton(onClick = { nav.navigateUp() }) {
                         Icon(painterResource(R.drawable.lucide_arrow_left), stringResource(R.string.back))
                     } },
@@ -144,18 +150,33 @@ private val destinations = listOf(
                 composable<Arcade> { arcadeEntry ->
                     val game: TriviaViewModel = viewModel(arcadeEntry) { TriviaViewModel(container.catalogRepository::catalog) }
                     val state by game.state.collectAsStateWithLifecycle()
-                    ArcadeScreen(state is TriviaState.Playing) {
+                    val puzzle: PuzzleViewModel = viewModel(arcadeEntry) { PuzzleViewModel(container.catalogRepository::catalog) }
+                    val puzzleState by puzzle.state.collectAsStateWithLifecycle()
+                    ArcadeScreen(state is TriviaState.Playing, puzzleState is PuzzleState.Playing, {
                         if (nav.currentDestination?.hasRoute<Arcade>() == true) nav.navigate(Trivia)
-                    }
+                    }, {
+                        if (nav.currentDestination?.hasRoute<Arcade>() == true) nav.navigate(PosterPuzzle)
+                    })
                 }
                 composable<Trivia> { triviaEntry ->
                     val arcadeEntry = remember(triviaEntry) { nav.getBackStackEntry(Arcade) }
                     val game: TriviaViewModel = viewModel(arcadeEntry) { TriviaViewModel(container.catalogRepository::catalog) }
                     val state by game.state.collectAsStateWithLifecycle()
+                    GameSound(game.sounds, preferences.settings.sound)
                     TriviaScreen(state, game::start, game::retry, game::answer, game::pause, game::resume,
                         game::fiftyFifty, game::hold, game::next, game::playAgain, { nav.navigateUp() }, game::setVisible)
                 }
-                composable<Settings> { FoundationScreen(R.string.settings,R.drawable.lucide_settings_2) }
+                composable<PosterPuzzle> { puzzleEntry ->
+                    val arcadeEntry = remember(puzzleEntry) { nav.getBackStackEntry(Arcade) }
+                    val puzzle: PuzzleViewModel = viewModel(arcadeEntry) { PuzzleViewModel(container.catalogRepository::catalog) }
+                    val state by puzzle.state.collectAsStateWithLifecycle()
+                    GameSound(puzzle.sounds, preferences.settings.sound)
+                    PuzzleScreen(state, puzzle::start, puzzle::retry, puzzle::choose, puzzle::toggleReference,
+                        puzzle::nextPuzzle, puzzle::posterFailed, puzzle::posterLoaded, puzzle::retryPoster, { id ->
+                            if (nav.currentDestination?.hasRoute<PosterPuzzle>() == true) nav.navigate(MovieDetails(id))
+                        }, { nav.navigateUp() })
+                }
+                composable<Settings> { SettingsScreen(preferences, settingsModel::appearance, settingsModel::sound, settingsModel::retry) }
             }
         }
     }

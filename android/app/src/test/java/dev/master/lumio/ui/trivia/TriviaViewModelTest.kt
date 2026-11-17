@@ -3,6 +3,8 @@ package dev.master.lumio.ui.trivia
 import dev.master.lumio.data.*
 import androidx.lifecycle.ViewModelStore
 import dev.master.lumio.domain.TriviaPhase
+import dev.master.lumio.ui.arcade.GameCue
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.After
@@ -25,6 +27,24 @@ class TriviaViewModelTest {
     private val questions = (1..8).map { TriviaQuestion("q$it", "film$it", "synthetic", "Question $it?", listOf("A", "B", "C", "D"), 2) }
     private val catalog = Catalog(emptyList(), questions)
     private fun game(vm: TriviaViewModel) = (vm.state.value as TriviaState.Playing).round
+
+    @Test fun soundsOnlyForNewFeedbackAndNeverReplayAfterReturning() = gameTest {
+        val vm = model({ catalog }, { testScheduler.currentTime })
+        val cues = mutableListOf<GameCue>()
+        val collect = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { vm.sounds.collect { cues += it } }
+        vm.setVisible(true); vm.start(); runCurrent()
+        vm.answer(2); runCurrent()
+        vm.answer(2); runCurrent()
+        assertEquals(listOf(GameCue.CORRECT), cues)
+        vm.next(); vm.answer(1); runCurrent()
+        assertEquals(GameCue.INCORRECT, cues.last())
+        vm.next(); advanceTimeBy(20_001); runCurrent()
+        assertEquals(listOf(GameCue.CORRECT, GameCue.INCORRECT, GameCue.INCORRECT), cues)
+        collect.cancel()
+        val returned = mutableListOf<GameCue>()
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { vm.sounds.collect { returned += it } }
+        runCurrent(); assertTrue(returned.isEmpty())
+    }
 
     @Test fun lazyStartLoadsFiveSourceQuestionsAndStartsTwentySecondClock() = gameTest {
         var calls = 0

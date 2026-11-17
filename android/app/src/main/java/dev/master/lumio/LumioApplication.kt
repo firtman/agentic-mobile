@@ -12,6 +12,7 @@ import dev.master.lumio.data.ratings.LumioDatabase
 import dev.master.lumio.data.ratings.RoomRatingsRepository
 
 class AppContainer(context: Context) {
+    val settingsRepository = dev.master.lumio.data.settings.DataStoreSettingsRepository(context)
     val api = ApiClient.create(BuildConfig.API_BASE_URL)
     val catalogRepository = CatalogRepository(api)
     val exploreRepository = OnlineExploreRepository(api)

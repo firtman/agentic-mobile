@@ -1,7 +1,7 @@
 package dev.master.lumio.ui.trivia
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.isSystemInDarkTheme
+import dev.master.lumio.ui.theme.LocalLumioDark
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -105,7 +105,7 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
                                 val correct = feedback && index == round.question.answerIndex
                                 val wrong = feedback && index == round.selected && !correct
                                 val accent = when {
-                                    correct -> if (isSystemInDarkTheme()) Color(0xFF9CC8AA) else Color(0xFF3C6750)
+                                    correct -> if (LocalLumioDark.current) Color(0xFF9CC8AA) else Color(0xFF3C6750)
                                     wrong -> MaterialTheme.colorScheme.error
                                     else -> MaterialTheme.colorScheme.onSurface
                                 }

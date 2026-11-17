@@ -5,6 +5,8 @@ package dev.master.lumio.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.*
@@ -52,6 +54,9 @@ val LumioTypography = Typography(
     bodyLarge = body(17,26), bodyMedium = body(14,20), bodySmall = body(13,18),
     labelLarge = body(16,22,FontWeight.SemiBold), labelMedium = body(13,18,FontWeight.Medium), labelSmall = body(13,18,FontWeight.Medium),
 )
+val LocalLumioDark = staticCompositionLocalOf { false }
 @Composable fun LumioTheme(dark: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    MaterialTheme(colorScheme = if(dark) Dark else Light, typography = LumioTypography, content = content)
+    CompositionLocalProvider(LocalLumioDark provides dark) {
+        MaterialTheme(colorScheme = if(dark) Dark else Light, typography = LumioTypography, content = content)
+    }
 }

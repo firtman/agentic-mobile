@@ -418,3 +418,102 @@ Left on Arcade, English, original dark appearance, airplane mode off, with a pau
 At the owner’s request, built Step 6 using `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success; `am start` launched Lumio. No app data was cleared, ratings changed or phone appearance/locale settings modified. Local API health verified: 9,919 movies.
 
 Opened Arcade and visually inspected ignored `validation/screenshots/stage-6/phone-arcade.png`: hub displayed in the phone’s current light appearance, five-question/20-second rules and Play Trivia button. Left the round unstarted so the owner can begin when ready. This was an install/hub smoke check, not a physical-phone game walkthrough. App, API and ADB forwarding remain available. The phone now has Step 6.
+
+
+## Step 6 approval and publication — 2026-11-17
+
+The owner approved Arcade hub/Trivia, requested commit/push and authorized Poster Puzzle. Step 6 source, tests, documentation and ignore rules were committed on `main` as **`4a937a7`** and pushed successfully to the existing `origin/main` (`864a7c5..4a937a7`). Catalog/trivia/poster data, screenshots, exploratory assets, secrets and machine configuration remained excluded. `initial-state` was not changed.
+
+## Stage 7 — Poster Puzzle — 2026-11-17
+
+**Historical initial validation:** the procedural-pattern behavior and its captures below were subsequently removed at the owner’s request. The poster-only correction at the end of this document supersedes those parts of this record.
+
+### Delivered
+
+- Activated the Poster Puzzle card in Arcade, with Start puzzle / Return to puzzle. Full-screen puzzle has back navigation and online movie details (including existing source/dataset links).
+- Random eligible catalog movie, preferring supplied HTTP(S) posters; duplicate movie ids removed. Next avoids the immediately previous movie when alternatives exist. No URL rewriting or fabricated artwork URLs.
+- Pure immutable 3×3 board, guaranteed shuffled rather than solved. Tap one tile to select/check it, another to swap; tap the same tile to cancel. Progress counts correct positions, swaps count actual exchanges. All permutations are solvable by arbitrary swaps. Completion locks moves and offers Next puzzle / Back to Arcade. No timer.
+- Reference view shows the coherent full image, clears selection and prevents swaps until hidden. Next resets selection, reference and swap count. Arcade-scoped ViewModel retains a partial board within the live process through navigation/configuration changes, but catalog/rounds/images are never persisted to disk.
+- One bounded Coil painter supplies nine clipped regions of a single centered crop, without nine downloads or sliced-bitmap copies. Missing/failed artwork becomes an explicitly labeled id-derived procedural pattern, stable after navigation/reconnection. Session ids reject late errors from old artwork requests. Final pattern drawing uses Paper on dark fills for contrast.
+- Catalog loading/error + Retry and no-movie states; artwork-loading feedback and Next allow skipping slow artwork. Nineteen new keys plus updated hub intro, aligned across all **173 resource keys** in English, Spanish, German and Portuguese. Piece/position/selection semantics supplement visual selection. Preview source included.
+
+### Automated validation
+
+`./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug` passed, including the final pattern-contrast correction. **86 JVM tests, zero failures** (12 new): six pure domain tests validate unsolved shuffles/permutations, selection/cancel/swap/count/completion, solving arbitrary boards, valid unchanged supplied URLs, poster/movie preference/dedup/previous avoidance and fallback/empty selection. Six controller tests validate lazy loading and retained start, reference selection clearing/input blocking, completion and Next resets, stable artwork fallback/stale-image rejection, missing poster/empty catalog, and Retry/cancelled stale loads.
+
+Lint: **0 errors, 39 warnings** (20 reserved unused resources, 18 dependency/build update notices, 1 selected target-SDK notice). Locale-key alignment and `git diff --check` passed. Independent review authored the six domain tests and found no blocking defects in board behavior, image crop/sharing, fallback session or navigation. Existing Room implementation was unchanged; its two prior device tests were not rerun.
+
+### Device / API validation
+
+Initially `Pixel_9_Pro_XL`, `emulator-5600`, API 36, against the local API. That emulator disconnected before failure-path testing; device inventory confirmed it had stopped. Restarted the existing Pixel AVD through Android CLI, which assigned **`emulator-5554`**, and reinstalled with `adb install -r` without clearing ratings. Remaining Spanish/dark/error checks used this restarted device. The physical phone was not changed and retains Step 6. API health verified before/after: `http://127.0.0.1:3000/health`, 9,919 movies.
+
+| Flow | Actual result |
+| --- | --- |
+| Live poster load | Chilangolandia (2021) loaded with nine distinct crop regions; initial progress 2/9, swaps 0 |
+| Reference | Selecting a tile then Show reference displayed the coherent full poster, cleared selection, kept swaps 0 and blocked board moves until Hide reference |
+| Complete solve | Used the spoken piece/position labels to perform five swaps; progress reached **9/9, swaps 5**, coherent poster and completion/Next/back controls confirmed visually |
+| Next | Selected In the Heart of the Sea (2015), a different movie; swaps 0, fresh unsolved board |
+| Partial-board retention | Swapped its first two positions, left through Arcade and returned; same movie/permutation and swaps 1 retained |
+| Spanish / dark | Restarted emulator loaded a new live puzzle with translated instructions, progress and controls; source title/year unchanged |
+| Failed artwork | With session catalog already in memory, airplane mode + Next selected Matando Cabos 2 and failed to load its poster; labeled procedural pattern appeared. Tiles swapped successfully (count 1) |
+| Fallback retention | Restored network, left through Arcade and returned; the same pattern/permutation and swap count stayed stable |
+| Fresh offline process | Airplane mode + force-stop/relaunch then Start puzzle showed the Spanish catalog connection error + Reintentar |
+| Retry | Restored connectivity, tapped Reintentar; online movie Killing Jesus (2015) loaded with playable tiles |
+
+Five captures were visually inspected under ignored `validation/screenshots/stage-7/`: `puzzle-light.png`, `puzzle-reference.png`, `puzzle-complete.png`, `puzzle-spanish-pattern.png`, `puzzle-spanish-error.png`. They contain supplied poster imagery; none is committed. The pattern capture predates only the final foreground-contrast correction. Network isolation used emulator airplane mode, preserving the shared API for the owner’s phone. Puzzle actions did not change personal movie ratings.
+
+### Limits
+
+No-movie and stale-network/image-response cases were validated with synthetic unit fixtures rather than induced with live data. TalkBack execution/focus, German/Portuguese rendering, 200% text, wide screens, rotation and a physical-phone puzzle walkthrough were not manually exercised. Reference/complete geometry was checked on the emulator with one live poster; cropping for unusual source aspect ratios was reviewed in code. Light/dark/large-text preview sources compile but were not separately rendered. The screen scrolls, and lower controls or tiles may require scrolling on smaller windows. Process death intentionally loses a puzzle; only the personal ratings store persists. Settings and sound remain stage 8.
+
+**Stage 7 is uncommitted and awaits owner approval; stage 8 has not started.**
+
+
+### Poster-only correction — 2026-11-17
+
+The owner clarified: “If there is no poster for the movie, you should NOT use it for the puzzle.” Poster Puzzle now excludes movies with missing, malformed or non-HTTP(S) poster URLs entirely. All generated-pattern rendering and its UI string were removed. Other screens’ existing artwork fallbacks remain outside this puzzle-specific correction.
+
+A puzzle’s swap/reference controls stay blocked until the supplied poster has actually loaded successfully. A failed image request shows an error with Retry and Next puzzle; it never creates playable substitute artwork. Next excludes movies whose artwork has failed in this process. If no eligible posters remain, an unavailable state offers Retry to recheck availability. Retrying an individual poster uses a new attempt id; late success/failure callbacks from the previous attempt cannot affect it. Existing game sound events were preserved and cannot fire for blocked swaps.
+
+Validation: `./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug` passed on the current shared workspace. **96 JVM tests, zero failures**, including **6 puzzle-domain tests and 9 puzzle-controller tests**. Tests cover missing-poster exclusion, no play before successful loading, failed-artwork exclusion, stale callbacks after retry, all-posters-failed/unavailable recovery, normal solve/next behavior and swap/completion sound events. Lint: **0 errors, 39 warnings**. All four resource sets align (187 keys in the current workspace, including concurrent Settings work). `git diff --check` passed. Independent read-only review found no blocking defects in the correction.
+
+The emulator walkthrough was not repeated for this correction; the prior emulator package/reboot stall interrupted the final visual check. Earlier pattern screenshots are obsolete and are not evidence of current puzzle behavior. No phone installation or rating changes were made for this correction. Step 7 remains uncommitted pending owner approval; concurrent Settings work was preserved.
+
+## Stage 8 — Settings — 2026-11-17
+
+Status: authorized by the owner while Stage 7 is being finished. Implemented locally, pending review/approval. No commit or push was made in this chat; Stage 9 was not started.
+
+### Delivered
+
+- Full-screen Settings with System / Light / Dark radio choices and a game-sound switch. Preferences DataStore 1.3.0 stores only appearance and sound, with defaults System and on. First preference read completes before the app content is displayed; later edits keep navigation and game state intact.
+- Theme and system-bar icon contrast follow the selected appearance. Trivia feedback colours follow app appearance instead of the device setting.
+- Read failures show Retry and disable edits; failed writes preserve the saved value and permit retry. Settings and bundled notices do not request catalog data.
+- Short Android media-stream tones for Trivia correct/incorrect/timeout feedback and Poster Puzzle swaps/completion. No replay across navigation, no downloaded sound files; audio service failure is nonfatal and the player releases when the game leaves the resumed lifecycle.
+- Full existing Fraunces, DM Sans and Lucide notices, a bundled exact copy of `data/SOURCE-ATTRIBUTION.md`, and external source links. All 187 resource keys align in English, Spanish, German and Portuguese. Legal notices retain their original language.
+- Light and German dark/200% Compose previews in `ui/settings/SettingsScreen.kt`.
+
+### Automated validation
+
+Final `JAVA_HOME=/Users/firt/Library/Java/JavaVirtualMachines/jbr-21.0.11/Contents/Home ./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --console=plain` passed. Combined current Stage 7/8 results: **96 JVM tests, zero failures; lint zero errors and 39 warnings** (20 unused resources, 18 build/dependency notices, one newer-target-SDK notice). Eight Stage 8 tests cover actual file-backed DataStore recreation/persistence and independent preferences, unknown appearance fallback, ViewModel load/save, read Retry, failed write/retry, overlapping-write rejection, Trivia correct/wrong/timeout events and no replay, and Puzzle selection silence/swap/completion events.
+
+The first Gradle invocation was blocked by sandbox cache access, so validation ran through approved escalation. Android Studio's bundled JDK 25.0.4 failed Gradle configuration; switching to the project's established JDK 21 resolved it. A concurrent Stage 7 update temporarily left tests referencing the old procedural-fallback state; the updated poster-state tests and integration passed together. Final checks include the system-bar and light-mode text-button contrast fixes. XML key alignment and `git diff --check` pass. Existing SDK XML compatibility and unstripped native-library warnings remain.
+
+### Device checks and limits
+
+- The configured `Pixel_9_Pro_XL` AVD failed boot with an existing-instance lock, including a read-only attempt. Plugin diagnostics were checked without stopping another chat's device. Created temporary `Lumio_Stage8`, same Pixel 9 Pro XL hardware profile and API 36, serial `emulator-5600`, owned by this chat; it is removed when the chat is archived.
+- Installed and launched the debug APK successfully, then updated to the final APK. Settings opens full screen from the global gear. Light and forced-dark screens were visually checked. Dark appearance and sound-off persisted through force-stop/restart; the final build displays correct light system-bar icons on dark backgrounds. Light overrides system night mode; selecting System follows night mode. Returned to System/light, English, normal text scale, sound on for review.
+- Bundled Fraunces licence dialog opened and rendered readable scrollable text. Spanish Settings at 200% text size showed wrapped choices and sound copy with scrollable credits. English/normal scale was restored.
+- The emulator plugin's Android CLI UI hierarchy inspection repeatedly failed; fresh screenshots plus coordinate taps verified these flows. Diagnostics reported the device running and the stream active. This is manual visual validation, not a completed automated UI suite.
+- Sound-event emission and suppression/replay rules are unit-tested; audible output/volume quality has not been confirmed by listening. Complete TalkBack and wide-screen audits remain Stage 9.
+- Host API health was verified outside the sandbox: `http://127.0.0.1:3000/health` returned `{"status":"ok","movies":9919}`. The shared API was left running; it was not stopped for a repeated catalog-failure test during simultaneous Stage 7 work. Stage 8 does not alter catalog networking or persist catalog data.
+
+The emulator remains running on Settings for owner review. Stages 7 and 8 remain uncommitted pending approval.
+
+### Physical phone install — 2026-11-17
+
+At the owner's request, built the current Stage 7/8 debug app with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` using JDK 21 (passed), reapplied phone-scoped ADB reverse port 3000, and installed on the connected Pixel 3a. Installation returned Success; `am start` reported `Status: ok` for `dev.master.lumio/.MainActivity`. A fresh screenshot confirmed Settings rendered on the physical phone. No app data was cleared, ratings edited, or phone appearance/locale settings changed. Host API health verified: 9,919 movies. The app and API were left running.
+
+
+### Stages 7 and 8 approval — 2026-11-17
+
+The owner approved the current Poster Puzzle (including its poster-only correction) and Settings for commit and push to the existing `origin/main`. Final combined build, JVM tests and lint were rerun before commit; results remain 96 passing JVM tests, zero failures and zero lint errors (39 warnings). Source, tests, relevant documentation and the Stage 7 screenshot ignore rule are included. Unrelated exploratory branding, screen exports and Trivia design previews remain outside this commit, as do all catalog/poster/trivia data, machine configuration and secrets. The owner subsequently said “don't do stage 9”; no Stage 9 work was started.

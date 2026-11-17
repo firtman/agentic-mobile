@@ -36,3 +36,6 @@ __pycache__/
 
 # Arcade/Trivia captures may contain supplied trivia data.
 /validation/screenshots/stage-6/
+
+# Poster Puzzle captures contain supplied poster imagery.
+/validation/screenshots/stage-7/

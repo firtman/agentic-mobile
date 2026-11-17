@@ -40,3 +40,9 @@ Stage 5 adds native Genie using the Editorial tokens and `sparkles` icon, with a
 
 
 Stage 6 adds the native Arcade hub and Trivia question, paused, feedback and results views. They use the existing Editorial palette, Fraunces/DM Sans and Lucide outline icons; correct feedback uses Pine/Sage and incorrect feedback uses Brick/Rose with explicit answer text. Preview sources live with `TriviaScreen.kt`. Captures containing source questions remain in ignored `validation/screenshots/stage-6/`. Poster Puzzle is a forthcoming card, not an implemented game or a new approved design.
+
+
+Stage 7 activates the native Poster Puzzle card and adds tile selection, reference and completion states using existing Editorial tokens. Preview sources live with `PuzzleScreen.kt`; source-poster captures remain in ignored `validation/screenshots/stage-7/`. The owner clarified that Poster Puzzle must use actual available posters only; the earlier procedural fallback has been removed.
+
+
+Stage 8 adds native Settings with appearance and game sound choices, bundled font/icon notices and catalog attribution. Light and German dark/large-text preview sources live with `SettingsScreen.kt`. Stages 7 and 8 were approved for commit and push on November 17, 2026; this does not approve exploratory design directions.
