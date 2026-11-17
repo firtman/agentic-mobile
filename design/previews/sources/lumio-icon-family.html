@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600,0,0&display=swap">
+<style>
+#lumio-icons{--li-paper:light-dark(#F7F2E8,#1D1C1A);--li-surface:light-dark(#FFFCF7,#292723);--li-ink:light-dark(#242320,#F7F2E8);--li-secondary:light-dark(#69635C,#BDB4A8);--li-rule:light-dark(#D9CFC0,#49443D);--li-focus:light-dark(#A83F30,#F47B65);--li-outline:#8C8378;--li-coral:#F47B65;--li-on-coral:#242320;--li-size:24px;padding:28px;background:var(--li-paper);color:var(--li-ink);font:400 14px/20px 'DM Sans',sans-serif;max-width:736px;box-sizing:border-box}
+#lumio-icons *{box-sizing:border-box}
+#lumio-icons .li-top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+#lumio-icons .li-title{font:600 30px/36px 'Fraunces',serif;font-variation-settings:'SOFT' 0,'WONK' 0;margin:0}
+#lumio-icons .li-sub{color:var(--li-secondary);margin:8px 0 0}
+#lumio-icons .li-controls{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+#lumio-icons label{display:flex;align-items:center;gap:8px;color:var(--li-secondary)}
+#lumio-icons select{font:500 14px/20px 'DM Sans',sans-serif;padding:10px;background:var(--li-surface);color:var(--li-ink);border:1px solid var(--li-outline);border-radius:6px}
+#lumio-icons .li-heading{font:600 20px/26px 'Fraunces',serif;margin:24px 0 12px}
+#lumio-icons .li-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:16px 0;border-top:1px solid var(--li-rule);border-bottom:1px solid var(--li-rule);gap:8px}
+#lumio-icons .li-tab{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;min-height:56px;background:transparent;color:var(--li-secondary);border:0;font:500 13px/18px 'DM Sans',sans-serif;padding:0;outline-offset:4px}
+#lumio-icons .li-tab[aria-pressed="true"]{color:var(--li-ink);font-weight:600}
+#lumio-icons .li-indicator{display:flex;width:48px;height:32px;align-items:center;justify-content:center;border-radius:8px}
+#lumio-icons .li-tab[aria-pressed="true"] .li-indicator{background:var(--li-coral);color:var(--li-on-coral)}
+#lumio-icons svg{width:var(--li-size);height:var(--li-size);stroke-width:2;fill:none;flex:none}
+#lumio-icons .li-nav svg{width:24px;height:24px}
+#lumio-icons .li-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 12px}
+#lumio-icons .li-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
+#lumio-icons .li-glyph{height:32px;display:flex;align-items:center;justify-content:center}
+#lumio-icons .li-item span{font-size:13px;line-height:18px;overflow-wrap:anywhere}
+#lumio-icons .li-detail{color:var(--li-secondary);font-size:13px;line-height:20px;margin-top:20px;padding-top:16px;border-top:1px solid var(--li-rule)}
+@media(max-width:460px){#lumio-icons{padding:20px}#lumio-icons .li-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#lumio-icons .li-title{font-size:26px;line-height:32px}}
+</style>
+<section id="lumio-icons" aria-label="Lumio Editorial approved icon family">
+  <div class="li-top"><div><h2 class="li-title">Lumio, in outline.</h2><p class="li-sub">Approved family · 24-unit grid · 2-unit strokes</p></div></div>
+  <div class="li-controls"><label>Appearance <select id="li-theme" class="cursor-interaction"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Sheet size <select id="li-size" class="cursor-interaction"><option value="24">24</option><option value="20">20</option></select></label></div>
+  <h3 class="li-heading">Navigation</h3>
+  <div class="li-nav" role="group" aria-label="Navigation selection preview">
+    <button type="button" class="li-tab cursor-interaction" aria-pressed="true" data-destination="Explore"><span class="li-indicator"><i data-lucide="compass" aria-hidden="true"></i></span>Explore</button>
+    <button type="button" class="li-tab cursor-interaction" aria-pressed="false" data-destination="Swipe"><span class="li-indicator"><i data-lucide="layers-2" aria-hidden="true"></i></span>Swipe</button>
+    <button type="button" class="li-tab cursor-interaction" aria-pressed="false" data-destination="Genie"><span class="li-indicator"><i data-lucide="sparkles" aria-hidden="true"></i></span>Genie</button>
+    <button type="button" class="li-tab cursor-interaction" aria-pressed="false" data-destination="Arcade"><span class="li-indicator"><i data-lucide="gamepad-2" aria-hidden="true"></i></span>Arcade</button>
+  </div>
+  <h3 class="li-heading">Actions & games</h3>
+  <div class="li-grid" aria-label="Core action icons">
+    <div class="li-item"><div class="li-glyph"><i data-lucide="settings-2" aria-hidden="true"></i></div><span>Settings</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="search" aria-hidden="true"></i></div><span>Search</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="sliders-horizontal" aria-hidden="true"></i></div><span>Filter</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="thumbs-up" aria-hidden="true"></i></div><span>Like</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="thumbs-down" aria-hidden="true"></i></div><span>Dislike</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="eye-off" aria-hidden="true"></i></div><span>Not seen yet</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="undo-2" aria-hidden="true"></i></div><span>Undo</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="list-checks" aria-hidden="true"></i></div><span>Your choices</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="arrow-left" aria-hidden="true"></i></div><span>Back</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="volume-2" aria-hidden="true"></i></div><span>Sound on</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="volume-x" aria-hidden="true"></i></div><span>Sound off</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="pause" aria-hidden="true"></i></div><span>Pause</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="circle-help" aria-hidden="true"></i></div><span>Trivia</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="puzzle" aria-hidden="true"></i></div><span>Poster Puzzle</span></div>
+  </div>
+  <h3 class="li-heading">Supporting icons</h3>
+  <div class="li-grid" aria-label="Supporting icons">
+    <div class="li-item"><div class="li-glyph"><i data-lucide="arrow-up-down" aria-hidden="true"></i></div><span>Sort</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="x" aria-hidden="true"></i></div><span>Close</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="external-link" aria-hidden="true"></i></div><span>View source</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="play" aria-hidden="true"></i></div><span>Resume</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="rotate-ccw" aria-hidden="true"></i></div><span>Play again</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="sun" aria-hidden="true"></i></div><span>Light</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="moon" aria-hidden="true"></i></div><span>Dark</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="monitor" aria-hidden="true"></i></div><span>System</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="wifi-off" aria-hidden="true"></i></div><span>Offline</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="loader-circle" aria-hidden="true"></i></div><span>Loading</span></div>
+    <div class="li-item"><div class="li-glyph"><i data-lucide="check" aria-hidden="true"></i></div><span>Selected</span></div>
+  </div>
+  <div class="li-detail" id="li-state" aria-live="polite">Explore selected · outline retained · ink on coral</div>
+</section>
+<script>
+(function(){
+ const root=document.getElementById('lumio-icons');
+ const theme=document.getElementById('li-theme');
+ const size=document.getElementById('li-size');
+ const buttons=Array.from(root.querySelectorAll('[data-destination]'));
+ const state={appearance:'system',size:'24',destination:'Explore'};
+ function valid(s){if(!s)return;if(['system','light','dark'].includes(s.appearance))state.appearance=s.appearance;if(['20','24'].includes(s.size))state.size=s.size;if(buttons.some(b=>b.dataset.destination===s.destination))state.destination=s.destination;}
+ function render(){root.style.colorScheme=state.appearance==='system'?'light dark':state.appearance;root.style.setProperty('--li-size',state.size+'px');theme.value=state.appearance;size.value=state.size;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.destination===state.destination)));document.getElementById('li-state').textContent=state.destination+' selected · outline retained · ink on coral';}
+ function save(){window.openai?.setWidgetState?.({modelContent:{...state}})?.catch(()=>{});}
+ valid(window.openai?.widgetState?.modelContent);render();
+ theme.addEventListener('change',()=>{state.appearance=theme.value;render();save();});
+ size.addEventListener('change',()=>{state.size=size.value;render();save();});
+ buttons.forEach(b=>b.addEventListener('click',()=>{state.destination=b.dataset.destination;render();save();}));
+ window.addEventListener('openai:set_globals',e=>{valid(e.detail?.globals?.widgetState?.modelContent);render();});
+})();
+</script>

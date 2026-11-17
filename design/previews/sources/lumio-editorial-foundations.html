@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600,0,0&display=swap">
+<style>
+#lumio-foundations{--lum-paper:light-dark(#F7F2E8,#1D1C1A);--lum-surface:light-dark(#FFFCF7,#292723);--lum-ink:light-dark(#242320,#F7F2E8);--lum-secondary:light-dark(#69635C,#BDB4A8);--lum-link:light-dark(#A83F30,#F47B65);--lum-rule:light-dark(#D9CFC0,#49443D);--lum-outline:#8C8378;--lum-coral:#F47B65;--lum-on-coral:#242320;color:var(--lum-ink);background:var(--lum-paper);font-family:'DM Sans',sans-serif;padding:28px;box-sizing:border-box;max-width:736px}
+#lumio-foundations *{box-sizing:border-box}
+#lumio-foundations .lum-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--lum-rule)}
+#lumio-foundations .lum-eyebrow{font-size:13px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--lum-secondary)}
+#lumio-foundations label{font-size:14px;color:var(--lum-secondary);display:flex;gap:8px;align-items:center}
+#lumio-foundations select{font:500 14px 'DM Sans',sans-serif;color:var(--lum-ink);background:var(--lum-surface);border:1px solid var(--lum-outline);border-radius:6px;padding:10px}
+#lumio-foundations .lum-display{font:600 36px/1.17 'Fraunces',serif;font-variation-settings:'SOFT' 0,'WONK' 0;margin:24px 0 12px;max-width:520px;letter-spacing:-.02em}
+#lumio-foundations .lum-body{font-size:17px;line-height:1.53;margin:0;max-width:520px}
+#lumio-foundations .lum-meta{font-size:14px;line-height:1.43;color:var(--lum-secondary);margin:12px 0 0}
+#lumio-foundations .lum-actions{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin:20px 0 28px}
+#lumio-foundations .lum-button{font:600 16px/22px 'DM Sans',sans-serif;color:var(--lum-on-coral);background:var(--lum-coral);padding:12px 18px;border:0;border-radius:8px;display:inline-block}
+#lumio-foundations .lum-link{color:var(--lum-link);font-size:16px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+#lumio-foundations .lum-swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:14px}
+#lumio-foundations .lum-swatch{height:46px;border:1px solid var(--lum-outline);margin-bottom:8px}
+#lumio-foundations .lum-label{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+#lumio-foundations .lum-hex{font-size:12px;color:var(--lum-secondary);margin-top:3px;font-variant-numeric:tabular-nums}
+#lumio-foundations .lum-type{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-top:22px;border-top:1px solid var(--lum-rule);margin-top:24px}
+#lumio-foundations .lum-serif{font:600 24px/30px 'Fraunces',serif;font-variation-settings:'SOFT' 0,'WONK' 0;margin:6px 0}
+#lumio-foundations .lum-sans{font:600 24px/30px 'DM Sans',sans-serif;margin:6px 0}
+#lumio-foundations .lum-small{font-size:14px;line-height:20px;color:var(--lum-secondary)}
+#lumio-foundations .lum-check{padding-top:20px;margin-top:20px;border-top:1px solid var(--lum-rule);font-size:14px;line-height:22px;color:var(--lum-secondary)}
+@media(max-width:460px){#lumio-foundations{padding:20px}#lumio-foundations .lum-swatches{grid-template-columns:repeat(3,minmax(0,1fr))}#lumio-foundations .lum-display{font-size:30px;line-height:36px}#lumio-foundations .lum-type{grid-template-columns:1fr;gap:18px}}
+</style>
+<section id="lumio-foundations" aria-label="Lumio Editorial approved colors and typography">
+  <div class="lum-top"><span class="lum-eyebrow">Lumio · Editorial approved</span><label>Appearance <select id="lumio-appearance" class="cursor-interaction"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></div>
+  <h2 class="lum-display">Find your next film.</h2>
+  <p class="lum-body">A familiar favorite. An unexpected discovery. A little cinema, every day.</p>
+  <p class="lum-meta">Fraunces 600 · 36/42 &nbsp; / &nbsp; DM Sans 400 · 17/26</p>
+  <div class="lum-actions"><span class="lum-button">Explore films</span><span class="lum-link">View your history</span></div>
+  <div class="lum-eyebrow">Color roles</div>
+  <div class="lum-swatches">
+    <div><div class="lum-swatch" style="background:var(--lum-paper)"></div><div class="lum-label">Canvas</div><div class="lum-hex" data-lum="canvas">System</div></div>
+    <div><div class="lum-swatch" style="background:var(--lum-ink)"></div><div class="lum-label">Text</div><div class="lum-hex" data-lum="text">System</div></div>
+    <div><div class="lum-swatch" style="background:var(--lum-coral)"></div><div class="lum-label">Coral</div><div class="lum-hex">#F47B65</div></div>
+    <div><div class="lum-swatch" style="background:var(--lum-secondary)"></div><div class="lum-label">Secondary</div><div class="lum-hex" data-lum="secondary">System</div></div>
+    <div><div class="lum-swatch" style="background:var(--lum-link)"></div><div class="lum-label">Links</div><div class="lum-hex" data-lum="links">System</div></div>
+  </div>
+  <div class="lum-type">
+    <div><div class="lum-eyebrow">Headings</div><div class="lum-serif">Fraunces</div><div class="lum-small">Screen titles · sections · movie titles<br>36 / 30 / 24 / 20 · weight 600</div></div>
+    <div><div class="lum-eyebrow">Reading & controls</div><div class="lum-sans">DM Sans</div><div class="lum-small">Body · buttons · navigation · metadata<br>17 / 16 / 14 / 13 · weights 400–600</div></div>
+  </div>
+  <div class="lum-check">Películas · Empfehlungen · Recomendações · ação · für · groß<br><span id="lumio-contrast" aria-live="polite">Ink on coral: 5.89:1 · Ember on paper: 5.51:1</span></div>
+</section>
+<script>
+(function(){
+const root=document.getElementById('lumio-foundations');
+const select=document.getElementById('lumio-appearance');
+const media=window.matchMedia('(prefers-color-scheme: dark)');
+const palettes={light:{canvas:'#F7F2E8',text:'#242320',secondary:'#69635C',links:'#A83F30'},dark:{canvas:'#1D1C1A',text:'#F7F2E8',secondary:'#BDB4A8',links:'#F47B65'}};
+function render(){
+ root.style.colorScheme=select.value==='system'?'light dark':select.value;
+ const dark=select.value==='dark'||(select.value==='system'&&media.matches);
+ const palette=palettes[dark?'dark':'light'];
+ root.querySelectorAll('[data-lum]').forEach(el=>el.textContent=palette[el.dataset.lum]);
+ document.getElementById('lumio-contrast').textContent=dark?'Ink on coral: 5.89:1 · Paper on night: 15.26:1':'Ink on coral: 5.89:1 · Ember on paper: 5.51:1';
+}
+const saved=window.openai?.widgetState?.modelContent?.appearance;
+if(['system','light','dark'].includes(saved))select.value=saved;
+select.addEventListener('change',()=>{render();window.openai?.setWidgetState?.({modelContent:{appearance:select.value}})?.catch(()=>{});});
+media.addEventListener('change',render);
+window.addEventListener('openai:set_globals',event=>{const value=event.detail?.globals?.widgetState?.modelContent?.appearance;if(['system','light','dark'].includes(value)){select.value=value;render();}});
+render();
+})();
+</script>

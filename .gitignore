@@ -13,3 +13,6 @@ local.properties
 .DS_Store
 dist/
 __pycache__/
+
+# Local Stitch screen exports may contain movie/poster imagery.
+/design/stitch/13911445762657244453/screens/
