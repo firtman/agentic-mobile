@@ -21,5 +21,9 @@ __pycache__/
 *.jks
 *.keystore
 
-# Explore validation captures may include supplied movie/poster imagery.
+# Explore and details validation captures may include supplied movie/poster imagery.
 /validation/screenshots/stage-1/
+/validation/screenshots/stage-2/
+
+# Swipe validation captures contain supplied poster imagery.
+/validation/screenshots/stage-3/

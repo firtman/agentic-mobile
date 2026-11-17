@@ -69,4 +69,36 @@
     <string name="catalog_sources_notice">Textos da Wikipédia: CC BY-SA 4.0. Duração: CMU Movie Summary Corpus; David Bamman, Brendan O’Connor e Noah Smith, ACL 2013. Dados adicionais: 9,000+ Movies Dataset. Os direitos dos cartazes pertencem às suas fontes.</string>
     <string name="dataset_source">Fonte de dados</string>
     <string name="movie_source_label">%1$s: %2$s</string>
+    <string name="open_details">Ver detalhes</string>
+    <string name="movie_details">Detalhes do filme</string>
+    <string name="loading_movie">Carregando filme…</string>
+    <string name="movie_not_found">Este filme não está no catálogo.</string>
+    <string name="synopsis">Sinopse</string>
+    <string name="movie_information">Informações do filme</string>
+    <string name="no_movie_information">O catálogo não tem mais detalhes deste filme.</string>
+    <string name="release_year">Ano de lançamento</string>
+    <string name="genres">Gêneros</string>
+    <string name="runtime">Duração</string>
+    <string name="runtime_minutes">%1$d min</string>
+    <string name="director">Direção</string>
+    <string name="cast">Elenco</string>
+    <string name="source_rating">Avaliação da fonte</string>
+    <string name="source_rating_value">%1$s / 10</string>
+    <string name="your_rating">Sua avaliação</string>
+    <string name="rating_saved_like">Salvo como Gostei</string>
+    <string name="rating_saved_dislike">Salvo como Não gostei</string>
+    <string name="rating_saved_unseen">Salvo como Ainda não vi</string>
+    <string name="rating_undone">Avaliação desfeita</string>
+    <string name="rating_error">Não foi possível salvar sua avaliação. Tente novamente.</string>
+    <plurals name="source_rating_votes">
+        <item quantity="one">%1$s / 10 · %2$d voto</item>
+        <item quantity="many">%1$s / 10 · %2$d votos</item>
+        <item quantity="other">%1$s / 10 · %2$d votos</item>
+    </plurals>
+    <string name="swipe_heading">Um pouco mais de você.</string>
+    <string name="swipe_intro">Suas escolhas moldam suas recomendações.</string>
+    <string name="swipe_hint">Esquerda: não gostei · Baixo: ainda não vi · Direita: gostei</string>
+    <string name="swipe_empty">Você está em dia.</string>
+    <string name="swipe_empty_hint">Todos os filmes disponíveis têm uma escolha salva. Desfaça uma escolha ou procure novos filmes.</string>
+    <string name="choices_load_error">Não foi possível carregar suas escolhas salvas. Tente novamente.</string>
 </resources>

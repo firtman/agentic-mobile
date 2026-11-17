@@ -69,4 +69,35 @@
     <string name="catalog_sources_notice">Wikipedia-derived text: CC BY-SA 4.0. Runtime metadata: CMU Movie Summary Corpus; David Bamman, Brendan O’Connor and Noah Smith, ACL 2013. Additional records: 9,000+ Movies Dataset. Poster rights remain with their sources.</string>
     <string name="dataset_source">Dataset source</string>
     <string name="movie_source_label">%1$s: %2$s</string>
+    <string name="open_details">View details</string>
+    <string name="movie_details">Movie details</string>
+    <string name="loading_movie">Loading film…</string>
+    <string name="movie_not_found">This film is not in the catalog.</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="movie_information">Movie information</string>
+    <string name="no_movie_information">The catalog has no further details for this film.</string>
+    <string name="release_year">Release year</string>
+    <string name="genres">Genres</string>
+    <string name="runtime">Runtime</string>
+    <string name="runtime_minutes">%1$d min</string>
+    <string name="director">Director</string>
+    <string name="cast">Cast</string>
+    <string name="source_rating">Source rating</string>
+    <string name="source_rating_value">%1$s / 10</string>
+    <string name="your_rating">Your rating</string>
+    <string name="rating_saved_like">Saved as Like</string>
+    <string name="rating_saved_dislike">Saved as Dislike</string>
+    <string name="rating_saved_unseen">Saved as Not seen yet</string>
+    <string name="rating_undone">Rating undone</string>
+    <string name="rating_error">Your rating could not be saved. Try again.</string>
+    <plurals name="source_rating_votes">
+        <item quantity="one">%1$s / 10 · %2$d vote</item>
+        <item quantity="other">%1$s / 10 · %2$d votes</item>
+    </plurals>
+    <string name="swipe_heading">A little more you.</string>
+    <string name="swipe_intro">Your choices shape your recommendations.</string>
+    <string name="swipe_hint">Left to dislike · Down for not seen yet · Right to like</string>
+    <string name="swipe_empty">You’re all caught up.</string>
+    <string name="swipe_empty_hint">Every available film has a saved choice. Undo a choice or check for new films.</string>
+    <string name="choices_load_error">Your saved choices could not be loaded. Try again.</string>
 </resources>

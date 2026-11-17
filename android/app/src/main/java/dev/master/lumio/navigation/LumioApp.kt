@@ -25,6 +25,9 @@ import dev.master.lumio.AppContainer
 import dev.master.lumio.R
 import dev.master.lumio.ui.foundation.*
 import dev.master.lumio.ui.explore.*
+import dev.master.lumio.ui.details.*
+import dev.master.lumio.ui.swipe.*
+import androidx.navigation.toRoute
 import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Serializable data object Genie
 @Serializable data object Arcade
 @Serializable data object Settings
+@Serializable data class MovieDetails(val id: String)
 private data class Destination(val route: Any, @param:StringRes val label: Int, @param:DrawableRes val icon: Int)
 private val destinations = listOf(
     Destination(Explore,R.string.explore,R.drawable.lucide_compass),
@@ -46,6 +50,8 @@ private val destinations = listOf(
     val nav = rememberNavController()
     val entry by nav.currentBackStackEntryAsState()
     val settings = entry?.destination?.hasRoute<Settings>() == true
+    // Details, settings (and later history and games) are full-screen with back navigation.
+    val fullScreen = settings || entry?.destination?.hasRoute<MovieDetails>() == true
     val layout = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
         androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -53,7 +59,7 @@ private val destinations = listOf(
         navigationRailItemColors = NavigationRailItemDefaults.colors(indicatorColor = androidx.compose.ui.graphics.Color.Transparent),
     )
     NavigationSuiteScaffold(
-        layoutType = if(settings) NavigationSuiteType.None else layout,
+        layoutType = if(fullScreen) NavigationSuiteType.None else layout,
         containerColor = MaterialTheme.colorScheme.background,
         navigationSuiteItems = {
             destinations.forEach { destination ->
@@ -73,7 +79,7 @@ private val destinations = listOf(
         Scaffold(containerColor = MaterialTheme.colorScheme.background,
             topBar = {
                 TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
-                    navigationIcon = { if(settings) IconButton(onClick = { nav.popBackStack() }) {
+                    navigationIcon = { if(fullScreen) IconButton(onClick = { nav.navigateUp() }) {
                         Icon(painterResource(R.drawable.lucide_arrow_left), stringResource(R.string.back))
                     } },
                     actions = { if(!settings) IconButton(onClick = { nav.navigate(Settings) { launchSingleTop = true } }) {
@@ -85,9 +91,24 @@ private val destinations = listOf(
                 composable<Explore> {
                     val explore: ExploreViewModel = viewModel { ExploreViewModel(container.exploreRepository,createSavedStateHandle()) }
                     val state by explore.state.collectAsStateWithLifecycle()
-                    ExploreScreen(state,explore::search,explore::selectGenre,explore::sort,explore::refresh,explore::loadMore,explore::retryGenres,explore::resetFilters)
+                    ExploreScreen(state,explore::search,explore::selectGenre,explore::sort,explore::refresh,explore::loadMore,explore::retryGenres,explore::resetFilters) { movie ->
+                        // Only from Explore itself, so two quick taps cannot stack two details screens.
+                        if (nav.currentDestination?.hasRoute<Explore>() == true) nav.navigate(MovieDetails(movie.id))
+                    }
                 }
-                composable<Swipe> { FoundationScreen(R.string.swipe,R.drawable.lucide_layers_2) }
+                composable<MovieDetails> { backStackEntry ->
+                    val id = backStackEntry.toRoute<MovieDetails>().id
+                    val details: MovieDetailsViewModel = viewModel { MovieDetailsViewModel(id,container.movieRepository,container.ratingsRepository) }
+                    val state by details.state.collectAsStateWithLifecycle()
+                    MovieDetailsScreen(state,details::rate,details::undo,details::retry,{ nav.navigateUp() },details::messageShown)
+                }
+                composable<Swipe> {
+                    val swipe: SwipeViewModel = viewModel { SwipeViewModel(container.exploreRepository, container.ratingsRepository) }
+                    val state by swipe.state.collectAsStateWithLifecycle()
+                    SwipeScreen(state, swipe::rate, swipe::undo, swipe::retry, { movie ->
+                        if (nav.currentDestination?.hasRoute<Swipe>() == true) nav.navigate(MovieDetails(movie.id))
+                    }, swipe::messageShown)
+                }
                 composable<Genie> { FoundationScreen(R.string.genie,R.drawable.lucide_sparkles) }
                 composable<Arcade> { FoundationScreen(R.string.arcade,R.drawable.lucide_gamepad_2) }
                 composable<Settings> { FoundationScreen(R.string.settings,R.drawable.lucide_settings_2) }

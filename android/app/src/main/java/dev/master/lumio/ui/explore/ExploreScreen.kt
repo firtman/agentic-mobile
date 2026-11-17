@@ -42,6 +42,7 @@ fun ExploreScreen(
     onLoadMore: () -> Unit,
     onRetryGenres: () -> Unit,
     onReset: () -> Unit,
+    onOpenMovie: (Movie) -> Unit,
 ) {
     val gridState = rememberSaveable(state.filters, saver = LazyGridState.Saver) { LazyGridState() }
     var attribution by rememberSaveable { mutableStateOf(false) }
@@ -98,7 +99,7 @@ fun ExploreScreen(
                 SectionLabel(stringResource(R.string.spotlight))
             }
             item(key = "spotlight", span = { GridItemSpan(maxLineSpan) }) {
-                SpotlightCard(content.movies.first(),Modifier.fillMaxWidth())
+                content.movies.first().let { movie -> SpotlightCard(movie,{ onOpenMovie(movie) },Modifier.fillMaxWidth()) }
             }
         }
         item(key = "catalog-controls", span = { GridItemSpan(maxLineSpan) }) {
@@ -136,7 +137,7 @@ fun ExploreScreen(
                 }
             }
             is ExploreResult.Content -> {
-                items(result.movies, key = { "movie:" + it.id },contentType = { "movie" }) { movie -> MovieGridCard(movie,Modifier.fillMaxWidth()) }
+                items(result.movies, key = { "movie:" + it.id },contentType = { "movie" }) { movie -> MovieGridCard(movie,{ onOpenMovie(movie) },Modifier.fillMaxWidth()) }
                 item(key = "pagination", span = { GridItemSpan(maxLineSpan) }) {
                     Column(Modifier.fillMaxWidth(),verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(stringResource(R.string.loaded_count,result.movies.size,result.total),style = MaterialTheme.typography.bodyMedium,color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -226,6 +227,6 @@ private fun MovieSort.label() = when(this) {
 @Composable private fun ExplorePreview(dark: Boolean) {
     LumioTheme(dark) { Surface {
         ExploreScreen(ExploreUiState(genres = listOf("Drama","Comedy"),genresLoading = false,result = ExploreResult.Content(
-            listOf(Movie("preview-a","The Quiet Observatory",2024,genres = listOf("Drama")),Movie("preview-b","A Small Adventure",2023)),2,null)),{},{},{},{},{},{},{})
+            listOf(Movie("preview-a","The Quiet Observatory",2024,genres = listOf("Drama")),Movie("preview-b","A Small Adventure",2023)),2,null)),{},{},{},{},{},{},{},{})
     } }
 }

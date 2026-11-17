@@ -1,6 +1,7 @@
 package dev.master.lumio.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -93,18 +94,22 @@ fun MoviePoster(movie: Movie, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MovieGridCard(movie: Movie, modifier: Modifier = Modifier) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+fun MovieGridCard(movie: Movie, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.clip(RoundedCornerShape(8.dp))
+            .clickable(onClickLabel = stringResource(R.string.open_details), onClick = onClick),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
         MoviePoster(movie, Modifier.fillMaxWidth().aspectRatio(2f / 3f))
         Text(movie.title, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.onSurface)
         if (movie.year > 0) {
             Text(movie.year.toString(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        MovieSourceLinks(movie)
     }
 }
 
-@Composable private fun MovieSourceLinks(movie: Movie) {
+/** Source and dataset links; shown on the details screen next to the data they describe. */
+@Composable fun MovieSourceLinks(movie: Movie) {
     val uriHandler = LocalUriHandler.current
     listOf(movie.sourceUrl to R.string.view_source, movie.datasetSourceUrl to R.string.dataset_source)
         .filter { (url,_) -> runCatching { URI(url) }.getOrNull()?.let {
@@ -123,8 +128,8 @@ fun MovieGridCard(movie: Movie, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SpotlightCard(movie: Movie, modifier: Modifier = Modifier) {
-    Surface(modifier = modifier, shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surfaceContainer) {
+fun SpotlightCard(movie: Movie, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(modifier = modifier.clip(RoundedCornerShape(8.dp)).clickable(onClickLabel = stringResource(R.string.open_details), onClick = onClick), shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surfaceContainer) {
         Row(modifier = Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             MoviePoster(movie, Modifier.width(100.dp).aspectRatio(2f / 3f))
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -147,8 +152,8 @@ private val previewMovie = Movie(id = "fictional-1", title = "A Place Beyond the
 private fun MovieCardsLightPreview() {
     LumioTheme(dark = false) {
         Column(Modifier.background(MaterialTheme.colorScheme.background).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            SpotlightCard(previewMovie, Modifier.fillMaxWidth())
-            MovieGridCard(previewMovie, Modifier.width(150.dp))
+            SpotlightCard(previewMovie, {}, Modifier.fillMaxWidth())
+            MovieGridCard(previewMovie, {}, Modifier.width(150.dp))
         }
     }
 }
@@ -158,8 +163,8 @@ private fun MovieCardsLightPreview() {
 private fun MovieCardsDarkLargeTextPreview() {
     LumioTheme(dark = true) {
         Column(Modifier.background(MaterialTheme.colorScheme.background).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            SpotlightCard(previewMovie, Modifier.fillMaxWidth())
-            MovieGridCard(previewMovie, Modifier.width(150.dp))
+            SpotlightCard(previewMovie, {}, Modifier.fillMaxWidth())
+            MovieGridCard(previewMovie, {}, Modifier.width(150.dp))
         }
     }
 }

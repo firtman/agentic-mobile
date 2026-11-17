@@ -128,3 +128,130 @@ The API is restored and verified at **http://127.0.0.1:3000**. Emulator remains 
 At the owner’s request, installed and launched the current Stage 1 debug app on the connected **Pixel 3a, Android API 32**. The debug API address is now configurable with `-Plumio.apiBaseUrl`; the emulator default remains unchanged. Built using `http://127.0.0.1:3000/` and configured device-scoped ADB reverse forwarding for port 3000. Added debug-only loopback HTTP permissions; release retains fixed HTTPS configuration.
 
 Phone-specific `assembleDebug` and `lintDebug` passed. APK installation returned Success; launch identified `dev.master.lumio/.MainActivity`. Fresh physical-device screenshot confirmed Explore in the phone’s existing dark appearance, loaded genre chips, supplied poster artwork and **Films: 9919**. No phone appearance, locale or personal data was changed. The hierarchy inspector again failed, so visual confirmation was used. This was a launch/catalog smoke check, not a complete physical-device walkthrough. The app, local API and ADB forwarding were left running for the owner.
+
+## Stage 2 — Movie details and ratings — 2026-11-17
+
+### Delivered
+
+- `MovieDetails(id)` full-screen route from Explore grid cards and the spotlight (with "View details" click labels); back arrow uses `navigateUp`, so repeated taps cannot empty the back stack.
+- Online `/movies/{id}` load with loading, not-found (404) and connection-error + Retry states. No catalog data is cached.
+- Poster, year · runtime · genres, title, synopsis, and movie information: release year, genres, runtime, director, cast, source rating with locale-formatted score and pluralized vote count. Missing values are hidden; a "no further details" line appears only when every field is missing. Source/dataset links moved from Explore cards to details.
+- Like / Dislike / Not seen yet as a single-choice group (`Role.RadioButton`, ≥72 dp tall). Room 2.8.5 (KSP 2.2.21-2.0.5) stores `ratings` with the planned snapshot (title, year, posterUrl, genres, director, cast) and an `undo_log` capped at 200 entries. Each save shows a snackbar with Undo; undo restores the previous value and timestamp, or removes a first rating, and only applies while it is still the latest change. Re-selecting the current value is not a change. Schema exported to `android/app/schemas/`. The database is already excluded from backup/device transfer.
+- 21 new string keys plus one plural in all four locales (English, Spanish, German, Portuguese). Plural `many` forms added for Spanish/Portuguese.
+- Two-column layout at ≥720 dp container width (not checked on a device).
+
+### Automated validation
+
+```sh
+cd android
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleDebugAndroidTest
+ANDROID_SERIAL=emulator-5600 ./gradlew :app:connectedDebugAndroidTest
+```
+
+All passed. **29 JVM unit tests, zero failures** (13 new): `RatingsLedgerTest` (first rating + undo removal, previous value/timestamp restore, same value no-op, stale undo id ignored, bounded history), `MovieDetailsViewModelTest` (error/retry, not found, rate + undo, change + undo, no rating before load, save failure, re-select no-op), `MovieRepositoryTest` (id path, 404 vs 500). **1 instrumented Room test passed on `emulator-5600`** (real schema, list converter with commas in names, transactions, undo through Room).
+
+Final lint: **0 errors, 53 warnings**: 34 unused resources reserved for later stages, 18 dependency/build update notices, 1 owner-selected target-SDK notice. The three warnings introduced during this stage (two `MissingQuantity`, one `ConfigurationScreenWidthHeight`) were fixed. No baseline or suppression was added. All four `strings.xml` files contain the same 91 keys.
+
+### Device and live API validation
+
+`Pixel_9_Pro_XL` (`emulator-5600`, API 36) against the local API (health: 9,919 movies). The connected Pixel 3a was not used.
+
+| Flow | Actual result |
+| --- | --- |
+| Open from spotlight | ¡A Volar, Joven! opened with supplied poster, "1947 · COMEDY", synopsis; bottom navigation hidden, back arrow shown |
+| Like | Like highlighted in Coral; snackbar "Saved as Like" with Undo |
+| Persistence | Force-stopped and relaunched app, reopened the movie; Like still selected |
+| Change + Undo | Not seen yet saved with snackbar; tapping Undo showed "Rating undone" and restored Like |
+| Open from grid, Spanish + dark | Per-app locale `es` and dark mode: ¡Qué Despadre! showed translated labels, "4,0 / 10 · 2 votos", missing runtime/director/cast hidden, catalog synopsis kept in its source language, one deduplicated source link |
+| Error + Retry | With emulator airplane mode on, opening a movie showed the Spanish connection error and Reintentar; after restoring the network, Retry loaded synopsis and rating controls |
+
+Snackbar action colour initially used Material's default purple; it now uses the Editorial palette (Ink surface, Coral action), verified in the later captures.
+
+### Captures and limits
+
+Six captures in **ignored** `validation/screenshots/stage-2/` (they contain supplied poster imagery): `details-light.png`, `liked-snackbar.png`, `unseen-snackbar.png`, `undo-restored.png`, `spanish-dark-info.png`, `spanish-dark-error.png`. `.gitignore` now excludes this folder.
+
+The offline check used emulator airplane mode instead of stopping the API, because the API process was already running before this session. The not-found state was covered by unit tests only. Not validated on a device: German/Portuguese, the wide two-column layout, TalkBack, 200% text, process death during a save, and external browser opening of source links. Compose previews (light, dark at 200% text, error) compile but were not rendered. The connected instrumented test reinstalled the app, so earlier emulator ratings were cleared before the walkthrough.
+
+An independent review found no blocking defects. Two of its low-severity suggestions were applied afterwards: rating buttons stay enabled while saving (the ViewModel already ignores repeat taps), for stable TalkBack focus; and details opens only while Explore is current, so two quick taps cannot stack two details screens. Build, the 29 unit tests and lint (0 errors, 53 warnings) passed again, and the final APK was reinstalled, but the walkthrough above was not repeated after these two changes.
+
+Emulator left running on English, dark appearance, airplane mode off, showing a movie's details. Its appearance was switched to light and then dark during testing; its original setting was not recorded. API left running at **http://127.0.0.1:3000**.
+
+### Physical-phone walkthrough — 2026-11-17
+
+At the owner's request, personally tested the current Stage 2 build on the connected **Pixel 3a, Android 12L / API 32**, using its existing English UI, dark appearance and normal text size. No emulator was used for this walkthrough. Rebuilt with the phone's loopback API address and installed the APK:
+
+```sh
+cd android
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/ --console=plain
+```
+
+Build passed; **29 JVM tests passed, zero failures/errors/skips**. Lint reported **0 errors, 53 warnings**. Device-scoped ADB reverse forwards port 3000 to the existing host API. Final host health check returned `status: ok`, **9,919 movies**.
+
+| Flow | Physical-phone result |
+| --- | --- |
+| Spotlight entry | Opened ¡A Volar, Joven!; details displayed title, year, genre, synopsis and rating controls, with bottom navigation hidden |
+| First rating + Undo | Like highlighted with Saved as Like snackbar; Undo showed Rating undone and cleared the selection |
+| Persist Like | Force-stopped/relaunched the app and reopened the movie; Like remained selected |
+| Change + Undo | Changed Like to Dislike; Undo restored Like |
+| Not seen yet | Saved Not seen yet; force-stop/relaunch preserved the selection |
+| Missing metadata | Missing runtime, director and cast were omitted; source score 7.9 / 10 and 83 votes were displayed |
+| Source link | View source opened the supplied Kaggle dataset page in Chrome Beta; system Back returned to Lumio |
+| Grid entry + complete metadata | Searched 12 Angry Men, opened the 1957 film from its grid card, and scrolled through details. Runtime 96 min, director Sidney Lumet, cast Lee J. Cobb / Henry Fonda, score 8.5 / 10 and 6227 votes matched the live API record |
+| Back navigation | Both system Back and toolbar Back returned to Explore; the 12 Angry Men search remained active after toolbar Back |
+| Connection error + Retry | Removed only this phone's port-3000 forwarding, opened details and observed the connection error with Retry. Restored forwarding and tapped Retry; the film's details and rating controls returned |
+| Cleanup | No ratings database existed before the first Stage 2 launch. With the app force-stopped, removed only the test-created lumio.db and its SQLite sidecars; reopened the tested movie and visually confirmed all rating choices unselected |
+
+No blocking defects were observed in these flows, and no application code changes were needed. Saved 13 screenshots under ignored `validation/screenshots/stage-2/phone/`; downloaded catalog imagery remains excluded from commits. The hierarchy inspector failed, so testing used fresh screenshots and device-scoped taps, swipes and input; this was an actual manual walkthrough, not an automated UI-suite pass. Both supplied artwork and procedural title fallbacks were observed.
+
+Physical-phone limits: no TalkBack, large-text, wide layout, other locales, process death during an in-flight save, rapid double-tap stress test, or live 404 check. The not-found state remains covered by unit tests. Instrumented Room tests were not rerun on the owner's phone. Phone appearance, font scale and locale were unchanged; no unrelated app data was cleared. The app is left open on movie details with no test ratings, API running and forwarding restored. Stage 2 remains pending owner approval; nothing was committed or pushed, and Stage 3 was not started.
+
+
+## Stage 3 — Swipe — 2026-11-17
+
+### Delivered
+
+- Replaced Swipe placeholder with an Editorial screen: headline, one supplied poster/fallback, movie title/year/genres, online details link, Undo, three equally accessible rating actions and gesture guidance. All six new UI keys are present in English, Spanish, German and Portuguese (97 resource keys per locale).
+- Popularity-descending 24-film API pages, excluding every saved id including UNSEEN. Fully-rated pages are skipped; only unread page records remain in memory. Queue reacts to choices saved in details. No catalog disk persistence, bundled data or new dependencies.
+- Right/left/down dominant-axis drags of ≥72 dp match Like/Dislike/Not seen yet buttons. Short/upward/tied diagonal gestures do not rate. Saves are guarded against repeated taps and advance only after transaction success. Failed saves preserve the current movie with feedback.
+- Persistent global Undo from the existing bounded log, available after restart and even when the queue is empty or the network fails. Undo restores a previous value/timestamp or removes a first rating, then reloads online; a still-rated film remains excluded. Details Undo returns consumed cards to eligibility.
+- Loading, exhausted + Refresh, connection error + Retry, and local-storage error + Retry states. No timed card animation or fling. System animator disablement is observed while visible and removes drag transforms. Labeled buttons and card accessibility actions provide alternatives to gestures.
+
+### Automated validation
+
+`./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleDebugAndroidTest` passed during development. After the review fix and light-mode link-colour correction, `./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug` passed again. **40 JVM tests, zero failures** (11 new Swipe tests): fully-rated page skipping, UNSEEN exclusion, all button values, duplicate-tap protection, external details changes and Undo, persistence through ViewModel recreation, previous-value Undo exclusion, save failure, page-error retry at the same offset, empty refresh with new films, ratings changed during an in-flight request, storage-read failure + retry, and gesture thresholds/directions.
+
+Installed app and test APKs with device-scoped `adb install -r`, then ran `adb -s emulator-5600 shell am instrument -w dev.master.lumio.test/androidx.test.runner.AndroidJUnitRunner`. **1 Room integration test passed**, extended to check rated-id and latest-undo observations. It uses an in-memory DB; existing emulator ratings were preserved. The final screen-only colour correction did not change the Room implementation; the device test was not repeated after it.
+
+Lint: **0 errors, 52 warnings** (33 reserved unused resources, 18 dependency/build update notices, 1 target-SDK notice). All four string-resource key sets match. `git diff --check` passed.
+
+The first pagination regression test caught an unintended extra retry caused by a ratings emission after a network failure; fixed to retain Error until Retry. Independent review caught a consumed movie missing after Undo in details; fixed by resetting the queue when observed rated ids shrink and covered by a regression test. Re-review found no remaining blocking defects.
+
+### Device and live API validation
+
+`Pixel_9_Pro_XL`, `emulator-5600`, API 36. Local API verified before and after at `http://127.0.0.1:3000/health`: 9,919 movies. Connected physical phone was not used.
+
+| Flow | Actual result |
+| --- | --- |
+| Initial queue | Spider-Man: No Way Home appeared first, matching popularity order, with title/year/genres and three actions |
+| Right / left / down gestures | Right advanced to The Batman; left advanced to No Exit; down advanced to Encanto |
+| Undo | Returned No Exit with “Rating undone” feedback |
+| Buttons | Like on No Exit, Not seen yet on Encanto, Dislike on The King’s Man each advanced the queue |
+| Stored values / restart | Inspected emulator DB copy in `/tmp`: Spider-Man LIKE, The Batman DISLIKE, No Exit LIKE, Encanto UNSEEN, The King’s Man DISLIKE. Force-stop/relaunch retained choices and Undo availability; next card remained The Commando |
+| Spanish + dark + animations disabled | Translated labels fit; titles/genres remain source text. Right swipe on The Commando advanced to Scream with animator duration scale 0 |
+| Connection failure + Retry | Emulator airplane mode + fresh process showed Spanish connection error and Reintentar. Immediate retry while reconnecting still errored; retry after reconnection loaded Scream |
+| Details → rating → Undo → Back | Opened Scream details from Swipe, saved Like, tapped snackbar Undo and returned: Scream remained eligible as the current Swipe card |
+
+Three captures, visually inspected, in ignored `validation/screenshots/stage-3/`: `swipe-light.png`, `swipe-spanish-dark-reduced-motion.png`, `swipe-spanish-error.png`. Supplied poster imagery stays uncommitted. First light capture caught a navigation transition and was replaced with a settled final-build capture.
+
+### Limits and handoff
+
+Network isolation used emulator airplane mode instead of stopping the pre-existing shared API. Ratings and their snapshots remain on the emulator after this walkthrough. Animations were disabled for the gesture smoke check, but motion during a held drag was not recorded. German/Portuguese rendering, TalkBack action execution/focus, 200% text, wide screens, end-of-catalog exhaustion and actual on-device disk failures were not manually exercised; queue exhaustion, read/save failures and page boundaries are unit-tested. Light/dark previews compile but were not separately rendered. History remains stage 4.
+
+Emulator left on Swipe, English, dark appearance (the starting appearance), airplane mode off; animator duration scale restored to its original unset value. The local API remains running. Stage 3 awaits owner approval; no commit/push or stage 4 implementation in this session.
+
+### Subsequent physical-phone launch — 2026-11-17
+
+At the owner’s request, built the current stage 3 debug app with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), configured device-scoped ADB reverse port 3000 and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success and `am start` launched `dev.master.lumio/.MainActivity`. Local API health was verified: 9,919 movies.
+
+The phone opened on Swipe in its existing dark appearance. Hierarchy and visually inspected capture confirmed Spider-Man: No Way Home loaded with supplied artwork, year/genres, details link and all three rating buttons. A short scroll outside the poster revealed the full buttons on the smaller screen. No rating was made, no app data was cleared and no phone appearance/locale settings were changed. This was a launch/catalog smoke check, not a complete physical-device walkthrough. Capture: ignored `validation/screenshots/stage-3/phone-swipe.png`. App, API and ADB forwarding left running for owner use; the connection to this computer is required for the local catalog.

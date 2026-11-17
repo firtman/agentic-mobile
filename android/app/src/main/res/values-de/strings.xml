@@ -69,4 +69,35 @@
     <string name="catalog_sources_notice">Wikipedia-Texte: CC BY-SA 4.0. Laufzeitdaten: CMU Movie Summary Corpus; David Bamman, Brendan O’Connor und Noah Smith, ACL 2013. Weitere Einträge: 9,000+ Movies Dataset. Plakatrechte verbleiben bei den Quellen.</string>
     <string name="dataset_source">Datenquelle</string>
     <string name="movie_source_label">%1$s: %2$s</string>
+    <string name="open_details">Details ansehen</string>
+    <string name="movie_details">Filmdetails</string>
+    <string name="loading_movie">Film wird geladen…</string>
+    <string name="movie_not_found">Dieser Film ist nicht im Katalog.</string>
+    <string name="synopsis">Handlung</string>
+    <string name="movie_information">Filminformationen</string>
+    <string name="no_movie_information">Der Katalog enthält keine weiteren Details zu diesem Film.</string>
+    <string name="release_year">Erscheinungsjahr</string>
+    <string name="genres">Genres</string>
+    <string name="runtime">Laufzeit</string>
+    <string name="runtime_minutes">%1$d Min.</string>
+    <string name="director">Regie</string>
+    <string name="cast">Besetzung</string>
+    <string name="source_rating">Bewertung der Quelle</string>
+    <string name="source_rating_value">%1$s / 10</string>
+    <string name="your_rating">Deine Bewertung</string>
+    <string name="rating_saved_like">Als „Gefällt mir“ gespeichert</string>
+    <string name="rating_saved_dislike">Als „Gefällt mir nicht“ gespeichert</string>
+    <string name="rating_saved_unseen">Als „Noch nicht gesehen“ gespeichert</string>
+    <string name="rating_undone">Bewertung rückgängig gemacht</string>
+    <string name="rating_error">Deine Bewertung konnte nicht gespeichert werden. Versuche es erneut.</string>
+    <plurals name="source_rating_votes">
+        <item quantity="one">%1$s / 10 · %2$d Stimme</item>
+        <item quantity="other">%1$s / 10 · %2$d Stimmen</item>
+    </plurals>
+    <string name="swipe_heading">Ein bisschen mehr du.</string>
+    <string name="swipe_intro">Deine Auswahl prägt deine Empfehlungen.</string>
+    <string name="swipe_hint">Links: gefällt mir nicht · Unten: noch nicht gesehen · Rechts: gefällt mir</string>
+    <string name="swipe_empty">Du bist auf dem neuesten Stand.</string>
+    <string name="swipe_empty_hint">Für alle verfügbaren Filme ist eine Auswahl gespeichert. Mache eine Auswahl rückgängig oder suche nach neuen Filmen.</string>
+    <string name="choices_load_error">Deine gespeicherte Auswahl konnte nicht geladen werden. Versuche es erneut.</string>
 </resources>

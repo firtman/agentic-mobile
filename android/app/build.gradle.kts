@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.compose)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 val debugApiBaseUrl = providers.gradleProperty("lumio.apiBaseUrl")
     .getOrElse("http://10.0.2.2:3000/")
@@ -22,6 +23,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug { buildConfigField("String", "API_BASE_URL", "\"$debugApiBaseUrl\"") }
@@ -57,7 +59,18 @@ dependencies {
     implementation(libs.coroutines)
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.coroutines.test)
+}
+ksp {
+    arg("room.generateKotlin", "true")
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
