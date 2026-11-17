@@ -31,7 +31,7 @@ import dev.master.lumio.ui.theme.LumioTheme
 
 @Composable
 fun SwipeScreen(state: SwipeUiState, rate: (RatingValue) -> Unit, undo: () -> Unit,
-                retry: () -> Unit, openDetails: (Movie) -> Unit, messageShown: () -> Unit) {
+                retry: () -> Unit, openDetails: (Movie) -> Unit, messageShown: () -> Unit, onHistory: () -> Unit = {}) {
     val snackbar = remember { SnackbarHostState() }
     val message = state.message?.let { stringResource(it) }
     LaunchedEffect(message) {
@@ -44,11 +44,19 @@ fun SwipeScreen(state: SwipeUiState, rate: (RatingValue) -> Unit, undo: () -> Un
                 Text(stringResource(R.string.swipe_heading), style = MaterialTheme.typography.headlineLarge)
                 Text(stringResource(R.string.swipe_intro), style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 TextButton(onClick = undo, enabled = state.undoId != null && !state.saving,
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.secondary)) {
                     Icon(painterResource(R.drawable.lucide_undo_2), null, Modifier.size(20.dp))
                     Spacer(Modifier.width(8.dp))
                     Text(stringResource(R.string.undo))
+                }
+                TextButton(onClick = onHistory,
+                    colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.secondary)) {
+                    Icon(painterResource(R.drawable.lucide_list_checks), null, Modifier.size(20.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text(stringResource(R.string.history))
+                }
                 }
             }
             when (val result = state.result) {

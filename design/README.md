@@ -31,3 +31,6 @@ Saving exploratory material does not approve its design or authorize native app 
 Stage 0 applies the approved palette, typography and icons in the native shell. These [device screenshots](../validation/screenshots/stage-0/) document implementation checks, not new approved design decisions. See [validation](../validation/android.md) for scope and limitations.
 
 Stage 1 adds native Explore using the Editorial screen reference and approved brand tokens. Its validation notes are in [Android validation](../validation/android.md). Captures with real catalog/poster imagery are kept locally under ignored `validation/screenshots/stage-1/` and are excluded from Git. This implementation does not approve new branding choices.
+
+
+Stages 2–4 add native movie details, Swipe and Your choices using the existing approved tokens and Lucide mappings. History uses `list-checks`; Undo uses `undo-2`. See [Android validation](../validation/android.md) for actual checks. Catalog/poster captures for these stages remain in ignored `validation/screenshots/stage-2/`, `stage-3/` and `stage-4/`; no new branding choices or exploratory assets were approved by this implementation.

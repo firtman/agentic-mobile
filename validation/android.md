@@ -255,3 +255,57 @@ Emulator left on Swipe, English, dark appearance (the starting appearance), airp
 At the owner’s request, built the current stage 3 debug app with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), configured device-scoped ADB reverse port 3000 and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success and `am start` launched `dev.master.lumio/.MainActivity`. Local API health was verified: 9,919 movies.
 
 The phone opened on Swipe in its existing dark appearance. Hierarchy and visually inspected capture confirmed Spider-Man: No Way Home loaded with supplied artwork, year/genres, details link and all three rating buttons. A short scroll outside the poster revealed the full buttons on the smaller screen. No rating was made, no app data was cleared and no phone appearance/locale settings were changed. This was a launch/catalog smoke check, not a complete physical-device walkthrough. Capture: ignored `validation/screenshots/stage-3/phone-swipe.png`. App, API and ADB forwarding left running for owner use; the connection to this computer is required for the local catalog.
+
+
+## Stages 2–3 approval and publication — 2026-11-17
+
+The owner approved stages 2 and 3, requested commit/push, and authorized stage 4. Approved app source, Room schema, tests, dependency declarations, documentation and ignore rules were committed on `main` as **`9e468d4`** and pushed successfully to the existing `origin/main` (`7b47f94..9e468d4`). Local exploratory design assets, movie/trivia data, posters, captured screenshots, secrets and machine configuration were excluded. `initial-state` was not changed.
+
+## Stage 4 — Your choices — 2026-11-17
+
+### Delivered
+
+- Full-screen `History` route from Swipe’s checklist action, with back navigation to Swipe and online movie-details navigation/back to history. A lazy list shows saved snapshots newest first, each with title, available year, supplied poster/fallback, current choice and locale-formatted saved date/time. Stable movie-id keys retain list identity.
+- Choice editor with three single-choice options, Save and Cancel. Saving the existing value is a no-op. Writes use the saved snapshot fields; viewing/editing history does not fetch the catalog.
+- Per-film Undo targets that film’s most recent retained entry, checked transactionally against the displayed id. It restores the previous value/timestamp or removes a first rating, preserving all other films and global undo entries. The existing 200-entry limit remains; Undo is disabled for a film with no retained step. Swipe remains reactive to history changes.
+- Loading, empty guidance, local-read error + Retry, write-failure and stale-undo feedback. Row-specific accessibility labels, single-choice dialog semantics, 48 dp minimum actions, light/dark/large-text preview source. Twelve new UI keys; all four locales contain the same **109 keys**.
+
+### Automated validation
+
+```sh
+./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleDebugAndroidTest
+```
+
+Passed. **48 JVM tests, zero failures**: eight new tests cover empty/reactive newest-first history including UNSEEN, per-film Undo with a newer other-film choice, previous-value/timestamp and first-rating removal, snapshot-preserving edits without network, unchanged values and repeated taps, read-error Retry, failed rate/undo writes, stale ids, trimmed undo availability, and wrong-movie/stale ledger protection.
+
+App and test APKs installed using device-scoped `adb install -r`, preserving existing emulator data. `adb -s emulator-5600 shell am instrument -w dev.master.lumio.test/androidx.test.runner.AndroidJUnitRunner`: **2 Room tests passed**, including the real history projection/query, ordering, per-film stale-id rejection, restoration, removal and unaffected global Undo. No database schema version change or migration was needed.
+
+Lint: **0 errors, 50 warnings** (31 reserved unused resources, 18 dependency/build update notices, 1 selected target-SDK notice). Four-locale resource alignment and `git diff --check` passed. Independent read-only review found no blocking defects in history, per-film Undo, offline snapshot use or navigation.
+
+### Emulator validation
+
+`Pixel_9_Pro_XL` (`emulator-5600`, API 36), local API verified before and after: `http://127.0.0.1:3000/health`, 9,919 movies. The physical phone was not changed during stage 4.
+
+| Flow | Actual result |
+| --- | --- |
+| Open history | Swipe’s Your choices opened full-screen history, newest first: The Commando LIKE, The King’s Man DISLIKE, Encanto UNSEEN; bottom navigation hidden and back arrow present |
+| Change an older choice | Changed The King’s Man to UNSEEN through the dialog; updated film moved to the first row with a new saved time and “Choice updated” feedback |
+| Undo change | Restored DISLIKE and the original saved time/order; newer The Commando choice remained LIKE |
+| Undo first rating | Per-film Undo removed The King’s Man while keeping other rows; Back to Swipe immediately showed it as the current eligible film |
+| Spanish + dark, catalog disconnected | Airplane mode on: history still showed localized labels/dates. Changed The Commando from LIKE to DISLIKE and undid it, restoring LIKE and its original timestamp |
+| Details from history | While offline, Ver detalles showed the catalog connection error + Reintentar. Restored network/English and tapped Retry: online The Commando details loaded; Back returned to history |
+
+Two screenshots captured and visually inspected in ignored `validation/screenshots/stage-4/`: `history-light.png`, `history-spanish-dark-offline.png`. Supplied poster imagery remains uncommitted. Existing loaded images remained in memory during the offline history check; this does not establish offline poster availability. Catalog isolation used emulator airplane mode, preserving the shared API for the owner’s phone.
+
+### Limits and handoff
+
+Empty/local-read-error/stale-undo/disk-write-failure/trimmed-log states were covered by unit tests, not induced on the device. TalkBack execution/focus, German/Portuguese rendering, 200% font scale, wide screens, and cold offline thumbnail fallbacks were not manually exercised. Preview functions compile but were not separately rendered. Full accessibility/layout hardening remains stage 9.
+
+The emulator retains the walkthrough’s personal choices: The King’s Man’s first rating was removed to test return to Swipe; the temporary The Commando edit was undone. Left on Your choices, English, original dark appearance, airplane mode off. API remains running. The physical phone retains stage 3. **Stage 4 is uncommitted and awaits owner approval; stage 5 was not started.**
+
+
+### Subsequent physical-phone launch — 2026-11-17
+
+At the owner’s request, built stage 4 with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Install returned Success; `am start` launched Lumio. API health verified: 9,919 movies. No app data was cleared or ratings changed.
+
+Hierarchy confirmed Swipe with the new Your choices action and a loaded catalog movie. The phone UI changed between inspection and the attempted history tap; the subsequent visually inspected capture showed Explore with the search keyboard open, so history opening was not established in this launch check. No further UI actions were made. Capture renamed to ignored `validation/screenshots/stage-4/phone-launch.png`. Step 4 is installed; access history through Swipe → Your choices. App, API and forwarding remain available for owner use.

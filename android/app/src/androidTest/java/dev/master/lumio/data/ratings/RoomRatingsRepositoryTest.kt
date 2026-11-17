@@ -24,6 +24,26 @@ class RoomRatingsRepositoryTest {
 
     @After fun tearDown() = database.close()
 
+    @Test fun historyAndPerMovieUndoKeepOtherMoviesIntact() = runTest {
+        val first = repository.rate(movie, RatingValue.UNSEEN)!!
+        val originalAt = database.ratings().get(movie.id)!!.updatedAt
+        val second = repository.rate(movie, RatingValue.LIKE)!!
+        val other = movie.copy(id = "other", title = "Other")
+        val third = repository.rate(other, RatingValue.DISLIKE)!!
+        val history = repository.history().first()
+        assertEquals(listOf("other", movie.id), history.map { it.rating.movieId })
+        assertEquals(second, history.last().undoId)
+        assertFalse(repository.undoMovie(movie.id, first))
+        assertTrue(repository.undoMovie(movie.id, second))
+        assertEquals(RatingValue.UNSEEN, repository.rating(movie.id).first())
+        assertEquals(originalAt, database.ratings().get(movie.id)!!.updatedAt)
+        assertEquals(third, repository.latestUndo().first()!!.id)
+        assertTrue(repository.undoMovie(movie.id, first))
+        assertEquals(listOf("other"), repository.history().first().map { it.rating.movieId })
+        assertTrue(repository.undo(third))
+        assertTrue(repository.history().first().isEmpty())
+    }
+
     @Test fun ratingSnapshotUndoAndObservation() = runTest {
         assertTrue(repository.ratedIds().first().isEmpty())
         assertNull(repository.latestUndo().first())

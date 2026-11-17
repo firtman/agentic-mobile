@@ -100,4 +100,16 @@
     <string name="swipe_empty">You’re all caught up.</string>
     <string name="swipe_empty_hint">Every available film has a saved choice. Undo a choice or check for new films.</string>
     <string name="choices_load_error">Your saved choices could not be loaded. Try again.</string>
+    <string name="history_intro">Review, change or undo your saved film choices.</string>
+    <string name="loading_choices">Loading your choices…</string>
+    <string name="history_empty">No choices yet.</string>
+    <string name="history_empty_hint">Like, dislike or mark a film as not seen yet in Swipe or movie details. Your choices will appear here.</string>
+    <string name="change_choice">Change choice</string>
+    <string name="save_choice">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="choice_updated">Choice updated</string>
+    <string name="choice_changed">This choice has changed. Review it and try again.</string>
+    <string name="change_choice_label">Change choice for %1$s</string>
+    <string name="undo_choice_label">Undo the last choice for %1$s</string>
+    <string name="history_details_label">View details for %1$s</string>
 </resources>

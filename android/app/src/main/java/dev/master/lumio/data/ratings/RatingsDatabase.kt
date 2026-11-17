@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Database
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
@@ -47,9 +48,21 @@ data class UndoEntry(
     val previousUpdatedAt: Long?,
 )
 
+/** One saved choice and its most recent still-available undo step, read in one SQLite query. */
+data class HistoryChoice(@Embedded val rating: RatingEntity, val undoId: Long?)
+
 /** Storage operations used by [RatingsLedger]; Room implements them, tests use an in-memory fake. */
 @Dao
 interface RatingDao {
+    @Query("""
+        SELECT ratings.*, (SELECT MAX(id) FROM undo_log WHERE undo_log.movieId = ratings.movieId) AS undoId
+        FROM ratings ORDER BY updatedAt DESC, movieId ASC
+    """)
+    fun observeHistory(): Flow<List<HistoryChoice>>
+
+    @Query("SELECT * FROM undo_log WHERE movieId = :movieId ORDER BY id DESC LIMIT 1")
+    suspend fun latestUndoForMovie(movieId: String): UndoEntry?
+
     @Query("SELECT movieId FROM ratings")
     fun observeRatedIds(): Flow<List<String>>
 

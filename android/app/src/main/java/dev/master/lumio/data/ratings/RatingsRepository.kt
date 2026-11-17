@@ -33,6 +33,17 @@ class RatingsLedger(private val dao: RatingDao, private val clock: () -> Long) {
     suspend fun undo(entryId: Long? = null): String? {
         val entry = dao.latestUndo() ?: return null
         if (entryId != null && entry.id != entryId) return null
+        return restore(entry)
+    }
+
+    /** Undo only this film's latest step; changes to other films keep their order and values. */
+    suspend fun undoMovie(movieId: String, entryId: Long): String? {
+        val entry = dao.latestUndoForMovie(movieId) ?: return null
+        if (entry.id != entryId) return null
+        return restore(entry)
+    }
+
+    private suspend fun restore(entry: UndoEntry): String {
         val previous = entry.previousValue
         if (previous == null) {
             dao.delete(entry.movieId)
@@ -49,6 +60,8 @@ class RatingsLedger(private val dao: RatingDao, private val clock: () -> Long) {
 }
 
 interface RatingsRepository {
+    fun history(): Flow<List<HistoryChoice>>
+    suspend fun undoMovie(movieId: String, entryId: Long): Boolean
     fun ratedIds(): Flow<Set<String>>
     fun latestUndo(): Flow<UndoEntry?>
     fun rating(movieId: String): Flow<RatingValue?>
@@ -62,6 +75,9 @@ class RoomRatingsRepository(
 ) : RatingsRepository {
     private val dao = database.ratings()
     private val ledger = RatingsLedger(dao, clock)
+    override fun history(): Flow<List<HistoryChoice>> = dao.observeHistory().distinctUntilChanged()
+    override suspend fun undoMovie(movieId: String, entryId: Long): Boolean =
+        database.withTransaction { ledger.undoMovie(movieId, entryId) } != null
     override fun ratedIds(): Flow<Set<String>> = dao.observeRatedIds().map { it.toSet() }.distinctUntilChanged()
     override fun latestUndo(): Flow<UndoEntry?> = dao.observeLatestUndo().distinctUntilChanged()
     override fun rating(movieId: String): Flow<RatingValue?> =

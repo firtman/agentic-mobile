@@ -100,4 +100,16 @@
     <string name="swipe_empty">Du bist auf dem neuesten Stand.</string>
     <string name="swipe_empty_hint">Für alle verfügbaren Filme ist eine Auswahl gespeichert. Mache eine Auswahl rückgängig oder suche nach neuen Filmen.</string>
     <string name="choices_load_error">Deine gespeicherte Auswahl konnte nicht geladen werden. Versuche es erneut.</string>
+    <string name="history_intro">Sieh dir deine gespeicherte Auswahl an, ändere sie oder mache sie rückgängig.</string>
+    <string name="loading_choices">Deine Auswahl wird geladen…</string>
+    <string name="history_empty">Noch keine Auswahl.</string>
+    <string name="history_empty_hint">Markiere einen Film beim Wischen oder in den Filmdetails als gefällt mir, gefällt mir nicht oder noch nicht gesehen. Deine Auswahl erscheint hier.</string>
+    <string name="change_choice">Auswahl ändern</string>
+    <string name="save_choice">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="choice_updated">Auswahl aktualisiert</string>
+    <string name="choice_changed">Diese Auswahl wurde geändert. Prüfe sie und versuche es erneut.</string>
+    <string name="change_choice_label">Auswahl für %1$s ändern</string>
+    <string name="undo_choice_label">Letzte Auswahl für %1$s rückgängig machen</string>
+    <string name="history_details_label">Details zu %1$s ansehen</string>
 </resources>

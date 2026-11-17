@@ -27,3 +27,6 @@ __pycache__/
 
 # Swipe validation captures contain supplied poster imagery.
 /validation/screenshots/stage-3/
+
+# History validation captures contain supplied poster imagery.
+/validation/screenshots/stage-4/

@@ -101,4 +101,16 @@
     <string name="swipe_empty">Ya estás al día.</string>
     <string name="swipe_empty_hint">Todas las películas disponibles tienen una elección guardada. Deshaz una elección o busca nuevas películas.</string>
     <string name="choices_load_error">No se pudieron cargar tus elecciones guardadas. Inténtalo de nuevo.</string>
+    <string name="history_intro">Revisa, cambia o deshaz tus elecciones guardadas.</string>
+    <string name="loading_choices">Cargando tus elecciones…</string>
+    <string name="history_empty">Aún no hay elecciones.</string>
+    <string name="history_empty_hint">Marca una película con Me gusta, No me gusta o Aún no la vi en Deslizar o en sus detalles. Tus elecciones aparecerán aquí.</string>
+    <string name="change_choice">Cambiar elección</string>
+    <string name="save_choice">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="choice_updated">Elección actualizada</string>
+    <string name="choice_changed">Esta elección ha cambiado. Revísala e inténtalo de nuevo.</string>
+    <string name="change_choice_label">Cambiar elección de %1$s</string>
+    <string name="undo_choice_label">Deshacer la última elección de %1$s</string>
+    <string name="history_details_label">Ver detalles de %1$s</string>
 </resources>

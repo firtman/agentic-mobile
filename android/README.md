@@ -43,7 +43,7 @@ Dependencies are pinned in `gradle/libs.versions.toml`. SDK 36 is an owner requi
 - [Retrofit 3.0.0 source](https://github.com/square/retrofit/tree/3.0.0)
 - [Kotlin serialization 1.9.0](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.9.0)
 
-Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved for commit/push on 2026-11-17, and stage 4 was authorized.
+Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved for commit/push on 2026-11-17 and stage 5 (Genie) was authorized.
 
 ## Explore behavior
 
@@ -72,4 +72,11 @@ Keep the API and ADB connection running while using the local catalog. Reapply p
 
 Swipe requests 24-film pages from `/movies?sort=popularity&order=desc`, keeping unread records in memory only. Room supplies all rated ids, including Not seen yet, before any card appears. Fully-rated pages are skipped automatically. Right, left and down gestures match Like, Dislike and Not seen yet buttons; only a dominant-axis drag of at least 72 dp commits, while short, upward and tied diagonal drags do nothing. Saves advance only after a successful transaction. The scrollable screen also exposes accessibility actions on the card and ordinary labeled buttons.
 
-Undo uses the latest persisted change across the app, survives process restart and reloads the queue online. It removes a first rating or restores a previous rating; a restored prior rating still excludes that movie. Details ratings update Swipe reactively, including returning a consumed film after details Undo. Network errors require Retry, local rating-read errors block the queue until Retry succeeds, and exhausted queues can refresh for new films. Undo has no timed expiry, subject to the ratings store’s 200-entry limit. With Android animator duration scale set to zero, drag transforms are disabled; no timed card transitions or fling animations are used. Stage 4 history is not implemented.
+Undo uses the latest persisted change across the app, survives process restart and reloads the queue online. It removes a first rating or restores a previous rating; a restored prior rating still excludes that movie. Details ratings update Swipe reactively, including returning a consumed film after details Undo. Network errors require Retry, local rating-read errors block the queue until Retry succeeds, and exhausted queues can refresh for new films. Undo has no timed expiry, subject to the ratings store’s 200-entry limit. With Android animator duration scale set to zero, drag transforms are disabled; no timed card transitions or fling animations are used. Your choices history is available from Swipe in stage 4.
+
+
+## Your choices behavior
+
+The history route opens from Swipe’s Your choices action. A single observable Room query returns saved personal-choice snapshots and each film’s latest undo id, sorted by saved time descending with movie id as a stable tie-breaker. It never downloads the catalog to render or edit history. Thumbnail requests use the supplied saved URL with the same memory-only image loader and fallback; opening full movie details requests `/movies/{id}` online.
+
+Each row offers a choice editor and per-film Undo. Saving an unchanged value is a no-op. The per-film Undo transaction rejects stale entry ids, restores the previous choice/timestamp or removes a first rating, and leaves other films’ undo entries untouched. Global Undo on Swipe continues to target the latest remaining change across all films. When a film has no retained undo step (the shared limit is 200), its Undo button is disabled. Changes update history and Swipe reactively. No schema migration or dependency change was needed for the new queries.

@@ -101,4 +101,16 @@
     <string name="swipe_empty">Você está em dia.</string>
     <string name="swipe_empty_hint">Todos os filmes disponíveis têm uma escolha salva. Desfaça uma escolha ou procure novos filmes.</string>
     <string name="choices_load_error">Não foi possível carregar suas escolhas salvas. Tente novamente.</string>
+    <string name="history_intro">Revise, altere ou desfaça suas escolhas salvas.</string>
+    <string name="loading_choices">Carregando suas escolhas…</string>
+    <string name="history_empty">Nenhuma escolha ainda.</string>
+    <string name="history_empty_hint">Marque um filme como gostei, não gostei ou ainda não vi em Deslizar ou nos detalhes do filme. Suas escolhas aparecerão aqui.</string>
+    <string name="change_choice">Alterar escolha</string>
+    <string name="save_choice">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="choice_updated">Escolha atualizada</string>
+    <string name="choice_changed">Esta escolha mudou. Confira e tente novamente.</string>
+    <string name="change_choice_label">Alterar escolha de %1$s</string>
+    <string name="undo_choice_label">Desfazer a última escolha de %1$s</string>
+    <string name="history_details_label">Ver detalhes de %1$s</string>
 </resources>

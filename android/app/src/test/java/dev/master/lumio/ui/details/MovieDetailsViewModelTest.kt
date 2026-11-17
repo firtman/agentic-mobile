@@ -35,6 +35,8 @@ class MovieDetailsViewModelTest {
     private class Ratings(val dao: FakeRatingDao = FakeRatingDao()) : RatingsRepository {
         private val ledger = RatingsLedger(dao) { 1L }
         var fail = false
+        override fun history() = dao.observeHistory()
+        override suspend fun undoMovie(movieId: String, entryId: Long) = ledger.undoMovie(movieId, entryId) != null
         override fun ratedIds() = dao.ratings.map { it.keys }
         override fun latestUndo() = dao.latest
         override fun rating(movieId: String): Flow<RatingValue?> = dao.ratings.map { it[movieId]?.value }

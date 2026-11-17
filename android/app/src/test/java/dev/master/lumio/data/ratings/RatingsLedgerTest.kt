@@ -4,6 +4,7 @@ import dev.master.lumio.data.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Test
@@ -16,6 +17,11 @@ class FakeRatingDao : RatingDao {
     override fun observeRatedIds(): Flow<List<String>> = ratings.map { it.keys.toList() }
     override fun observeLatestUndo(): Flow<UndoEntry?> = latest
     private var nextId = 1L
+    override fun observeHistory(): Flow<List<HistoryChoice>> = combine(ratings, latest) { rows, _ ->
+        rows.values.sortedWith(compareByDescending<RatingEntity> { it.updatedAt }.thenBy { it.movieId })
+            .map { row -> HistoryChoice(row, undo.lastOrNull { it.movieId == row.movieId }?.id) }
+    }
+    override suspend fun latestUndoForMovie(movieId: String) = undo.lastOrNull { it.movieId == movieId }
     override fun observe(movieId: String): Flow<RatingEntity?> = ratings.map { it[movieId] }
     override suspend fun get(movieId: String) = ratings.value[movieId]
     override suspend fun upsert(rating: RatingEntity) { ratings.value += rating.movieId to rating }
@@ -76,6 +82,15 @@ class RatingsLedgerTest {
         assertEquals(RatingValue.LIKE, dao.get("m1")!!.value)
         assertEquals(RatingValue.DISLIKE, dao.get("m2")!!.value)
         assertNull(RatingsLedger(FakeRatingDao()) { 0 }.undo())
+    }
+
+    @Test fun perMovieUndoRejectsStaleOrWrongMovieIds() = runTest {
+        val first = ledger.rate(movie, RatingValue.LIKE)!!
+        val second = ledger.rate(movie, RatingValue.DISLIKE)!!
+        assertNull(ledger.undoMovie("missing", second))
+        assertNull(ledger.undoMovie("m1", first))
+        assertEquals("m1", ledger.undoMovie("m1", second))
+        assertEquals(RatingValue.LIKE, dao.get("m1")!!.value)
     }
 
     @Test fun undoHistoryIsBounded() = runTest {

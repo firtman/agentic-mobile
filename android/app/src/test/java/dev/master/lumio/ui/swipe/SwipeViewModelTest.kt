@@ -34,6 +34,8 @@ class SwipeViewModelTest {
         private val ledger = RatingsLedger(dao) { 1L }
         var fail = false
         var failRead = false
+        override fun history() = dao.observeHistory()
+        override suspend fun undoMovie(movieId: String, entryId: Long) = ledger.undoMovie(movieId, entryId) != null
         override fun ratedIds(): Flow<Set<String>> = flow {
             if (failRead) error("db unavailable")
             emitAll(dao.ratings.map { it.keys })

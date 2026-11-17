@@ -27,6 +27,7 @@ import dev.master.lumio.ui.foundation.*
 import dev.master.lumio.ui.explore.*
 import dev.master.lumio.ui.details.*
 import dev.master.lumio.ui.swipe.*
+import dev.master.lumio.ui.history.*
 import androidx.navigation.toRoute
 import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
@@ -36,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Serializable data object Swipe
 @Serializable data object Genie
 @Serializable data object Arcade
+@Serializable data object History
 @Serializable data object Settings
 @Serializable data class MovieDetails(val id: String)
 private data class Destination(val route: Any, @param:StringRes val label: Int, @param:DrawableRes val icon: Int)
@@ -51,7 +53,8 @@ private val destinations = listOf(
     val entry by nav.currentBackStackEntryAsState()
     val settings = entry?.destination?.hasRoute<Settings>() == true
     // Details, settings (and later history and games) are full-screen with back navigation.
-    val fullScreen = settings || entry?.destination?.hasRoute<MovieDetails>() == true
+    val history = entry?.destination?.hasRoute<History>() == true
+    val fullScreen = settings || history || entry?.destination?.hasRoute<MovieDetails>() == true
     val layout = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
         androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -78,7 +81,7 @@ private val destinations = listOf(
     ) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background,
             topBar = {
-                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
+                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else if(history) R.string.history else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
                     navigationIcon = { if(fullScreen) IconButton(onClick = { nav.navigateUp() }) {
                         Icon(painterResource(R.drawable.lucide_arrow_left), stringResource(R.string.back))
                     } },
@@ -107,7 +110,16 @@ private val destinations = listOf(
                     val state by swipe.state.collectAsStateWithLifecycle()
                     SwipeScreen(state, swipe::rate, swipe::undo, swipe::retry, { movie ->
                         if (nav.currentDestination?.hasRoute<Swipe>() == true) nav.navigate(MovieDetails(movie.id))
-                    }, swipe::messageShown)
+                    }, swipe::messageShown, onHistory = {
+                        if (nav.currentDestination?.hasRoute<Swipe>() == true) nav.navigate(History)
+                    })
+                }
+                composable<History> {
+                    val historyModel: HistoryViewModel = viewModel { HistoryViewModel(container.ratingsRepository) }
+                    val state by historyModel.state.collectAsStateWithLifecycle()
+                    HistoryScreen(state, historyModel::rate, historyModel::undo, historyModel::retry, { id ->
+                        if (nav.currentDestination?.hasRoute<History>() == true) nav.navigate(MovieDetails(id))
+                    }, historyModel::messageShown)
                 }
                 composable<Genie> { FoundationScreen(R.string.genie,R.drawable.lucide_sparkles) }
                 composable<Arcade> { FoundationScreen(R.string.arcade,R.drawable.lucide_gamepad_2) }
