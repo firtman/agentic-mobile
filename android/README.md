@@ -43,7 +43,7 @@ Dependencies are pinned in `gradle/libs.versions.toml`. SDK 36 is an owner requi
 - [Retrofit 3.0.0 source](https://github.com/square/retrofit/tree/3.0.0)
 - [Kotlin serialization 1.9.0](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.9.0)
 
-Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved for commit/push on 2026-11-17 and stage 5 (Genie) was authorized.
+Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved and pushed as `d47edb4` on 2026-11-17. Stage 5 (Genie) was approved for commit/push on 2026-11-17 and stage 6 was authorized.
 
 ## Explore behavior
 
@@ -80,3 +80,14 @@ Undo uses the latest persisted change across the app, survives process restart a
 The history route opens from Swipe’s Your choices action. A single observable Room query returns saved personal-choice snapshots and each film’s latest undo id, sorted by saved time descending with movie id as a stable tie-breaker. It never downloads the catalog to render or edit history. Thumbnail requests use the supplied saved URL with the same memory-only image loader and fallback; opening full movie details requests `/movies/{id}` online.
 
 Each row offers a choice editor and per-film Undo. Saving an unchanged value is a no-op. The per-film Undo transaction rejects stale entry ids, restores the previous choice/timestamp or removes a first rating, and leaves other films’ undo entries untouched. Global Undo on Swipe continues to target the latest remaining change across all films. When a film has no retained undo step (the shared limit is 200), its Undo button is disabled. Changes update history and Swipe reactively. No schema migration or dependency change was needed for the new queries.
+
+
+## Genie behavior
+
+Genie loads `/catalog` lazily through the existing mutex-protected `CatalogRepository`; one successful catalog is shared in process memory, never written to disk. A fresh process needs a connection. With no like/dislike choices (including when all saved films are unseen), Genie shows getting-started guidance without downloading the catalog.
+
+The pure Kotlin engine builds feature affinities from saved rating snapshots: each LIKE adds genre 1, director 3 and actor 2; DISLIKE subtracts equal amounts. Features are trimmed, case-normalized with `Locale.ROOT` and counted once per film. A candidate’s score is the sum of its matching affinities. All saved ids, including UNSEEN, are excluded; unseen contributes no affinity. Only positive net scores are recommended. The top 30 are ordered by score, then supplied popularity, normalized title and id. Missing metadata is ignored rather than guessed.
+
+Cards show up to three strongest positive matching features with supplied names. The score is internal and is not presented as a source rating or confidence percentage. Negative matches still lower the net score even though the displayed reasons describe positive connections. The introductory text explains the effect of dislikes. Catalog titles, genres and names remain in their source language; UI templates are localized.
+
+Changes from details, Swipe or history trigger fresh scoring on `Dispatchers.Default`; newer choices and read failures cancel older work before it can publish stale recommendations. Distinct getting-started, no-positive-match, loading, network-error and local-read-error states provide appropriate guidance/Retry. Details still load online and history edits still use personal snapshots. Director/actor reasons depend on metadata availability; most catalog records lack these fields, so genre reasons dominate. Stage 6 remains unimplemented.

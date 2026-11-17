@@ -34,3 +34,6 @@ Stage 1 adds native Explore using the Editorial screen reference and approved br
 
 
 Stages 2–4 add native movie details, Swipe and Your choices using the existing approved tokens and Lucide mappings. History uses `list-checks`; Undo uses `undo-2`. See [Android validation](../validation/android.md) for actual checks. Catalog/poster captures for these stages remain in ignored `validation/screenshots/stage-2/`, `stage-3/` and `stage-4/`; no new branding choices or exploratory assets were approved by this implementation.
+
+
+Stage 5 adds native Genie using the Editorial tokens and `sparkles` icon, with actual metadata-based recommendation reasons. Light/dark/large-text preview sources live with `GenieScreen.kt`; live catalog captures stay in ignored `validation/screenshots/stage-5/`. This does not approve new branding choices.

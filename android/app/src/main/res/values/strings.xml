@@ -112,4 +112,17 @@
     <string name="change_choice_label">Change choice for %1$s</string>
     <string name="undo_choice_label">Undo the last choice for %1$s</string>
     <string name="history_details_label">View details for %1$s</string>
+    <string name="genie_heading">A little movie magic.</string>
+    <string name="genie_intro">Discover films connected to your taste. Likes add to a match; dislikes subtract. Every saved choice, including not seen yet, is excluded.</string>
+    <string name="loading_recommendations">Finding films for you…</string>
+    <string name="genie_get_started">Let Genie get to know you.</string>
+    <string name="genie_get_started_hint">Like or dislike films in Swipe or movie details to shape your recommendations. Not seen yet saves a choice without shaping your taste.</string>
+    <string name="genie_no_matches">No positive matches yet.</string>
+    <string name="genie_no_matches_hint">Try liking more films or review your choices. Genie only suggests films with a positive match from the available metadata.</string>
+    <string name="start_swiping">Start swiping</string>
+    <string name="genie_selection">Your strongest matches · up to 30 films</string>
+    <string name="genie_why">Why this film</string>
+    <string name="genie_reason_genre">A genre you like: %1$s</string>
+    <string name="genie_reason_director">A director you like: %1$s</string>
+    <string name="genie_reason_actor">An actor you like: %1$s</string>
 </resources>

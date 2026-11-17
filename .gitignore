@@ -30,3 +30,6 @@ __pycache__/
 
 # History validation captures contain supplied poster imagery.
 /validation/screenshots/stage-4/
+
+# Genie captures contain supplied poster imagery.
+/validation/screenshots/stage-5/

@@ -28,6 +28,7 @@ import dev.master.lumio.ui.explore.*
 import dev.master.lumio.ui.details.*
 import dev.master.lumio.ui.swipe.*
 import dev.master.lumio.ui.history.*
+import dev.master.lumio.ui.genie.*
 import androidx.navigation.toRoute
 import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
@@ -121,7 +122,21 @@ private val destinations = listOf(
                         if (nav.currentDestination?.hasRoute<History>() == true) nav.navigate(MovieDetails(id))
                     }, historyModel::messageShown)
                 }
-                composable<Genie> { FoundationScreen(R.string.genie,R.drawable.lucide_sparkles) }
+                composable<Genie> {
+                    val genie: GenieViewModel = viewModel { GenieViewModel(container.catalogRepository::catalog, container.ratingsRepository) }
+                    val state by genie.state.collectAsStateWithLifecycle()
+                    GenieScreen(state, genie::retry, { id ->
+                        if (nav.currentDestination?.hasRoute<Genie>() == true) nav.navigate(MovieDetails(id))
+                    }, {
+                        nav.navigate(Swipe) {
+                            popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }, {
+                        if (nav.currentDestination?.hasRoute<Genie>() == true) nav.navigate(History)
+                    })
+                }
                 composable<Arcade> { FoundationScreen(R.string.arcade,R.drawable.lucide_gamepad_2) }
                 composable<Settings> { FoundationScreen(R.string.settings,R.drawable.lucide_settings_2) }
             }
@@ -158,6 +173,10 @@ private val destinations = listOf(
         }
     }
 }
-@Preview @Composable private fun LightPreview() { LumioTheme(false) { Surface { FoundationScreen(R.string.explore,R.drawable.lucide_compass,ConnectionState.Connected(0)) } } }
-@Preview(uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES) @Composable private fun DarkPreview() { LumioTheme(true) { Surface { FoundationScreen(R.string.explore,R.drawable.lucide_compass,ConnectionState.Error) } } }
-@Preview(fontScale = 2f) @Composable private fun LargeTextPreview() { LightPreview() }
+// Preview functions should not be private so that Compose Tooling reflection (ComposableInvoker) can find and invoke them.
+@Preview @Composable fun LightPreview() { LumioTheme(false) { Surface { FoundationScreen(R.string.explore,R.drawable.lucide_compass,ConnectionState.Connected(0)) } } }
+@Preview(uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES) @Composable fun DarkPreview() { LumioTheme(true) { Surface { FoundationScreen(R.string.explore,R.drawable.lucide_compass,ConnectionState.Error) } } }
+@Preview(fontScale = 2f) @Composable fun LargeTextPreview() { LightPreview() }
+@Preview(name = "German light", locale = "de") @Composable fun GermanLightPreview() { LightPreview() }
+@Preview(name = "German dark", locale = "de", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES) @Composable fun GermanDarkPreview() { DarkPreview() }
+@Preview(name = "German large text", locale = "de", fontScale = 2f) @Composable fun GermanLargeTextPreview() { LightPreview() }

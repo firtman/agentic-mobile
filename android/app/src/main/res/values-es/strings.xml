@@ -113,4 +113,17 @@
     <string name="change_choice_label">Cambiar elección de %1$s</string>
     <string name="undo_choice_label">Deshacer la última elección de %1$s</string>
     <string name="history_details_label">Ver detalles de %1$s</string>
+    <string name="genie_heading">Un poco de magia de cine.</string>
+    <string name="genie_intro">Descubre películas relacionadas con tus gustos. Me gusta suma y No me gusta resta. Se excluyen todas tus elecciones guardadas, incluso Aún no la vi.</string>
+    <string name="loading_recommendations">Buscando películas para ti…</string>
+    <string name="genie_get_started">Deja que Genie te conozca.</string>
+    <string name="genie_get_started_hint">Marca películas con Me gusta o No me gusta en Deslizar o en sus detalles para orientar tus recomendaciones. Aún no la vi guarda una elección sin influir en tus gustos.</string>
+    <string name="genie_no_matches">Aún no hay coincidencias positivas.</string>
+    <string name="genie_no_matches_hint">Prueba a marcar más películas con Me gusta o revisa tus elecciones. Genie solo sugiere películas con una coincidencia positiva según los datos disponibles.</string>
+    <string name="start_swiping">Empezar a deslizar</string>
+    <string name="genie_selection">Tus mejores coincidencias · hasta 30 películas</string>
+    <string name="genie_why">Por qué esta película</string>
+    <string name="genie_reason_genre">Un género que te gusta: %1$s</string>
+    <string name="genie_reason_director">Un director que te gusta: %1$s</string>
+    <string name="genie_reason_actor">Un actor que te gusta: %1$s</string>
 </resources>

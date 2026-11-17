@@ -309,3 +309,53 @@ The emulator retains the walkthrough’s personal choices: The King’s Man’s 
 At the owner’s request, built stage 4 with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Install returned Success; `am start` launched Lumio. API health verified: 9,919 movies. No app data was cleared or ratings changed.
 
 Hierarchy confirmed Swipe with the new Your choices action and a loaded catalog movie. The phone UI changed between inspection and the attempted history tap; the subsequent visually inspected capture showed Explore with the search keyboard open, so history opening was not established in this launch check. No further UI actions were made. Capture renamed to ignored `validation/screenshots/stage-4/phone-launch.png`. Step 4 is installed; access history through Swipe → Your choices. App, API and forwarding remain available for owner use.
+
+
+## Stage 4 approval and publication — 2026-11-17
+
+The owner approved Step 4, requested commit/push, and authorized Genie. Step 4 source, tests, documentation and ignore rules were committed on `main` as **`d47edb4`** and pushed successfully to the existing `origin/main` (`9e468d4..d47edb4`). Exploratory design assets, catalog data, posters, captured screenshots and machine configuration remained excluded. `initial-state` was not touched.
+
+## Stage 5 — Genie — 2026-11-17
+
+### Delivered
+
+- Replaced Genie’s placeholder with an Editorial recommendations screen, loading indicator, getting-started guidance, no-positive-match state, catalog error + Retry and saved-choice-read error + Retry. History and online details are reachable with back navigation. No dependency, database schema, API or data-persistence changes.
+- Existing `CatalogRepository` lazily downloads/stream-decodes `/catalog` once per successful process session under its mutex, keeping it in memory only. No fetch is needed before a like/dislike preference exists.
+- Pure deterministic engine sums genre ±1, director ±3 and actor ±2 feature affinities across saved snapshots. All saved ids (including UNSEEN) are excluded; UNSEEN contributes zero. Blank metadata is ignored; repeated/case-varied features count once per movie, normalized using `Locale.ROOT`. Positive net scores only; top 30 ordered by score, popularity, normalized title and id. No invented ratings, facts or confidence percentages.
+- Each recommendation displays up to three strongest positive genre/director/actor contributions using supplied names. Dislikes still reduce the total used to rank/filter candidates; introductory text explains that behavior. Full source attribution remains reachable through online details.
+- Ratings/history/Undo changes recompute off the main thread; `collectLatest` cancels prior loads/scoring so stale choices cannot replace current results. Storage errors also cancel pending catalog work. Thirteen new keys; all four locales contain the same **122 keys**.
+
+### Automated validation
+
+`./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug` passed. **61 JVM tests, zero failures** (13 new): six engine tests cover exact weights/reason contributions, summed likes/dislikes and nonpositive exclusion, all-rated-id exclusion/UNSEEN neutrality, duplicate/blank/case normalization under Turkish locale, feature-type separation, deterministic ties and result limits. Seven Genie ViewModel tests cover getting-started without requests, positive matches/exclusion, reactive Undo and dislike cancellation, missing metadata/dislike-only no-match, network Retry, read error + Retry, late catalog data after storage failure, newer preferences cancelling older results, and removal of the last effective preference.
+
+Lint: **0 errors, 49 warnings** (30 reserved unused resources, 18 dependency/build update notices, 1 selected target-SDK notice). Resource-key alignment and `git diff --check` passed. The independent reviewer authored the engine tests and found no blocking defects in the implementation. Their own Gradle attempt was blocked by sandbox access to the wrapper lock; the lead’s full build above successfully executed all six tests. Existing Room code was unchanged; its two device tests from stage 4 were not rerun.
+
+### Emulator and live API validation
+
+`Pixel_9_Pro_XL` (`emulator-5600`, API 36). Installed with device-scoped `adb install -r`, preserving saved choices. The physical phone was not modified and remains on Step 4. Local API health verified before/after: `http://127.0.0.1:3000/health`, 9,919 movies.
+
+| Flow | Actual result |
+| --- | --- |
+| Full catalog / loading | Genie showed “Finding films for you…” then recommendations; first was Yu-Gi-Oh! The Movie with supplied poster/year/genres and Action, Adventure and Comedy reasons |
+| Details / unseen exclusion | Opened the recommendation’s online details and saved Not seen yet; Back to Genie removed it and Zombie Tidal Wave became first |
+| History / Undo | Opened Your choices from Genie and undid that first UNSEEN choice; Back returned to Genie with Yu-Gi-Oh! The Movie first again |
+| Spanish + dark | Intro, heading, history action, reasons and details label translated; source titles/genres retained their catalog language |
+| Fresh offline process | Emulator airplane mode + force-stop/relaunch removed the in-memory session; opening Genie showed Spanish connection error and Reintentar |
+| Recovery | Restored connectivity/English and tapped Retry; loading completed and the recommendation list returned |
+
+Three captures were visually inspected and remain ignored in `validation/screenshots/stage-5/`: `genie-light.png`, `genie-spanish-dark.png`, `genie-spanish-error.png`. Network isolation used emulator airplane mode to preserve the pre-existing shared API. Saved snapshots and undo were preserved; the temporary UNSEEN choice was undone.
+
+### Limits
+
+Getting-started/no-positive-match/local-read-error states were unit-tested but not manually induced on the main emulator (existing preferences were preserved). Director/actor reason calculations were validated with synthetic fixtures; live walkthrough reasons were genre-based, reflecting the catalog’s sparse director/cast metadata. German/Portuguese rendering, TalkBack action/focus, 200% font scale, wide screens, background memory pressure and a full 30-card scroll were not manually exercised. Light/dark/large-text previews compile but were not separately rendered. The memory-only session catalog can be reused until process death; no disk fallback exists.
+
+Stage 5 is uncommitted and awaits owner approval; stage 6 is not started.
+
+Genie handoff: emulator left on the recommendation list, English, original dark appearance, airplane mode off. Local API remains running. The physical phone retains Step 4.
+
+### Subsequent physical-phone launch — 2026-11-17
+
+At the owner’s request, built Genie for the phone with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success and `am start` launched Lumio; no app data was cleared or ratings changed. Local API health verified: 9,919 movies.
+
+The phone was on Genie when inspected: initially loading, then actual recommendations with supplied posters, year/genres, positive genre reasons and View details. Visually inspected ignored capture: `validation/screenshots/stage-5/phone-genie.png`. This was a launch/full-catalog smoke check; no further phone UI interactions or preference changes were made. App, API and forwarding left available for owner use. The physical phone now has Step 5.

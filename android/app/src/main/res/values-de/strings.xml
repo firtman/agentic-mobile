@@ -112,4 +112,17 @@
     <string name="change_choice_label">Auswahl für %1$s ändern</string>
     <string name="undo_choice_label">Letzte Auswahl für %1$s rückgängig machen</string>
     <string name="history_details_label">Details zu %1$s ansehen</string>
+    <string name="genie_heading">Ein bisschen Filmzauber.</string>
+    <string name="genie_intro">Entdecke Filme, die zu deinem Geschmack passen. Gefällt mir erhöht die Übereinstimmung, gefällt mir nicht verringert sie. Alle gespeicherten Filme werden ausgeschlossen, auch noch nicht gesehene.</string>
+    <string name="loading_recommendations">Filme für dich werden gesucht…</string>
+    <string name="genie_get_started">Lass Genie dich kennenlernen.</string>
+    <string name="genie_get_started_hint">Markiere Filme beim Wischen oder in den Details mit gefällt mir oder gefällt mir nicht. Noch nicht gesehen speichert deine Auswahl, ohne deinen Geschmack zu beeinflussen.</string>
+    <string name="genie_no_matches">Noch keine positiven Treffer.</string>
+    <string name="genie_no_matches_hint">Markiere weitere Filme mit gefällt mir oder prüfe deine Auswahl. Genie schlägt nur Filme mit einer positiven Übereinstimmung anhand der verfügbaren Daten vor.</string>
+    <string name="start_swiping">Jetzt wischen</string>
+    <string name="genie_selection">Deine besten Treffer · bis zu 30 Filme</string>
+    <string name="genie_why">Warum dieser Film</string>
+    <string name="genie_reason_genre">Ein Genre, das dir gefällt: %1$s</string>
+    <string name="genie_reason_director">Ein Regisseur, der dir gefällt: %1$s</string>
+    <string name="genie_reason_actor">Ein Schauspieler, der dir gefällt: %1$s</string>
 </resources>

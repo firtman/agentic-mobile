@@ -113,4 +113,17 @@
     <string name="change_choice_label">Alterar escolha de %1$s</string>
     <string name="undo_choice_label">Desfazer a última escolha de %1$s</string>
     <string name="history_details_label">Ver detalhes de %1$s</string>
+    <string name="genie_heading">Um pouco de magia do cinema.</string>
+    <string name="genie_intro">Descubra filmes ligados ao seu gosto. Gostei aumenta a afinidade; não gostei diminui. Todas as escolhas salvas são excluídas, incluindo ainda não vi.</string>
+    <string name="loading_recommendations">Buscando filmes para você…</string>
+    <string name="genie_get_started">Deixe o Genie conhecer você.</string>
+    <string name="genie_get_started_hint">Marque filmes como gostei ou não gostei em Deslizar ou nos detalhes para orientar suas recomendações. Ainda não vi salva a escolha sem influenciar seu gosto.</string>
+    <string name="genie_no_matches">Ainda não há combinações positivas.</string>
+    <string name="genie_no_matches_hint">Tente marcar mais filmes como gostei ou revise suas escolhas. O Genie só sugere filmes com afinidade positiva segundo os dados disponíveis.</string>
+    <string name="start_swiping">Começar a deslizar</string>
+    <string name="genie_selection">Suas melhores combinações · até 30 filmes</string>
+    <string name="genie_why">Por que este filme</string>
+    <string name="genie_reason_genre">Um gênero de que você gosta: %1$s</string>
+    <string name="genie_reason_director">Um diretor de que você gosta: %1$s</string>
+    <string name="genie_reason_actor">Um ator de que você gosta: %1$s</string>
 </resources>
