@@ -20,3 +20,6 @@ __pycache__/
 # Android signing material
 *.jks
 *.keystore
+
+# Explore validation captures may include supplied movie/poster imagery.
+/validation/screenshots/stage-1/

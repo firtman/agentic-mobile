@@ -33,7 +33,7 @@ object ApiClient {
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .callTimeout(60, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(false)
+            .retryOnConnectionFailure(true) // Recover stale pooled connections for this read-only GET API.
             // No HTTP disk cache: catalog data remains online-only.
             .build()
         return Retrofit.Builder().baseUrl(baseUrl).client(client)

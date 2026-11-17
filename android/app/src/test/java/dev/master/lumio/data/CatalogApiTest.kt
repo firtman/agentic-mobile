@@ -3,6 +3,7 @@ package dev.master.lumio.data
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import okhttp3.mockwebserver.SocketPolicy
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -52,6 +53,22 @@ class CatalogApiTest {
         assertEquals("Film", catalog.movies.single().title)
         assertEquals(1, catalog.trivia.single().answerIndex)
         assertEquals("m1", catalog.trivia.single().movieId)
+    }
+
+    @Test fun getRecoversWhenReusedConnectionDisconnectsBeforeResponse() = runBlocking {
+        server.enqueue(MockResponse().setBody("""{"status":"ok","movies":1}"""))
+        server.enqueue(MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AFTER_REQUEST))
+        server.enqueue(MockResponse().setBody("""{"movies":[{"id":"1","title":"Film"}],"total":1,"limit":24,"offset":0}"""))
+
+        assertEquals(1, api.health().movies)
+        assertEquals("Film", api.movies(query = "Film", limit = 24).movies.single().title)
+        val initial = server.takeRequest()
+        val disconnected = server.takeRequest()
+        val retried = server.takeRequest()
+        assertEquals(0, initial.sequenceNumber)
+        assertEquals(1, disconnected.sequenceNumber) // same pooled connection
+        assertEquals(0, retried.sequenceNumber) // a fresh connection
+        assertEquals(disconnected.path, retried.path)
     }
 
     @Test fun httpErrorsArePropagated() = runBlocking {

@@ -94,4 +94,8 @@ Stages 0 and 9 are where delegation pays most (parallel mechanical work). In scr
 
 ## Stage 0 implementation status — 2026-11-17
 
-Foundation approved by the owner on 2026-11-17; committing/pushing and starting stage 1 authorized. Fonts and notices are now bundled (see `android/ASSETS.md`). SDK 36 was already installed; no SDK component installation was needed. Build pins, setup and architecture are documented in `android/README.md`; actual checks and remaining limits are recorded in `validation/android.md`. Stage 1 has not started.
+Foundation approved by the owner on 2026-11-17; committing/pushing and starting stage 1 authorized. Fonts and notices are now bundled (see `android/ASSETS.md`). SDK 36 was already installed; no SDK component installation was needed. Build pins, setup and architecture are documented in `android/README.md`; actual checks and remaining limits are recorded in `validation/android.md`. Stage 0 was committed and pushed to `origin/main` as `9ddf76d`. Stage 1 was subsequently approved by the owner.
+
+## Stage 1 implementation status — 2026-11-17
+
+Explore implemented locally with debounced search, API genres, six sort orders, a spotlight from the first matching film, 24-item pages with Load more, and loading/empty/error/retry states. Source links and dataset credits are available without waiting for stage 2. Live emulator testing exposed stale pooled GET connections; standard OkHttp recovery is now enabled and regression-tested. See `validation/android.md` for actual results and limits. Stage 1 was approved by the owner on 2026-11-17 for commit and push, including the physical-phone debug setup. The owner explicitly instructed not to start stage 2; stage 2 remains unstarted and requires new direction.

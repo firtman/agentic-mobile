@@ -24,6 +24,8 @@ import kotlinx.serialization.Serializable
 import dev.master.lumio.AppContainer
 import dev.master.lumio.R
 import dev.master.lumio.ui.foundation.*
+import dev.master.lumio.ui.explore.*
+import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -44,8 +46,6 @@ private val destinations = listOf(
     val nav = rememberNavController()
     val entry by nav.currentBackStackEntryAsState()
     val settings = entry?.destination?.hasRoute<Settings>() == true
-    val connection: ConnectionViewModel = viewModel { ConnectionViewModel(container.api) }
-    val state by connection.state.collectAsStateWithLifecycle()
     val layout = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
         androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -82,7 +82,11 @@ private val destinations = listOf(
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background))
             }) { padding ->
             NavHost(navController = nav, startDestination = Explore, modifier = Modifier.padding(padding)) {
-                composable<Explore> { FoundationScreen(R.string.explore,R.drawable.lucide_compass,state,connection::retry) }
+                composable<Explore> {
+                    val explore: ExploreViewModel = viewModel { ExploreViewModel(container.exploreRepository,createSavedStateHandle()) }
+                    val state by explore.state.collectAsStateWithLifecycle()
+                    ExploreScreen(state,explore::search,explore::selectGenre,explore::sort,explore::refresh,explore::loadMore,explore::retryGenres,explore::resetFilters)
+                }
                 composable<Swipe> { FoundationScreen(R.string.swipe,R.drawable.lucide_layers_2) }
                 composable<Genie> { FoundationScreen(R.string.genie,R.drawable.lucide_sparkles) }
                 composable<Arcade> { FoundationScreen(R.string.arcade,R.drawable.lucide_gamepad_2) }

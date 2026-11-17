@@ -61,3 +61,70 @@ Screenshots: [light](screenshots/stage-0/light.png), [dark](screenshots/stage-0/
 - Launcher artwork remains an interim raster; no vector logo, production launcher approval or trademark clearance is implied.
 
 The API was restored and left running at **http://127.0.0.1:3000**. The emulator remains running with English locale, normal text scale and light appearance for owner review.
+
+## Stage 1 — Explore — 2026-11-17
+
+Status: approved by the owner on 2026-11-17 for commit and push. Stage 0 was approved, committed and pushed to the existing `origin/main` as `9ddf76d`. The owner explicitly instructed not to start stage 2; it remains unstarted.
+
+### Delivered
+
+- Explore replaces its foundation placeholder with a search field, horizontally scrolling API genre chips, six sort choices, spotlight, count and two-column adaptive poster grid.
+- Search sends trimmed `q` for title/director/cast matching after 300 ms. Changing query, genre or sort cancels obsolete requests and resets the page offset. Filters use SavedStateHandle; scroll position is saveable across normal navigation/recreation.
+- Initial loading, no-results/reset, full error/Retry, independent genre error/Retry and paging error/Retry states. Paging errors keep existing films visible. Explicit Load more requests pages of 24 without downloading the complete catalog.
+- Spotlight shows the first matching film in the selected order; it is not a recommendation. All matching films, including the spotlight film, remain in the grid.
+- Shared Coil loader with disk cache disabled, supplied poster URLs unchanged, layout-constrained decoding, and an id-derived neutral fallback while artwork is missing/loading/failed. Missing years are hidden; no ratings are invented or shown.
+- Original per-record source/dataset links plus scrollable catalog attribution and source terms. Movie cards await stage 2 details; source buttons already work independently of that route.
+- 69 aligned UI string keys across English, Spanish, German and Portuguese. Movie titles and genres retain their catalog language.
+
+### Automated validation
+
+Final command passed on the same JDK/SDK environment as stage 0:
+
+```sh
+cd android
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleRelease --console=plain
+```
+
+Debug APK and unsigned release APK generated. **16 tests passed, zero failures/errors.** New tests cover Explore repository query/genre/sort/offset contracts, debounce and stale response cancellation, independent genres/page failures and retries, filter resets/restoration, concurrent Load more guards, deduplication/cursor advancement, empty-page termination and paging retry. A transport regression primes a pooled connection, disconnects the subsequent GET after receiving it, and verifies successful recovery on a fresh connection with the same request path.
+
+Final lint: **0 errors, 60 warnings** — 41 unused resources reserved for later stages, 18 dependency/build update notices, and 1 owner-selected target-SDK notice. The existing SDK XML compatibility/native-symbol stripping warnings remain. No lint baseline or blanket suppression was introduced.
+
+`git diff --check` passed. All resource XML parses, all four locales have the same unique keys and matching format arguments, and generated APK/local SDK configuration/catalog files remain ignored.
+
+### Device and live API validation
+
+Used only this chat’s `Pixel_9_Pro_XL` (`emulator-5600`, API 36); the connected physical Pixel 3a was not used. The final debug build was installed and run.
+
+| Flow | Actual result |
+| --- | --- |
+| Initial catalog | Genre chips, source poster imagery and catalog count loaded from the local API; final health response reported 9,919 movies |
+| Search | Entered `batman`; 52 results appeared, matching the host API |
+| Sort | Selected Newest first; first result and year matched the API’s descending-year response |
+| Combined filter | Selected Action while search/sort remained active; count narrowed to 44 and first result matched the combined API query |
+| Empty state | A deliberately unmatched query showed No films found, explanatory copy and Reset filters; reset restored the catalog/default sort/all genres |
+| Paging failure | At Loaded: 24 / 9919, stopped the owned API process and pressed Load more; existing films stayed visible with paging error and Retry |
+| Paging recovery | Restarted API, pressed Retry; next-page posters appeared at the preserved scroll position and matched the API’s `offset=24` response |
+| Full failure | Stopped API, force-stopped/relaunched app; both catalog error/Retry and independent genre error/Retry appeared; host health check failed as expected |
+| Full recovery | Restarted API and pressed Retry; genres, movie count and posters returned |
+| Light/dark/localization | Captured English light mode and Spanish dark mode, including translated full-error and recovered content; restored English/light afterward |
+| Image fallback | A neutral title fallback was observed while artwork was unavailable/loading; supplied artwork later appeared when successfully fetched |
+| Catalog persistence | Debug app directory inspection after browsing showed an empty `cache/` and only `files/profileInstalled`; no catalog or poster disk files were observed |
+| Review | Independent review identified scrollability and per-record attribution gaps; both were fixed and re-reviewed with no remaining actionable findings |
+
+The first live search initially failed with `IOException: unexpected end of stream` while reading headers from a reused connection. Stage 0 had disabled OkHttp connection recovery. Enabling standard recovery for this GET-only API resolved live search, genre and sort requests after idle periods. Temporary request diagnostics were removed. The regression test covers this recovery; real API-down checks still produce explicit Retry states.
+
+### Captures and limits
+
+Ten full-resolution captures are saved locally in **ignored** `validation/screenshots/stage-1/`: `light.png`, `search.png`, `sorted.png`, `genre.png`, `empty.png`, `page-1.png`, `paging-error.png`, `page-2.png`, `error-spanish-dark.png`, `spanish-dark.png`. They contain downloaded catalog/poster imagery and are deliberately excluded from commits. The tracked stage 0 captures remain unchanged.
+
+The emulator hierarchy inspector/selector-based typing still failed intermittently. Used fresh screenshots with coordinate taps and device-scoped input/swipes to complete those checks. Plugin diagnostics reported no concrete findings but did not resolve a target device when two devices were pinned. Minimap labels were best-effort; no automated UI-test-suite pass is claimed.
+
+Not validated in stage 1: API 26/physical-device runtime, tablet/rail behavior, TalkBack, all four locales on device, complete 200% text behavior, process-death scroll restoration, every sort option against live data, and external browser navigation for each attribution link. Light/dark/large-text Compose previews exist but were not rendered separately. These accessibility/layout checks remain part of stage 9. An unsigned release was built but not installed, signed or published.
+
+The API is restored and verified at **http://127.0.0.1:3000**. Emulator remains running on the Explore catalog, English locale, normal text size and light appearance for owner review.
+
+### Subsequent physical-phone launch — 2026-11-17
+
+At the owner’s request, installed and launched the current Stage 1 debug app on the connected **Pixel 3a, Android API 32**. The debug API address is now configurable with `-Plumio.apiBaseUrl`; the emulator default remains unchanged. Built using `http://127.0.0.1:3000/` and configured device-scoped ADB reverse forwarding for port 3000. Added debug-only loopback HTTP permissions; release retains fixed HTTPS configuration.
+
+Phone-specific `assembleDebug` and `lintDebug` passed. APK installation returned Success; launch identified `dev.master.lumio/.MainActivity`. Fresh physical-device screenshot confirmed Explore in the phone’s existing dark appearance, loaded genre chips, supplied poster artwork and **Films: 9919**. No phone appearance, locale or personal data was changed. The hierarchy inspector again failed, so visual confirmation was used. This was a launch/catalog smoke check, not a complete physical-device walkthrough. The app, local API and ADB forwarding were left running for the owner.

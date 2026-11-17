@@ -29,3 +29,5 @@ Saving exploratory material does not approve its design or authorize native app 
 ## Native Android foundation
 
 Stage 0 applies the approved palette, typography and icons in the native shell. These [device screenshots](../validation/screenshots/stage-0/) document implementation checks, not new approved design decisions. See [validation](../validation/android.md) for scope and limitations.
+
+Stage 1 adds native Explore using the Editorial screen reference and approved brand tokens. Its validation notes are in [Android validation](../validation/android.md). Captures with real catalog/poster imagery are kept locally under ignored `validation/screenshots/stage-1/` and are excluded from Git. This implementation does not approve new branding choices.
