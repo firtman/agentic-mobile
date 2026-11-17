@@ -37,3 +37,6 @@ Stages 2–4 add native movie details, Swipe and Your choices using the existing
 
 
 Stage 5 adds native Genie using the Editorial tokens and `sparkles` icon, with actual metadata-based recommendation reasons. Light/dark/large-text preview sources live with `GenieScreen.kt`; live catalog captures stay in ignored `validation/screenshots/stage-5/`. This does not approve new branding choices.
+
+
+Stage 6 adds the native Arcade hub and Trivia question, paused, feedback and results views. They use the existing Editorial palette, Fraunces/DM Sans and Lucide outline icons; correct feedback uses Pine/Sage and incorrect feedback uses Brick/Rose with explicit answer text. Preview sources live with `TriviaScreen.kt`. Captures containing source questions remain in ignored `validation/screenshots/stage-6/`. Poster Puzzle is a forthcoming card, not an implemented game or a new approved design.

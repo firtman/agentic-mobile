@@ -29,6 +29,8 @@ import dev.master.lumio.ui.details.*
 import dev.master.lumio.ui.swipe.*
 import dev.master.lumio.ui.history.*
 import dev.master.lumio.ui.genie.*
+import dev.master.lumio.ui.arcade.ArcadeScreen
+import dev.master.lumio.ui.trivia.*
 import androidx.navigation.toRoute
 import androidx.lifecycle.createSavedStateHandle
 import dev.master.lumio.ui.theme.*
@@ -37,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Serializable data object Explore
 @Serializable data object Swipe
 @Serializable data object Genie
+@Serializable data object Trivia
 @Serializable data object Arcade
 @Serializable data object History
 @Serializable data object Settings
@@ -55,7 +58,8 @@ private val destinations = listOf(
     val settings = entry?.destination?.hasRoute<Settings>() == true
     // Details, settings (and later history and games) are full-screen with back navigation.
     val history = entry?.destination?.hasRoute<History>() == true
-    val fullScreen = settings || history || entry?.destination?.hasRoute<MovieDetails>() == true
+    val triviaRoute = entry?.destination?.hasRoute<Trivia>() == true
+    val fullScreen = settings || history || triviaRoute || entry?.destination?.hasRoute<MovieDetails>() == true
     val layout = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
         androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -82,7 +86,7 @@ private val destinations = listOf(
     ) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background,
             topBar = {
-                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else if(history) R.string.history else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
+                TopAppBar(title = { Text(stringResource(if(settings) R.string.settings else if(history) R.string.history else if(triviaRoute) R.string.trivia else R.string.app_name), style = MaterialTheme.typography.headlineMedium) },
                     navigationIcon = { if(fullScreen) IconButton(onClick = { nav.navigateUp() }) {
                         Icon(painterResource(R.drawable.lucide_arrow_left), stringResource(R.string.back))
                     } },
@@ -137,7 +141,20 @@ private val destinations = listOf(
                         if (nav.currentDestination?.hasRoute<Genie>() == true) nav.navigate(History)
                     })
                 }
-                composable<Arcade> { FoundationScreen(R.string.arcade,R.drawable.lucide_gamepad_2) }
+                composable<Arcade> { arcadeEntry ->
+                    val game: TriviaViewModel = viewModel(arcadeEntry) { TriviaViewModel(container.catalogRepository::catalog) }
+                    val state by game.state.collectAsStateWithLifecycle()
+                    ArcadeScreen(state is TriviaState.Playing) {
+                        if (nav.currentDestination?.hasRoute<Arcade>() == true) nav.navigate(Trivia)
+                    }
+                }
+                composable<Trivia> { triviaEntry ->
+                    val arcadeEntry = remember(triviaEntry) { nav.getBackStackEntry(Arcade) }
+                    val game: TriviaViewModel = viewModel(arcadeEntry) { TriviaViewModel(container.catalogRepository::catalog) }
+                    val state by game.state.collectAsStateWithLifecycle()
+                    TriviaScreen(state, game::start, game::retry, game::answer, game::pause, game::resume,
+                        game::fiftyFifty, game::hold, game::next, game::playAgain, { nav.navigateUp() }, game::setVisible)
+                }
                 composable<Settings> { FoundationScreen(R.string.settings,R.drawable.lucide_settings_2) }
             }
         }

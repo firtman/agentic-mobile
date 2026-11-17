@@ -43,7 +43,7 @@ Dependencies are pinned in `gradle/libs.versions.toml`. SDK 36 is an owner requi
 - [Retrofit 3.0.0 source](https://github.com/square/retrofit/tree/3.0.0)
 - [Kotlin serialization 1.9.0](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.9.0)
 
-Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved and pushed as `d47edb4` on 2026-11-17. Stage 5 (Genie) was approved for commit/push on 2026-11-17 and stage 6 was authorized.
+Review actual build, lint and emulator results in [validation/android.md](../validation/android.md). Stage 0 was approved and pushed as `9ddf76d`. Stage 1 was approved for commit and push on 2026-11-17. Stage 1 was pushed as `7b47f94`; stages 2 and 3 were approved and pushed together as `9e468d4` on 2026-11-17. Stage 4 was approved and pushed as `d47edb4` on 2026-11-17. Stage 5 (Genie) was approved and pushed as `864a7c5` on 2026-11-17. Stage 6 (Arcade hub and Trivia) was approved for commit/push on 2026-11-17 and stage 7 was authorized.
 
 ## Explore behavior
 
@@ -90,4 +90,13 @@ The pure Kotlin engine builds feature affinities from saved rating snapshots: ea
 
 Cards show up to three strongest positive matching features with supplied names. The score is internal and is not presented as a source rating or confidence percentage. Negative matches still lower the net score even though the displayed reasons describe positive connections. The introductory text explains the effect of dislikes. Catalog titles, genres and names remain in their source language; UI templates are localized.
 
-Changes from details, Swipe or history trigger fresh scoring on `Dispatchers.Default`; newer choices and read failures cancel older work before it can publish stale recommendations. Distinct getting-started, no-positive-match, loading, network-error and local-read-error states provide appropriate guidance/Retry. Details still load online and history edits still use personal snapshots. Director/actor reasons depend on metadata availability; most catalog records lack these fields, so genre reasons dominate. Stage 6 remains unimplemented.
+Changes from details, Swipe or history trigger fresh scoring on `Dispatchers.Default`; newer choices and read failures cancel older work before it can publish stale recommendations. Distinct getting-started, no-positive-match, loading, network-error and local-read-error states provide appropriate guidance/Retry. Details still load online and history edits still use personal snapshots. Director/actor reasons depend on metadata availability; most catalog records lack these fields, so genre reasons dominate. Arcade and Trivia are available in stage 6.
+
+
+## Arcade and Trivia behavior
+
+The owner selected five questions per round with 20 seconds each. The hub opens Trivia and marks Poster Puzzle as coming soon (stage 7). Trivia validates supplied questions (nonblank prompt/id, four distinct nonblank options, valid answer index), removes duplicate question ids, then samples five using Kotlin Random. Fewer than five valid questions produces an unavailable state. The existing lazy in-memory catalog is shared with Genie; no questions, rounds or scores are persisted or bundled.
+
+A correct answer gives 100 points. Consecutive correct answers add 25 per answer after the first, capped at 100 extra (five perfect answers total 750). A wrong answer or timeout gives zero and resets the streak. One 50:50 per round removes two wrong choices and stays used for the rest of that round. Feedback identifies the correct answer and earned points; it advances after four seconds unless Keep reading is selected. Next / See results allow explicit advance. Play again clears score, streak and lifeline and samples a fresh round (individual questions may recur between rounds).
+
+The controller synchronizes against `SystemClock.elapsedRealtime` before inputs as well as on periodic updates, so a tap after the deadline cannot earn points. Pause and lifecycle visibility changes stop timer polling; returning requires explicit Resume and paused screens hide the question. The ViewModel belongs to the Arcade back-stack entry, retaining an active round when leaving and returning within the live process and through configuration changes. It is intentionally lost on process death because catalog data remains memory-only. The first round waits for a resumed lifecycle before starting. Full-screen Trivia has back navigation to Arcade. Settings/sound remain stage 8; no game sounds were added in stage 6.

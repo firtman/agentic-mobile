@@ -359,3 +359,62 @@ Genie handoff: emulator left on the recommendation list, English, original dark 
 At the owner’s request, built Genie for the phone with `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success and `am start` launched Lumio; no app data was cleared or ratings changed. Local API health verified: 9,919 movies.
 
 The phone was on Genie when inspected: initially loading, then actual recommendations with supplied posters, year/genres, positive genre reasons and View details. Visually inspected ignored capture: `validation/screenshots/stage-5/phone-genie.png`. This was a launch/full-catalog smoke check; no further phone UI interactions or preference changes were made. App, API and forwarding left available for owner use. The physical phone now has Step 5.
+
+
+## Step 5 approval and publication — 2026-11-17
+
+The owner approved Genie, requested commit/push and authorized Arcade hub + Trivia. Step 5 source, tests, documentation and ignore rules were committed on `main` as **`864a7c5`** and pushed successfully to the existing `origin/main` (`d47edb4..864a7c5`). Catalog/question/poster data, captured screenshots, exploratory assets, secrets and machine configuration were excluded. `initial-state` was not changed.
+
+## Stage 6 — Arcade hub and Trivia — 2026-11-17
+
+### Owner rules and delivered behavior
+
+The owner selected **5 questions per round, 20 seconds each** when asked about the plan’s proposed round length. This supersedes its original 10-question proposal.
+
+- Arcade hub with Trivia launch/return-to-round action and a clearly marked forthcoming Poster Puzzle card. Poster Puzzle implementation remains stage 7.
+- Full-screen Trivia loads the existing process-memory catalog only on first play, validates four distinct nonblank options and a valid answer index, deduplicates question ids and samples five without replacement. Fewer than five valid source questions produces an unavailable state; network failures show Retry. Current local catalog inspection found **1,109 valid questions across 247 movies**; counts may change. No source questions are bundled, downloaded into Git, translated or fabricated.
+- Monotonic 20-second countdown, four labeled answer buttons, one 50:50 per round removing two wrong options, explicit pause/resume, correct/incorrect/timeout feedback, four-second automatic feedback advance, Keep reading hold and manual Next / See results.
+- Correct answers earn 100 plus 25 per consecutive correct answer after the first, capped at 100 extra. Wrong/timeout earns zero and resets the streak. Five perfect answers earn 750. Results show points, correct count and best streak; Play again resets score/streak/lifeline and samples a new round.
+- Controller synchronizes time before every input, preventing a late tap from earning points. Pause hides the question. Leaving/backgrounding pauses and stops polling; returning/recreation requires Resume. Arcade-scoped ViewModel retains a paused round through hub/section navigation and configuration changes in the live process. Questions/scores are intentionally lost on process death; there is no catalog/round persistence.
+- UI strings aligned across English, Spanish, German and Portuguese: **154 resource keys each**. Supplied questions/answers remain English, disclosed in the hub. Pine/Sage and Brick/Rose feedback has explicit correct-answer text. Game sounds/settings remain stage 8; no sound was added here.
+
+### Automated validation
+
+`./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug` passed, including the final ticker/palette cleanup. **74 JVM tests, zero failures** (13 new): six pure TriviaGame tests cover valid selection/deduplication, exact points/capped streaks, wrong/timeout resets, elapsed-time and feedback transitions, repeated-answer rejection, 50:50 correctness/one-per-round/removed-option rejection, pause/hold and five-question results. Seven controller tests cover lazy five-question/20-second load, pause/background/resume, exact-deadline tap rejection, hold/manual/automatic advance, replay resets, network Retry and insufficient questions, offscreen loads and cancelled stale loads.
+
+The initial controller test invocation was interrupted because test-created paused ViewModels were not cleared, leaving scheduled ticker jobs alive after assertions. Tests now clear their ViewModelStore in `finally`. Production code also avoids creating a ticker for an unavailable catalog and stops it for paused/hidden games. The final complete suite passed after these corrections. No tests were removed or disabled.
+
+Final lint: **0 errors, 40 warnings** (21 reserved unused resources, 18 dependency/build update notices, 1 selected target-SDK notice). Two new quantity warnings and a German spelling heuristic were resolved through clearer label wording; no suppression/baseline added. Four-locale key alignment and `git diff --check` passed. Independent review authored the six domain tests and found no blocking defects; re-review of final ticker/lifecycle changes also found no blocking regression. Room code was unchanged; its two prior device tests were not rerun.
+
+### Emulator and API validation
+
+`Pixel_9_Pro_XL` (`emulator-5600`, API 36), device-scoped `adb install -r` preserving ratings. Local API health checked before and after: `http://127.0.0.1:3000/health`, 9,919 movies. Physical phone was not modified and still has Step 5.
+
+| Flow | Actual result |
+| --- | --- |
+| Hub | Two cards with approved five-question/20-second rules; Trivia playable, Poster Puzzle marked Coming soon |
+| Load / question | Loading Trivia appeared, followed by a supplied English question and four options with a countdown |
+| Pause / 50:50 | Pause hid the question; Resume retained Question 1. 50:50 left two options including the supplied correct answer; later questions showed it used |
+| Timeout / automatic advance | The first resumed question expired and advanced to Question 2 with score/streak 0 |
+| Correct / hold | Answered Question 2 correctly using supplied answer data for validation; 100 points and streak 1. Keep reading stopped reveal progression across subsequent tool calls |
+| Hub return | Back to Arcade showed Return to round; reopening preserved Question 2, score 100 and a paused state requiring Resume |
+| Complete round | Answered remaining three questions using supplied answers, earning 125/150/175. Final results: **550 points, 4/5 correct, best streak 4** |
+| Replay | Play again returned to Question 1 with score/streak 0, a fresh 20-second timer and unused 50:50 |
+| Background | Home then bringing Lumio forward retained the round in Paused state requiring Resume |
+| Spanish / dark | Localized statistics, controls, countdown and hub disclosure; English question/answers retained their supplied language |
+| Fresh offline process / recovery | Airplane mode plus force-stop/relaunch, then Trivia: Spanish connection error + Reintentar. After network/English restoration, Retry loaded a playable round |
+| Final build smoke | After final ticker/palette cleanup, reinstalled and verified Pause → Resume countdown → Pause, then Arcade → Explore → Arcade → Return to round retained Question 1 paused |
+
+Five captures visually inspected in ignored `validation/screenshots/stage-6/`: `arcade-light.png`, `trivia-held-feedback.png`, `trivia-results.png`, `trivia-spanish-dark.png`, `trivia-spanish-error.png`. Captures predate only the final timer-polling cleanup and replacement of the countdown’s default track colour with `outlineVariant`. The full round was not repeated after those final changes; final build tests and the pause/resume/section-switch smoke above passed. Source questions in screenshots remain uncommitted.
+
+### Limits and handoff
+
+Network isolation used emulator airplane mode, preserving the pre-existing shared API for the owner’s phone. Wrong-answer calculations and insufficient-question state were tested with synthetic unit fixtures rather than manually forced in the live walkthrough. Process-death round persistence is intentionally unsupported; a new round must load online in a fresh process. TalkBack focus/actions, German/Portuguese rendering, 200% text, wide screens and device rotation were not manually exercised. Light/dark/large-text preview sources compile but were not separately rendered. Feedback hold/Next can require scrolling on smaller screens; further accessibility/layout checks remain stage 9. No signed release, publication or physical-phone walkthrough was performed for Step 6.
+
+Left on Arcade, English, original dark appearance, airplane mode off, with a paused in-memory round available through Return to round. API remains running. Local ratings were not changed by Trivia testing. **Stage 6 remains uncommitted and awaits owner approval; stage 7 has not started.**
+
+### Subsequent physical-phone launch — 2026-11-17
+
+At the owner’s request, built Step 6 using `./gradlew :app:assembleDebug -Plumio.apiBaseUrl=http://127.0.0.1:3000/` (passed), reapplied phone-scoped ADB reverse port 3000, and installed with `adb install -r` on the connected Pixel 3a. Installation returned Success; `am start` launched Lumio. No app data was cleared, ratings changed or phone appearance/locale settings modified. Local API health verified: 9,919 movies.
+
+Opened Arcade and visually inspected ignored `validation/screenshots/stage-6/phone-arcade.png`: hub displayed in the phone’s current light appearance, five-question/20-second rules and Play Trivia button. Left the round unstarted so the owner can begin when ready. This was an install/hub smoke check, not a physical-phone game walkthrough. App, API and ADB forwarding remain available. The phone now has Step 6.
