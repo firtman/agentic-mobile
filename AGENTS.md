@@ -1,6 +1,7 @@
 # Agent instructions
 
 - **Lumio 1.0 is closed for Android and iOS (2026-11-18).** [docs/SPEC-1.0.md](docs/SPEC-1.0.md) is the source of truth for product behavior. It supersedes the UX brief, stage plans and the behavior notes below where they differ. Any change to a MUST rule needs owner approval and an update to the spec in the same commit.
+- **Lumio 1.1** adds the daily Genie Home Screen widget on both platforms, authorized by the owner on 2026-11-18. [docs/SPEC-1.1.md](docs/SPEC-1.1.md) defines the widget and its limited storage exception. The 1.0 behavior continues to apply elsewhere.
 - Read README.md for UX context and [design/branding/DECISIONS.md](design/branding/DECISIONS.md) for approved branding. Do not create a development plan or start app implementation until the owner authorizes it. The owner selected Lumio, Taste Ticket, variation C — Editorial, the Editorial light/dark palette, Fraunces / DM Sans interface typography, and the Lucide outline UI icon family on 2026-11-17; availability and trademarks have not been checked. The Android namespace/applicationId is `dev.master.lumio`; use the approved C raster as an interim launcher. Choose production launcher artwork and remaining platform branding with the owner later.
 - Preserve the initial-state branch unchanged. Use main for ongoing development and future commits. Never force-push or move the baseline branch.
 - The repository contains a UX brief and a local API. Android and iOS are independent native implementations using their respective SDKs. Follow the owner’s implementation plan.

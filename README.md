@@ -12,9 +12,11 @@ The [design index](design/README.md) brings together approved colors, typography
 
 This repository contains a UX brief, design prompts, and a local Node.js catalog API. Catalog data is downloaded during setup rather than bundled in the repository. Android and iOS are independent native apps using their respective SDKs.
 
-## Lumio 1.0 specification
+## Lumio product specifications
 
 Android and iOS were closed as **Lumio 1.0** on November 18, 2026. The [1.0 product specification](docs/SPEC-1.0.md) is the source of truth for app behavior and supersedes the UX brief and stage plans where they differ.
+
+The [1.1 specification](docs/SPEC-1.1.md) adds the daily Genie Home Screen widget for both platforms.
 
 ## Android implementation
 
