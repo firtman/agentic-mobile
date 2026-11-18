@@ -20,6 +20,10 @@ Swipe shows the most popular films that have no saved choice, one at a time, wit
 
 Open Your choices from the Swipe toolbar or Genie. The history shows saved snapshots and dates, newest first. Change a choice or undo a film’s latest available change without a catalog connection. Opening full Movie Details fetches the film from the catalog. Swipe’s global Undo and per-film Undo share the same 200-change ledger.
 
+## Genie
+
+Genie uses the shared local ratings ledger and fetches the full catalog into process memory when the user has a like or dislike. It presents one ranked movie at a time with matching reasons, a position indicator, and an explicit restart. The app keeps the current pick on return when that film is still eligible. Review or edit saved choices from the Genie toolbar.
+
 ## Tests
 
 Run from the repository root with the local API running. Replace the destination with an installed iPhone or iPad Simulator.

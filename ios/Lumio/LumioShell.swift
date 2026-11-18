@@ -35,6 +35,7 @@ struct LumioShell: View {
     let ratings: RatingsStore
     @State private var explore: ExploreModel
     @State private var swipe: SwipeModel
+    @State private var genie: GenieModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
     @State private var selection: Destination = .explore
@@ -42,7 +43,7 @@ struct LumioShell: View {
     @State private var showingSettings = false
     @State private var sidebarVisibility: NavigationSplitViewVisibility = .all
 
-    init(catalog: CatalogClient, ratings: RatingsStore) {
+    init(catalog: CatalogClient, repository: CatalogRepository, ratings: RatingsStore) {
         self.catalog = catalog
         self.ratings = ratings
         _explore = State(initialValue: ExploreModel(
@@ -50,6 +51,7 @@ struct LumioShell: View {
             savedSort: UserDefaults.standard.string(forKey: "explore.sort")
         ))
         _swipe = State(initialValue: SwipeModel(catalog: catalog, ratings: ratings))
+        _genie = State(initialValue: GenieModel(repository: repository, ratings: ratings))
     }
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
@@ -136,16 +138,16 @@ struct LumioShell: View {
                         .navigationTitle(destination.title)
                         .navigationBarTitleDisplayMode(.inline)
                         .editorialNavigationBar(canvas: palette.canvas)
-                } else {
-                    screen(title: destination.title, icon: destination.icon) {
-                        if destination == .genie {
-                            historyLink
-                        }
+                } else if destination == .genie {
+                    GenieScreen(model: genie, ratings: ratings) {
+                        selection = .swipe
                     }
+                } else {
+                    screen(title: destination.title, icon: destination.icon) {}
                 }
             }
             .toolbar {
-                if destination == .swipe {
+                if destination == .swipe || destination == .genie {
                     ToolbarItem(placement: .topBarTrailing) {
                         historyLink.labelStyle(.iconOnly)
                     }
@@ -250,7 +252,8 @@ struct LumioShell: View {
 }
 
 #Preview {
-    LumioShell(catalog: .configured(), ratings: RatingsStore(
+    let catalog = CatalogClient.configured()
+    LumioShell(catalog: catalog, repository: CatalogRepository(client: catalog), ratings: RatingsStore(
         configuration: ModelConfiguration(isStoredInMemoryOnly: true)
     ))
 }

@@ -41,3 +41,10 @@
 - Live UI tests saved a film from Swipe, changed the choice in history, undid the edit, opened the same film’s details, and undid the first choice. A separate UI test opened the empty history from Genie with the catalog endpoint unavailable. Both used isolated in-memory ratings.
 - The SwiftData regression test used an injected clock to verify newest-first ordering, stale action guards, timestamp restoration, and per-film Undo leaving the newest remaining global Undo entry intact. The existing persistence and 200-entry cap tests passed.
 - All 70 localization keys align across English, Spanish, German, and Portuguese. This run did not exercise a populated offline UI with connection loss, injected storage failure, or a complete accessibility audit. Physical device and iOS 17 runtime coverage remain unverified.
+
+## Stage 5 · Genie · 2026-11-18
+
+- Built Debug with Xcode 27.2. All 27 XCTest cases passed on iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4).
+- Live UI tests opened Genie without preferences, used Start swiping, saved a like in an isolated ratings store, and verified a real recommendation and reason. Next advanced the position, and returning from Movie Details kept the current film.
+- Synthetic tests checked signed feature weights, blank and duplicate features, saved-film exclusion including Unseen, positive-net ranking, reason order, tie-breaks, and the 30-film cap. They also covered the Unseen-only fast path, finite navigation and restart, selected-film retention and removal after recomputation, catalog failure/retry, and shared memory cache reuse.
+- All 86 localization keys align across English, Spanish, German, and Portuguese. The suite did not walk through all 30 live recommendations or inject a SwiftData failure in Genie. Physical device, iOS 17 runtime, and full accessibility coverage remain unverified.

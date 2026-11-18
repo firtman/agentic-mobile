@@ -3,12 +3,19 @@ import SwiftData
 
 @main
 struct LumioApp: App {
-    private let catalog = CatalogClient.configured()
+    private let catalog: CatalogClient
+    private let repository: CatalogRepository
     @State private var ratings = Self.makeRatings()
+
+    init() {
+        let catalog = CatalogClient.configured()
+        self.catalog = catalog
+        repository = CatalogRepository(client: catalog)
+    }
 
     var body: some Scene {
         WindowGroup {
-            LumioShell(catalog: catalog, ratings: ratings)
+            LumioShell(catalog: catalog, repository: repository, ratings: ratings)
         }
     }
 

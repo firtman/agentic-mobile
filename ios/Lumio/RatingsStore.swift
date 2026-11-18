@@ -2,7 +2,7 @@ import Foundation
 import Observation
 import SwiftData
 
-enum RatingChoice: String, CaseIterable, Identifiable {
+enum RatingChoice: String, CaseIterable, Identifiable, Sendable {
     case like, dislike, unseen
 
     var id: Self { self }
@@ -114,6 +114,17 @@ final class RatingsStore {
             return RatingHistoryItem(
                 id: rating.movieID, title: rating.title, year: rating.year, posterURL: rating.posterURL,
                 choice: choice, updatedAt: rating.updatedAt, undoID: latestByMovie[rating.movieID]
+            )
+        }
+    }
+
+    func tastePreferences() throws -> [TastePreference] {
+        let context = try makeContext()
+        return try context.fetch(FetchDescriptor<SavedRating>()).compactMap { rating in
+            guard let choice = RatingChoice(rawValue: rating.choice) else { return nil }
+            return TastePreference(
+                movieID: rating.movieID, choice: choice, genres: rating.genres,
+                director: rating.director, cast: rating.cast
             )
         }
     }
