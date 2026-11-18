@@ -152,7 +152,8 @@ fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choos
         val row = (point.y / boardSize.height * dimension).toInt()
         return row * dimension + col
     }
-    val hovered = if (source != null) position(origin + delta) else null
+    // Derived, so a drag recomposes the grid only when the target tile changes, not on every pointer event.
+    val hovered by remember(session.id, dimension) { derivedStateOf { if (source != null) position(origin + delta) else null } }
     Column(Modifier.widthIn(max = 360.dp).fillMaxWidth().onSizeChanged { boardSize = it }
         .pointerInput(session.id, dimension, session.board.complete) {
             if (!session.board.complete) detectDragGestures(

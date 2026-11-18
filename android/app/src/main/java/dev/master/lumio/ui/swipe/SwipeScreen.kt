@@ -27,6 +27,8 @@ import dev.master.lumio.R
 import dev.master.lumio.data.Movie
 import dev.master.lumio.data.ratings.RatingValue
 import dev.master.lumio.ui.components.MoviePoster
+import dev.master.lumio.domain.suppliedPosterUrl
+import androidx.compose.ui.layout.onSizeChanged
 import dev.master.lumio.ui.theme.LumioTheme
 
 @Composable
@@ -75,7 +77,7 @@ fun SwipeScreen(state: SwipeUiState, rate: (RatingValue) -> Unit, undo: () -> Un
                     OutlinedButton(onClick = retry) { Text(stringResource(R.string.refresh_movies)) }
                 }
                 is SwipeResult.Card -> {
-                    SwipeCard(result.movie, !state.saving, rate, Modifier.widthIn(max = 520.dp).fillMaxWidth())
+                    SwipeCard(result.movie, state.upcoming, !state.saving, rate, Modifier.widthIn(max = 520.dp).fillMaxWidth())
                     Column(Modifier.widthIn(max = 520.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(result.movie.title, style = MaterialTheme.typography.headlineMedium,
                             modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
@@ -112,8 +114,19 @@ fun SwipeScreen(state: SwipeUiState, rate: (RatingValue) -> Unit, undo: () -> Un
 }
 
 @Composable
-private fun SwipeCard(movie: Movie, enabled: Boolean, rate: (RatingValue) -> Unit, modifier: Modifier) {
+private fun SwipeCard(movie: Movie, upcoming: Movie?, enabled: Boolean, rate: (RatingValue) -> Unit, modifier: Modifier) {
     var drag by remember(movie.id, enabled) { mutableStateOf(Offset.Zero) }
+    // Warm the next card's supplied poster in the memory cache at this card's size. Nothing is stored on disk.
+    var posterSize by remember { mutableStateOf(androidx.compose.ui.unit.IntSize.Zero) }
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val upcomingUrl = upcoming?.let(::suppliedPosterUrl)
+    LaunchedEffect(upcomingUrl, posterSize) {
+        if (upcomingUrl != null && posterSize.width > 0 && posterSize.height > 0) {
+            coil3.SingletonImageLoader.get(context).enqueue(
+                coil3.request.ImageRequest.Builder(context).data(upcomingUrl)
+                    .size(posterSize.width, posterSize.height).build())
+        }
+    }
     val latestRate by rememberUpdatedState(rate)
     val reduceMotion = reducedMotion()
     val labels = RatingValue.entries.associateWith { stringResource(choiceLabel(it)) }
@@ -136,7 +149,7 @@ private fun SwipeCard(movie: Movie, enabled: Boolean, rate: (RatingValue) -> Uni
         )
     }) {
         // No timed transitions or fling. With system animations disabled, even drag transforms stop.
-        MoviePoster(movie, Modifier.fillMaxWidth().height(360.dp).graphicsLayer {
+        MoviePoster(movie, Modifier.fillMaxWidth().height(360.dp).onSizeChanged { posterSize = it }.graphicsLayer {
             translationX = if (reduceMotion) 0f else drag.x.coerceIn(-size.width / 3, size.width / 3)
             translationY = if (reduceMotion) 0f else drag.y.coerceIn(-size.height / 4, size.height / 4)
             rotationZ = if (reduceMotion) 0f else (drag.x / 50).coerceIn(-8f, 8f)

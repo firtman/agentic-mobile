@@ -31,7 +31,7 @@ class ExploreViewModelTest {
         var load: suspend (ExploreFilters, Int) -> MoviePage = { _, offset -> MoviePage(emptyList(), 0, 24, offset) }
         var loadGenres: suspend () -> List<String> = { listOf("Drama") }
         override suspend fun genres() = loadGenres()
-        override suspend fun movies(filters: ExploreFilters, offset: Int): MoviePage {
+        override suspend fun movies(filters: ExploreFilters, offset: Int, limit: Int): MoviePage {
             calls += filters to offset
             return load(filters, offset)
         }

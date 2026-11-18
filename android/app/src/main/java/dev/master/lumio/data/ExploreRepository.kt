@@ -12,13 +12,18 @@ data class ExploreFilters(
 )
 interface ExploreRepository {
     suspend fun genres(): List<String>
-    suspend fun movies(filters: ExploreFilters, offset: Int): MoviePage
+    suspend fun movies(filters: ExploreFilters, offset: Int, limit: Int = PAGE_SIZE): MoviePage
+    companion object {
+        const val PAGE_SIZE = 24
+        /** The largest page the catalog API serves in one request. */
+        const val MAX_PAGE_SIZE = 500
+    }
 }
 class OnlineExploreRepository(private val api: CatalogApi) : ExploreRepository {
     override suspend fun genres(): List<String> = api.genres().genres
-    override suspend fun movies(filters: ExploreFilters, offset: Int): MoviePage = api.movies(
+    override suspend fun movies(filters: ExploreFilters, offset: Int, limit: Int): MoviePage = api.movies(
         query = filters.query.trim().takeIf { it.isNotEmpty() },
         genre = filters.genre, sort = filters.sort.field, order = filters.sort.order,
-        limit = 24, offset = offset,
+        limit = limit, offset = offset,
     )
 }

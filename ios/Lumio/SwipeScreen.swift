@@ -17,6 +17,11 @@ struct SwipeScreen: View {
         .background(palette.canvas)
         .onAppear(perform: model.sync)
         .onChange(of: ratings.revision) { model.sync() }
+        .task(id: model.upcoming?.posterUrl) {
+            // Warm the next card's supplied poster in memory; nothing is stored on disk.
+            guard let url = suppliedWebURL(model.upcoming?.posterUrl) else { return }
+            _ = try? await PosterImages.shared.image(from: url)
+        }
     }
 
     private var content: some View {

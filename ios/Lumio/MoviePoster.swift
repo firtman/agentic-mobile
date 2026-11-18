@@ -1,35 +1,82 @@
 import ImageIO
 import SwiftUI
 
+/// Decoded posters only, held in memory. NSCache is thread-safe, so views can peek without an actor hop.
+private final class PosterCache: @unchecked Sendable {
+    static let sizes = [240, 480, 720]
+    private let cache = NSCache<NSString, CGImage>()
+
+    init(costLimit: Int) {
+        cache.totalCostLimit = costLimit
+    }
+
+    func image(for url: URL, maxPixel: Int) -> CGImage? {
+        // A larger decode already in memory serves a smaller request without another download.
+        for size in Self.sizes where size >= maxPixel {
+            if let image = cache.object(forKey: Self.key(url, size)) { return image }
+        }
+        return nil
+    }
+
+    func store(_ image: CGImage, for url: URL, maxPixel: Int) {
+        cache.setObject(image, forKey: Self.key(url, maxPixel), cost: image.bytesPerRow * image.height)
+    }
+
+    static func key(_ url: URL, _ size: Int) -> NSString {
+        "\(size) \(url.absoluteString)" as NSString
+    }
+}
+
 actor PosterImages {
     static let shared = PosterImages()
-    private let cache = NSCache<NSURL, CGImage>()
+    // NSCache still purges under memory pressure; nothing is written to disk.
+    private let cache = PosterCache(costLimit: 96 * 1024 * 1024)
     private let session: URLSession = {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.urlCache = nil
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         return URLSession(configuration: configuration)
     }()
+    private var loading: [NSString: Task<CGImage, Error>] = [:]
 
-    private init() {
-        cache.totalCostLimit = 24 * 1024 * 1024
+    /// The smallest decode size that still covers a poster shown `side` points long.
+    static func pixelSize(forPoints side: CGFloat, scale: CGFloat) -> Int {
+        PosterCache.sizes.first { CGFloat($0) >= side * scale } ?? 720
     }
 
-    func image(from url: URL) async throws -> CGImage {
-        if let image = cache.object(forKey: url as NSURL) { return image }
-        let (data, response) = try await session.data(from: url)
-        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
-              let source = CGImageSourceCreateWithData(data as CFData, nil),
-              let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [
-                  kCGImageSourceCreateThumbnailFromImageAlways: true,
-                  kCGImageSourceCreateThumbnailWithTransform: true,
-                  kCGImageSourceThumbnailMaxPixelSize: 720
-              ] as CFDictionary)
-        else { throw URLError(.cannotDecodeContentData) }
-        try Task.checkCancellation()
-        cache.setObject(image, forKey: url as NSURL, cost: image.bytesPerRow * image.height)
-        return image
+    nonisolated func cached(from url: URL, maxPixel: Int = 720) -> CGImage? {
+        cache.image(for: url, maxPixel: maxPixel)
     }
+
+    func image(from url: URL, maxPixel: Int = 720) async throws -> CGImage {
+        if let image = cache.image(for: url, maxPixel: maxPixel) { return image }
+        let key = PosterCache.key(url, maxPixel)
+        // One download and decode per poster, even when it is shown in two places at once.
+        if let task = loading[key] { return try await task.value }
+        let session = session, cache = cache
+        let task = Task.detached(priority: .userInitiated) { () throws -> CGImage in
+            let (data, response) = try await session.data(from: url)
+            guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
+                  let source = CGImageSourceCreateWithData(data as CFData, nil),
+                  let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [
+                      kCGImageSourceCreateThumbnailFromImageAlways: true,
+                      kCGImageSourceCreateThumbnailWithTransform: true,
+                      kCGImageSourceThumbnailMaxPixelSize: maxPixel
+                  ] as CFDictionary)
+            else { throw URLError(.cannotDecodeContentData) }
+            // Finished work is kept even if the requesting view has gone away.
+            cache.store(image, for: url, maxPixel: maxPixel)
+            return image
+        }
+        loading[key] = task
+        defer { loading[key] = nil }
+        return try await task.value
+    }
+}
+
+private struct PosterRequest: Equatable {
+    let url: URL?
+    let maxPixel: Int?
 }
 
 func suppliedWebURL(_ value: String?) -> URL? {
@@ -46,6 +93,8 @@ struct MoviePoster: View {
     let aspect: CGFloat
     let contentMode: ContentMode
     @State private var image: CGImage?
+    @State private var maxPixel: Int?
+    @Environment(\.displayScale) private var displayScale
 
     init(movie: Movie, aspect: CGFloat, contentMode: ContentMode = .fill) {
         self.init(id: movie.id, title: movie.title, posterURL: movie.posterUrl, aspect: aspect, contentMode: contentMode)
@@ -79,9 +128,21 @@ struct MoviePoster: View {
             .background(EditorialPalette(.dark).subtle)
             .clipped()
             .accessibilityHidden(true)
-            .task(id: url) {
+            .onGeometryChange(for: Int.self) { proxy in
+                PosterImages.pixelSize(forPoints: max(proxy.size.width, proxy.size.height), scale: displayScale)
+            } action: { maxPixel = $0 }
+            .task(id: PosterRequest(url: url, maxPixel: maxPixel)) {
+                guard let url, let maxPixel else {
+                    image = nil
+                    return
+                }
+                // A poster already in memory appears without a fallback frame.
+                if let cached = PosterImages.shared.cached(from: url, maxPixel: maxPixel) {
+                    image = cached
+                    return
+                }
                 image = nil
-                guard let url, let loaded = try? await PosterImages.shared.image(from: url),
+                guard let loaded = try? await PosterImages.shared.image(from: url, maxPixel: maxPixel),
                       !Task.isCancelled else { return }
                 image = loaded
             }

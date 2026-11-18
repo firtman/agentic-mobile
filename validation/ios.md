@@ -70,3 +70,9 @@
 - The first Settings UI run found the appearance picker exposed an empty accessibility value. The final control gives each option a selected trait and a visible checkmark. The final tests verified the selected option after relaunch.
 - Game-model tests verified single feedback events for correct answers, errors, timeouts, and completed swaps, including the final completion cue. Tile selection and invalid swaps emitted no cue. All five original PCM tones and four text notices were present in the built app. Physical-device sound quality, silent-switch behavior, and iOS 17 runtime coverage remain unverified.
 - Checked 149 localizable keys and format placeholders across English, Spanish, German, and Portuguese. The live catalog health endpoint returned 9,919 movies during validation.
+
+### Performance fixes — 2026-11-18 (owner approved for commit)
+
+Scope: poster cache raised to 96 MB with display-sized decodes (240/480/720 px), one shared download per poster and no fallback flash on a cache hit; Swipe skips saved films with one larger request (up to the API's 500 limit), warms the next poster and applies its own save without re-reading every choice; game sound configures the audio session once and prepares players.
+
+Results on iPhone 18 Pro Simulator (iOS 27.2) with the local API: 24 unit tests passed; UI tests `SwipeTests`, `ShellTests`, `PosterPuzzleFlowTests` and `TriviaFlowTests` passed (7 tests); Explore posters confirmed rendering in a simulator screenshot. Limits: the remaining UI suites were not rerun; no physical device, Instruments profile, listening check or before/after timing.

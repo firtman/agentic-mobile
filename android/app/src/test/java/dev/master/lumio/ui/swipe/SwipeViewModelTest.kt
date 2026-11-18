@@ -21,7 +21,7 @@ class SwipeViewModelTest {
         var fail = false
         var gate: CompletableDeferred<Unit>? = null
         override suspend fun genres() = emptyList<String>()
-        override suspend fun movies(filters: ExploreFilters, offset: Int): MoviePage {
+        override suspend fun movies(filters: ExploreFilters, offset: Int, limit: Int): MoviePage {
             assertEquals(MovieSort.POPULARITY_DESC, filters.sort)
             offsets += offset
             gate?.await()

@@ -17,6 +17,8 @@ final class SwipeModel {
     enum Feedback: Equatable { case undone, stale, saveFailed, undoFailed }
 
     static let pageSize = 24
+    /// The largest page the catalog API serves in one request.
+    static let maxPageSize = 500
 
     @ObservationIgnored private let catalog: CatalogClient
     @ObservationIgnored private let ratings: RatingsStore
@@ -35,6 +37,8 @@ final class SwipeModel {
     private(set) var feedback: Feedback?
 
     var current: Movie? { status == .card ? queue.first : nil }
+    /// The film after the current card, so its poster can be warmed in memory.
+    var upcoming: Movie? { status == .card && queue.count > 1 ? queue[1] : nil }
 
     init(catalog: CatalogClient, ratings: RatingsStore) {
         self.catalog = catalog
@@ -73,11 +77,20 @@ final class SwipeModel {
         guard let movie = current else { return }
         feedback = nil
         do {
-            _ = try ratings.rate(movie, as: choice)
+            let before = ratings.revision
+            let token = try ratings.rate(movie, as: choice)
             recent[movie.id] = movie
             if recent.count > 200 { recent.removeValue(forKey: recent.keys.first!) }
             queue.removeAll { $0.id == movie.id }
-            sync()
+            if let token, ratedIDs != nil, syncedRevision == before, ratings.revision == before + 1 {
+                // Only this save changed the ledger, so apply it without re-reading every saved choice.
+                ratedIDs?.insert(movie.id)
+                undoID = token
+                syncedRevision = ratings.revision
+                showNext()
+            } else {
+                sync()
+            }
         } catch {
             feedback = .saveFailed
         }
@@ -130,7 +143,10 @@ final class SwipeModel {
             do {
                 // Pages whose films are all saved are skipped without a false empty state.
                 while queue.isEmpty, hasMore {
-                    let page = try await catalog.movies(query: Self.parameters(offset: nextOffset))
+                    // Saved films sit at the front of the popularity order, so skip past them in
+                    // one larger request instead of many small sequential ones.
+                    let limit = min(Self.maxPageSize, (ratedIDs?.count ?? 0) + Self.pageSize)
+                    let page = try await catalog.movies(query: Self.parameters(offset: nextOffset, limit: limit))
                     guard self.generation == generation, !Task.isCancelled else { return }
                     let excluded = ratedIDs ?? []
                     var seen = Set(queue.map(\.id))
@@ -162,11 +178,11 @@ final class SwipeModel {
         request = nil
     }
 
-    static func parameters(offset: Int) -> [URLQueryItem] {
+    static func parameters(offset: Int, limit: Int = pageSize) -> [URLQueryItem] {
         [
             URLQueryItem(name: "sort", value: "popularity"),
             URLQueryItem(name: "order", value: "desc"),
-            URLQueryItem(name: "limit", value: String(pageSize)),
+            URLQueryItem(name: "limit", value: String(limit)),
             URLQueryItem(name: "offset", value: String(offset))
         ]
     }

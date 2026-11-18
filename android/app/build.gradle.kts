@@ -29,7 +29,9 @@ android {
         debug { buildConfigField("String", "API_BASE_URL", "\"$debugApiBaseUrl\"") }
         release {
             buildConfigField("String", "API_BASE_URL", "\"https://movie-api-delta-six.vercel.app/\"")
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {

@@ -29,6 +29,9 @@ class PuzzleViewModel(private val catalog: suspend () -> Catalog, private val ra
     private var dimension = 3
     private var nextId = 0L
     private val failedPosters = mutableSetOf<String>()
+    // Validated once per catalog instance; Next puzzle then avoids re-parsing every poster URL.
+    private var candidateSource: List<Movie>? = null
+    private var candidates: List<Movie> = emptyList()
 
     fun start() { if (state.value == PuzzleState.Ready) load() }
     fun retry() { failedPosters.clear(); load() }
@@ -39,7 +42,9 @@ class PuzzleViewModel(private val catalog: suspend () -> Catalog, private val ra
         mutableState.value = PuzzleState.Loading
         loadJob = viewModelScope.launch {
             try {
-                val movie = selectPuzzleMovie(catalog().movies.filter { it.id !in failedPosters }, previousId, random)
+                val movies = catalog().movies
+                if (candidateSource !== movies) { candidates = puzzleCandidates(movies); candidateSource = movies }
+                val movie = pickPuzzleMovie(candidates.filter { it.id !in failedPosters }, previousId, random)
                 if (movie == null) mutableState.value = PuzzleState.Unavailable
                 else {
                     previousId = movie.id

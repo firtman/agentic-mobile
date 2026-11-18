@@ -554,3 +554,9 @@ The Small Phone emulator is left running for review. Captures with supplied artw
 The owner reviewed the completed refinement set and explicitly requested commit and push to main. The implementation, aligned strings, tests, generated Trivia decoration, native welcome capture, relevant original editable/standalone Trivia references and documentation are included. The two alternative browser directions remain exploratory. Saved final wrapper validation remains 98 passing JVM tests and lint zero errors/39 warnings; no source change was made after that validation, only approval/delivery documentation. `git diff --check` passed before commit.
 
 The original main checkout also contains unrelated slide edits and branding/screen explorations. Those remain outside this commit. Overlapping Trivia drafts were verified identical to the approved references, and the full original design-index/preview notes are preserved in the committed versions. Main integration uses a fast-forward; no baseline branch is changed and no force push is used.
+
+### Performance fixes — 2026-11-18 (owner approved for commit)
+
+Scope: Swipe skips saved films with one larger request (up to the API's 500 limit) and warms the next card's poster in memory; Poster Puzzle validates candidates once per catalog and recomposes the board only when the drag target changes; release builds enable R8 and resource shrinking.
+
+Results with JDK 21: `./gradlew :app:assembleDebug :app:testDebugUnitTest :app:assembleRelease` succeeded; **98 JVM tests passing**; unsigned release APK 3.07 MB (debug 16.2 MB). Limits: lint was not rerun; nothing was installed or run on an emulator or phone; the minified release build has not been launched, so R8 keep rules are unverified at runtime; no before/after timing was measured.

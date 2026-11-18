@@ -21,6 +21,8 @@ data class SwipeUiState(
     val saving: Boolean = false,
     val undoId: Long? = null,
     val message: Int? = null,
+    /** The film after the current card, so its poster can be warmed in memory before it is shown. */
+    val upcoming: Movie? = null,
 )
 
 /** Only unread pages live in memory. Saved ratings and undo remain in Room. */
@@ -69,7 +71,7 @@ class SwipeViewModel(private val movies: ExploreRepository, private val ratings:
         // Keep no rated catalog records in the queue. Undo reloads online in popularity order.
         queue.removeAll { it.id in ids }
         if (queue.isNotEmpty()) {
-            mutableState.update { it.copy(result = SwipeResult.Card(queue.first())) }
+            mutableState.update { it.copy(result = SwipeResult.Card(queue.first()), upcoming = queue.getOrNull(1)) }
         } else if (!hasMore) {
             mutableState.update { it.copy(result = SwipeResult.Empty) }
         } else if (loadJob?.isActive != true && state.value.result != SwipeResult.Error &&
@@ -84,12 +86,17 @@ class SwipeViewModel(private val movies: ExploreRepository, private val ratings:
             try {
                 // Fully-rated pages are skipped without displaying a false empty state.
                 while (queue.isEmpty() && hasMore) {
-                    val page = movies.movies(ExploreFilters(sort = MovieSort.POPULARITY_DESC), offset)
+                    // Saved films sit at the front of the popularity order, so skip past them in
+                    // one larger request instead of many small sequential ones.
+                    val limit = (ratedIds.orEmpty().size + ExploreRepository.PAGE_SIZE)
+                        .coerceIn(ExploreRepository.PAGE_SIZE, ExploreRepository.MAX_PAGE_SIZE)
+                    val page = movies.movies(ExploreFilters(sort = MovieSort.POPULARITY_DESC), offset, limit)
                     hasMore = page.hasMore && page.movies.isNotEmpty()
                     offset = page.offset + page.movies.size
                     queue.addAll(page.movies.distinctBy { it.id }.filter { it.id !in ratedIds.orEmpty() })
                 }
-                mutableState.update { it.copy(result = queue.firstOrNull()?.let(SwipeResult::Card) ?: SwipeResult.Empty) }
+                mutableState.update { it.copy(result = queue.firstOrNull()?.let(SwipeResult::Card) ?: SwipeResult.Empty,
+                    upcoming = queue.getOrNull(1)) }
             } catch (e: CancellationException) {
                 throw e
             } catch (_: Exception) {

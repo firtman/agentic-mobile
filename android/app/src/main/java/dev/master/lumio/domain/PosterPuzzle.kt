@@ -37,9 +37,16 @@ fun suppliedPosterUrl(movie: Movie): String? = runCatching { URI(movie.posterUrl
     movie.posterUrl.takeIf { (uri.scheme.equals("http", true) || uri.scheme.equals("https", true)) && !uri.host.isNullOrBlank() }
 }
 
-fun selectPuzzleMovie(movies: List<Movie>, previousId: String?, random: Random): Movie? {
-    val candidates = movies.filter { it.id.isNotBlank() && it.title.isNotBlank() && suppliedPosterUrl(it) != null }
+/** Films that can be played: an id, a title and a supplied web poster URL. Validates every URL, so build it once. */
+fun puzzleCandidates(movies: List<Movie>): List<Movie> =
+    movies.filter { it.id.isNotBlank() && it.title.isNotBlank() && suppliedPosterUrl(it) != null }
         .distinctBy { it.id }
+
+/** Picks from already-validated [candidates], avoiding an immediate repeat when another film exists. */
+fun pickPuzzleMovie(candidates: List<Movie>, previousId: String?, random: Random): Movie? {
     val different = candidates.filter { it.id != previousId }
     return different.ifEmpty { candidates }.randomOrNull(random)
 }
+
+fun selectPuzzleMovie(movies: List<Movie>, previousId: String?, random: Random): Movie? =
+    pickPuzzleMovie(puzzleCandidates(movies), previousId, random)
