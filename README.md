@@ -16,6 +16,10 @@ This repository contains a UX brief, design prompts, and a local Node.js catalog
 
 The owner’s [staged Android plan](docs/ANDROID-PLAN.md) uses native Kotlin and Compose, package `dev.master.lumio`, and SDK 26/36/36. Android catalog access is online-only: no bundled or persisted catalog. Ratings and settings remain on device as their stages are implemented. This owner decision supersedes the original brief’s offline behavior for Android. See [Android setup](android/README.md) and [validation](validation/android.md).
 
+## iOS implementation
+
+The [staged iOS plan](docs/IOS-PLAN.md) compares the iPhone and iPad app with the Android plan and the shipped refinements. See [iOS setup](ios/README.md) and [validation](validation/ios.md).
+
 ## App UX brief
 
 Use this prompt to understand the app’s sections and user experience.
