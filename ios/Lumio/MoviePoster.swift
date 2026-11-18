@@ -1,7 +1,7 @@
 import ImageIO
 import SwiftUI
 
-private actor PosterImages {
+actor PosterImages {
     static let shared = PosterImages()
     private let cache = NSCache<NSURL, CGImage>()
     private let session: URLSession = {

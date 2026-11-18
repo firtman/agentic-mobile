@@ -7,6 +7,7 @@ final class TriviaModel {
     enum Status: Equatable { case welcome, loading, unavailable, networkError, playing }
 
     private let repository: CatalogRepository
+    private let playCue: (GameCue) -> Void
     private let now: () -> Duration
     @ObservationIgnored private var lastTick: Duration?
     private var visible = false
@@ -19,8 +20,9 @@ final class TriviaModel {
         status == .loading || (round != nil && round?.phase != .results)
     }
 
-    init(repository: CatalogRepository, now: (() -> Duration)? = nil) {
+    init(repository: CatalogRepository, playCue: @escaping (GameCue) -> Void = { _ in }, now: (() -> Duration)? = nil) {
         self.repository = repository
+        self.playCue = playCue
         let origin = ContinuousClock.now
         self.now = now ?? { origin.duration(to: .now) }
     }
@@ -98,15 +100,24 @@ final class TriviaModel {
         sync(at: timestamp)
         guard var round else { return }
         action(&round)
-        self.round = round
+        apply(round)
         resetClock(at: timestamp)
     }
 
     private func sync(at timestamp: Duration) {
         guard let lastTick, var round, round.isCounting else { return }
         round.advanceTime(timestamp - lastTick)
-        self.round = round
+        apply(round)
         resetClock(at: timestamp)
+    }
+
+    private func apply(_ updated: TriviaRound) {
+        let revealed = round?.phase == .question && updated.phase == .feedback
+        round = updated
+        if revealed {
+            if updated.selected == nil { playCue(.timeout) }
+            else { playCue(updated.earned > 0 ? .correct : .incorrect) }
+        }
     }
 
     private func resetClock(at timestamp: Duration) {

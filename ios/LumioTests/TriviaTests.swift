@@ -71,7 +71,8 @@ final class TriviaTests: XCTestCase {
         let session = URLSessionConfiguration.ephemeral
         session.protocolClasses = [TriviaCatalogStub.self]
         let client = CatalogClient(baseURL: URL(string: "https://catalog.example")!, session: URLSession(configuration: session))
-        let model = TriviaModel(repository: CatalogRepository(client: client), now: { now })
+        var cues: [GameCue] = []
+        let model = TriviaModel(repository: CatalogRepository(client: client), playCue: { cues.append($0) }, now: { now })
         model.setVisible(true)
         model.start()
         try await waitForRound(model)
@@ -97,6 +98,12 @@ final class TriviaTests: XCTestCase {
         model.answer(0, question: 0)
         XCTAssertEqual(model.round?.phase, .question)
 
+        XCTAssertEqual(cues, [.timeout])
+        model.answer(0, question: 1)
+        model.answer(0, question: 1)
+        model.next(question: 1)
+        model.answer(1, question: 2)
+        XCTAssertEqual(cues, [.timeout, .correct, .incorrect])
         model.useFiftyFifty(question: 1)
         model.start()
         try await waitForRound(model)

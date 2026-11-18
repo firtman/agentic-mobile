@@ -2,7 +2,7 @@ import XCTest
 
 final class TriviaFlowTests: XCTestCase {
     @MainActor
-    func testLiveRoundPausesOnLeavingAndAdvancesAfterAnswerFeedback() {
+    func testLiveRoundPausesOnLeavingAndAdvancesAfterAnswerFeedback() throws {
         let app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
         app.launch()
@@ -16,6 +16,20 @@ final class TriviaFlowTests: XCTestCase {
         XCTAssertFalse(question.exists)
         start.tap()
         XCTAssertTrue(question.waitForExistence(timeout: 25))
+
+        let firstQuestion = question.label
+        app.buttons["settings"].tap()
+        let styles = ["system", "light", "dark"].map { app.buttons["appearance-\($0)"] }
+        let original = try XCTUnwrap(styles.first(where: { $0.isSelected }))
+        (styles[2].isSelected ? styles[1] : styles[2]).tap()
+        app.buttons["settings-close"].tap()
+        XCTAssertFalse(question.exists)
+        app.buttons["trivia-resume"].tap()
+        XCTAssertEqual(question.label, firstQuestion)
+        app.buttons["settings"].tap()
+        original.tap()
+        app.buttons["settings-close"].tap()
+        app.buttons["trivia-resume"].tap()
 
         app.navigationBars["Trivia"].buttons.element(boundBy: 0).tap()
         XCTAssertTrue(entry.waitForExistence(timeout: 8))

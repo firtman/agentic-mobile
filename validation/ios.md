@@ -55,3 +55,18 @@
 - The live UI test covered the Arcade hub, explicit start with catalog questions, leaving and resuming a hidden question, the single 50:50, and automatic advancement after feedback. The clock-driven tests covered five valid distinct questions, the 20-second deadline, late taps, four-second feedback, holding, wrong-answer and timeout resets, 750-point perfect rounds, and replay.
 - All 120 string keys align across English, Spanish, German, and Portuguese. The bundled illustration matches the approved Golden Ticket artwork. The full live results/replay path, backgrounding through the Home gesture, Trivia-specific network failure, physical devices, and full accessibility checks were outside this run.
 - Visually verified the Arcade cards and the Golden Ticket welcome screen in the live Codex iPhone 18 Pro tab.
+
+## Stage 7 · Poster Puzzle · 2026-11-18
+
+- Built Debug with Xcode 27.2. All 35 XCTest cases passed on iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4).
+- The live UI test swapped exactly two pieces with a drag, reversed the move with two taps, retained the board through Arcade navigation, and exercised all three sizes. It also checked the reference image, the move reset, and retaining 6×6 on the next poster.
+- Synthetic tests checked unsolved shuffles, completion and move locking, same-position and invalid swaps, URL eligibility, failed-artwork blocking, retrying the same supplied poster, and avoiding an immediate repeat when another poster is available.
+- All 138 localizable UI keys align across English, Spanish, German, and Portuguese. No poster image or catalog data was added to the repository. The full VoiceOver flow, physical devices, iOS 17 runtime, and gesture cancellation during a live drag were outside this run.
+
+## Stage 8 · Settings · 2026-11-18
+
+- The final Debug run passed all 27 selected tests on each simulator, iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch M4 (iPadOS 18.4). It included every unit test plus the Settings, localized navigation, and live Trivia UI checks.
+- With the catalog deliberately unreachable, both devices changed appearance and sound, relaunched, verified both saved choices, and opened all four bundled credit notices. German navigation with accessibility-sized text returned to each original destination. During a live Trivia round, changing appearance paused play and Resume returned to the same question.
+- The first Settings UI run found the appearance picker exposed an empty accessibility value. The final control gives each option a selected trait and a visible checkmark. The final tests verified the selected option after relaunch.
+- Game-model tests verified single feedback events for correct answers, errors, timeouts, and completed swaps, including the final completion cue. Tile selection and invalid swaps emitted no cue. All five original PCM tones and four text notices were present in the built app. Physical-device sound quality, silent-switch behavior, and iOS 17 runtime coverage remain unverified.
+- Checked 149 localizable keys and format placeholders across English, Spanish, German, and Portuguese. The live catalog health endpoint returned 9,919 movies during validation.

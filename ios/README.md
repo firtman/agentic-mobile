@@ -26,9 +26,19 @@ Genie uses the shared local ratings ledger and fetches the full catalog into pro
 
 ## Arcade and Trivia
 
-Open Trivia from Arcade and start from the illustrated welcome screen. A round samples five validated questions from the shared in-memory catalog. Source questions remain in English. Back navigation, opening Settings, and leaving the active app pause the round. Return and tap Resume to continue. The round lasts for the current app process. Poster Puzzle is shown as coming soon.
+Open Trivia from Arcade and start from the illustrated welcome screen. A round samples five validated questions from the shared in-memory catalog. Source questions remain in English. Back navigation, opening Settings, and leaving the active app pause the round. Return and tap Resume to continue. The round lasts for the current app process.
 
 The bundled Golden Ticket illustration is decorative artwork from the approved Trivia direction. See [artwork provenance](../design/previews/assets/trivia/README.md).
+
+## Poster Puzzle
+
+Open Poster Puzzle from Arcade to play on a 3×3, 4×4, or 6×6 board. Drag one tile onto another or tap two tiles to swap them. The reference image uses the same crop as the tiles. A failed poster offers Retry or Next puzzle. Changing size reshuffles the current poster, and Next keeps the chosen size. The board and artwork live in memory for the current app process.
+
+## Settings
+
+Open Settings from any destination or game. System follows the device appearance. Choosing Light or Dark updates the app and its open sheet immediately. Appearance and game sound are saved in UserDefaults. Game sound starts enabled and respects silent mode. Trivia plays feedback on an answer or timeout. Poster Puzzle plays a short cue for an accepted swap and a completion cue for the final swap.
+
+The credits include offline copies of the Fraunces, DM Sans, and Lucide licenses and the catalog attribution. External source links open in the browser.
 
 ## Tests
 

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ArcadeScreen: View {
     let trivia: TriviaModel
+    let puzzle: PosterPuzzleModel
     @Environment(\.colorScheme) private var scheme
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
@@ -23,11 +24,16 @@ struct ArcadeScreen: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("arcade-trivia")
-                gameCard(
-                    title: "Poster Puzzle", icon: "puzzle",
-                    description: "Put a movie poster back together.", action: "Coming soon"
-                )
-                .accessibilityElement(children: .combine)
+                NavigationLink(value: LumioRoute.posterPuzzle) {
+                    gameCard(
+                        title: "Poster Puzzle", icon: "puzzle",
+                        description: "Put a movie poster back together.",
+                        action: puzzle.hasPuzzle ? "Return to puzzle" : "Play Poster Puzzle"
+                    )
+                    .contentShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("arcade-puzzle")
             }
             .frame(maxWidth: 620, alignment: .leading)
             .padding(20)

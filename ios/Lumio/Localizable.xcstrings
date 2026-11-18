@@ -1,6 +1,259 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "DM Sans" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DM Sans"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DM Sans"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DM Sans"
+          }
+        }
+      }
+    },
+    "Fraunces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fraunces"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fraunces"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fraunces"
+          }
+        }
+      }
+    },
+    "Lucide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucide"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucide"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucide"
+          }
+        }
+      }
+    },
+    "This notice is unavailable." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Hinweis ist nicht verfügbar."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este aviso no está disponible."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este aviso não está disponível."
+          }
+        }
+      }
+    },
+    "Catalog sources" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katalogquellen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuentes del catálogo"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fontes do catálogo"
+          }
+        }
+      }
+    },
+    "Credits and licenses" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitwirkende und Lizenzen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos y licencias"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos e licenças"
+          }
+        }
+      }
+    },
+    "Game sound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielton"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonido del juego"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Som do jogo"
+          }
+        }
+      }
+    },
+    "System" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dunkel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escuro"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hell"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darstellung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apariencia"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aparência"
+          }
+        }
+      }
+    },
     "%@ out of 10" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -66,6 +319,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld de %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld in place" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld am richtigen Platz"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld en su lugar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld no lugar"
           }
         }
       }
@@ -139,9 +415,7 @@
         }
       }
     },
-    "A" : {
-
-    },
+    "A" : {},
     "A little cinema knowledge. A streak worth chasing." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -257,9 +531,7 @@
         }
       }
     },
-    "B" : {
-
-    },
+    "B" : {},
     "Back to Arcade" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -306,9 +578,30 @@
         }
       }
     },
-    "C" : {
-
+    "Board size" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielfeldgröße"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamaño del tablero"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamanho do tabuleiro"
+          }
+        }
+      }
     },
+    "C" : {},
     "Cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -420,6 +713,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alterar escolha para %@"
+          }
+        }
+      }
+    },
+    "Changing the size reshuffles this poster." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine andere Größe mischt dieses Poster neu."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar el tamaño vuelve a mezclar las piezas de este póster."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudar o tamanho embaralha as peças deste pôster."
           }
         }
       }
@@ -539,29 +855,6 @@
         }
       }
     },
-    "Coming soon" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Demnächst"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Próximamente"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Em breve"
-          }
-        }
-      }
-    },
     "Correct answer: %@" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -677,6 +970,29 @@
         }
       }
     },
+    "Couldn’t load this poster." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Poster konnte nicht geladen werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo cargar este póster."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar este pôster."
+          }
+        }
+      }
+    },
     "Couldn’t load your choice." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -746,9 +1062,7 @@
         }
       }
     },
-    "D" : {
-
-    },
+    "D" : {},
     "Dataset source" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -841,6 +1155,29 @@
         }
       }
     },
+    "Drag tiles to swap them, or tap two tiles." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ziehe ein Teil auf ein anderes oder tippe auf zwei Teile, um sie zu tauschen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrastra una pieza sobre otra o toca dos piezas para intercambiarlas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arraste uma peça sobre outra ou toque em duas peças para trocá-las."
+          }
+        }
+      }
+    },
     "Every available movie has a saved choice. Undo a choice or check for new movies." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -883,6 +1220,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Explorar"
+          }
+        }
+      }
+    },
+    "Finding a poster…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poster wird gesucht…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscando un póster…"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscando um pôster…"
           }
         }
       }
@@ -1021,6 +1381,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boa tentativa"
+          }
+        }
+      }
+    },
+    "Hide reference" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage ausblenden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar referencia"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar referência"
+          }
+        }
+      }
+    },
+    "Hide the reference to keep playing." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blende die Vorlage aus, um weiterzuspielen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oculta la referencia para seguir jugando."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oculte a referência para continuar jogando."
           }
         }
       }
@@ -1186,6 +1592,29 @@
         }
       }
     },
+    "Loading movies…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filme werden geladen…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando películas…"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando filmes…"
+          }
+        }
+      }
+    },
     "Loading movie…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1209,25 +1638,25 @@
         }
       }
     },
-    "Loading movies…" : {
+    "Loading poster…" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filme werden geladen…"
+            "value" : "Poster wird geladen…"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cargando películas…"
+            "value" : "Cargando el póster…"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Carregando filmes…"
+            "value" : "Carregando pôster…"
           }
         }
       }
@@ -1278,9 +1707,7 @@
         }
       }
     },
-    "Lumio" : {
-
-    },
+    "Lumio" : {},
     "Most popular" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1300,6 +1727,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mais populares"
+          }
+        }
+      }
+    },
+    "Moves: %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Züge: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movimientos: %lld"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movimentos: %lld"
           }
         }
       }
@@ -1396,6 +1846,29 @@
         }
       }
     },
+    "Next puzzle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächstes Puzzle"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente puzle"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximo quebra-cabeça"
+          }
+        }
+      }
+    },
     "No matches yet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1438,6 +1911,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum filme corresponde a estes filtros."
+          }
+        }
+      }
+    },
+    "No playable posters are available." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es sind keine spielbaren Poster verfügbar."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay pósteres disponibles para jugar."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não há pôsteres disponíveis para jogar."
           }
         }
       }
@@ -1557,25 +2053,48 @@
         }
       }
     },
-    "Play again" : {
+    "Piece %lld, row %lld, column %lld" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erneut spielen"
+            "value" : "Teil %1$lld, Reihe %2$lld, Spalte %3$lld"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jugar de nuevo"
+            "value" : "Pieza %1$lld, fila %2$lld, columna %3$lld"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jogar novamente"
+            "value" : "Peça %1$lld, linha %2$lld, coluna %3$lld"
+          }
+        }
+      }
+    },
+    "Play Poster Puzzle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poster-Puzzle spielen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar al puzle de póster"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jogar quebra-cabeça de pôster"
           }
         }
       }
@@ -1603,6 +2122,29 @@
         }
       }
     },
+    "Play again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut spielen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar de nuevo"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jogar novamente"
+          }
+        }
+      }
+    },
     "Poster Puzzle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1622,6 +2164,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quebra-cabeça de pôster"
+          }
+        }
+      }
+    },
+    "Poster complete!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poster fertig!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Póster completado!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pôster completo!"
+          }
+        }
+      }
+    },
+    "Poster reference" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postervorlage"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Póster de referencia"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pôster de referência"
           }
         }
       }
@@ -1902,6 +2490,29 @@
         }
       }
     },
+    "Return to puzzle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück zum Puzzle"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver al puzle"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar ao quebra-cabeça"
+          }
+        }
+      }
+    },
     "Return to round" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2109,6 +2720,29 @@
         }
       }
     },
+    "Show reference" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar referencia"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar referência"
+          }
+        }
+      }
+    },
     "Sort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2266,6 +2900,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deslizar"
+          }
+        }
+      }
+    },
+    "Tap another tile to swap." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tippe auf ein anderes Teil, um zu tauschen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca otra pieza para intercambiarlas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toque em outra peça para trocar."
           }
         }
       }
@@ -2615,52 +3272,6 @@
         }
       }
     },
-    "You’re all caught up." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du bist auf dem neuesten Stand."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ya estás al día."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você está em dia."
-          }
-        }
-      }
-    },
-    "You’ve reached the end. Rate more films for new picks." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du bist am Ende. Bewerte mehr Filme für neue Vorschläge."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Llegaste al final. Califica más películas para obtener nuevas sugerencias."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você chegou ao fim. Avalie mais filmes para receber novas sugestões."
-          }
-        }
-      }
-    },
     "Your choice" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2772,6 +3383,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seu ingresso para uma noite de cinema"
+          }
+        }
+      }
+    },
+    "You’re all caught up." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist auf dem neuesten Stand."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya estás al día."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você está em dia."
+          }
+        }
+      }
+    },
+    "You’ve reached the end. Rate more films for new picks." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist am Ende. Bewerte mehr Filme für neue Vorschläge."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llegaste al final. Califica más películas para obtener nuevas sugerencias."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você chegou ao fim. Avalie mais filmes para receber novas sugestões."
           }
         }
       }

@@ -5,6 +5,7 @@ enum LumioRoute: Hashable {
     case movie(String)
     case history
     case trivia
+    case posterPuzzle
 }
 
 private enum Destination: String, CaseIterable, Identifiable {
@@ -38,10 +39,12 @@ struct LumioShell: View {
     @State private var swipe: SwipeModel
     @State private var genie: GenieModel
     @State private var trivia: TriviaModel
+    @State private var puzzle: PosterPuzzleModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
     @State private var selection: Destination = .explore
     @State private var paths: [Destination: NavigationPath] = [:]
+    @AppStorage(SettingKey.appearance) private var appearance = AppAppearance.system
     @State private var showingSettings = false
     @State private var sidebarVisibility: NavigationSplitViewVisibility = .all
 
@@ -54,7 +57,9 @@ struct LumioShell: View {
         ))
         _swipe = State(initialValue: SwipeModel(catalog: catalog, ratings: ratings))
         _genie = State(initialValue: GenieModel(repository: repository, ratings: ratings))
-        _trivia = State(initialValue: TriviaModel(repository: repository))
+        let sound = GameSound()
+        _trivia = State(initialValue: TriviaModel(repository: repository, playCue: sound.play))
+        _puzzle = State(initialValue: PosterPuzzleModel(repository: repository, playCue: sound.play))
     }
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
@@ -89,7 +94,7 @@ struct LumioShell: View {
         .tint(palette.accent)
         .sheet(isPresented: $showingSettings) {
             NavigationStack {
-                screen(title: "Settings", icon: "settings-2") {}
+                SettingsScreen(appearance: $appearance)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Close") { showingSettings = false }
@@ -97,7 +102,9 @@ struct LumioShell: View {
                         }
                     }
             }
+            .preferredColorScheme(appearance.colorScheme)
         }
+        .preferredColorScheme(appearance.colorScheme)
     }
 
     private var compactDestinations: some View {
@@ -146,7 +153,7 @@ struct LumioShell: View {
                         selection = .swipe
                     }
                 } else {
-                    ArcadeScreen(trivia: trivia)
+                    ArcadeScreen(trivia: trivia, puzzle: puzzle)
                 }
             }
             .toolbar {
@@ -167,6 +174,9 @@ struct LumioShell: View {
                         .toolbar { settingsToolbar }
                 case .trivia:
                     TriviaScreen(model: trivia, covered: showingSettings)
+                        .toolbar { settingsToolbar }
+                case .posterPuzzle:
+                    PosterPuzzleScreen(model: puzzle)
                         .toolbar { settingsToolbar }
                 }
             }
@@ -203,32 +213,6 @@ struct LumioShell: View {
             .accessibilityLabel("Settings")
             .accessibilityIdentifier("settings")
         }
-    }
-
-    private func screen<Content: View>(
-        title: LocalizedStringKey,
-        icon: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                LucideIcon(name: icon)
-                    .foregroundStyle(palette.accent)
-                Text(title)
-                    .editorialFont(.title)
-                    .foregroundStyle(palette.primary)
-                    .accessibilityAddTraits(.isHeader)
-                    .accessibilityIdentifier("screen-title")
-                content()
-            }
-            .frame(maxWidth: 560, alignment: .leading)
-            .padding(24)
-            .frame(maxWidth: .infinity)
-        }
-        .background(palette.canvas)
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-        .editorialNavigationBar(canvas: palette.canvas)
     }
 
     private func destinationButton(_ destination: Destination, sidebar: Bool) -> some View {

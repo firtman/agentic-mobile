@@ -12,6 +12,10 @@ The [design index](design/README.md) brings together approved colors, typography
 
 This repository contains a UX brief, design prompts, and a local Node.js catalog API. Catalog data is downloaded during setup rather than bundled in the repository. Android and iOS are independent native apps using their respective SDKs.
 
+## Lumio 1.0 specification
+
+Android and iOS were closed as **Lumio 1.0** on November 18, 2026. The [1.0 product specification](docs/SPEC-1.0.md) is the source of truth for app behavior and supersedes the UX brief and stage plans where they differ.
+
 ## Android implementation
 
 The owner’s [staged Android plan](docs/ANDROID-PLAN.md) uses native Kotlin and Compose, package `dev.master.lumio`, and SDK 26/36/36. Android catalog access is online-only: no bundled or persisted catalog. Ratings and settings remain on device as their stages are implemented. This owner decision supersedes the original brief’s offline behavior for Android. See [Android setup](android/README.md) and [validation](validation/android.md).
