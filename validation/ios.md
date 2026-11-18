@@ -34,3 +34,10 @@
 - The live UI test, using an isolated memory store, rated with the Like button, a left swipe and a downward drag. Undo then restored the latest film. The test opened its details and saved Not seen yet there, and the film left the Swipe queue after returning.
 - Visually verified light Swipe on the live iPhone 18 Pro tab without changing its saved choices. All content fits above the floating navigation. German dark mode on iPhone 16 (iOS 18.4) with an isolated store first showed a truncated hint and misaligned action icons. After the fixes, the hint wraps, the icons align, and the page scrolls. A downward drag on the card saved Not seen yet instead of scrolling.
 - All 60 localization keys align across English, Spanish, German, and Portuguese. Physical device, iOS 17 runtime, full VoiceOver (card actions are implemented but were not exercised with VoiceOver), large accessibility text on Swipe, an injected storage failure, and the exhausted state against the live catalog were outside this run.
+
+## Stage 4 · Your choices · 2026-11-18
+
+- Built Debug with Xcode 27.2. All 22 XCTest cases passed on iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4).
+- Live UI tests saved a film from Swipe, changed the choice in history, undid the edit, opened the same film’s details, and undid the first choice. A separate UI test opened the empty history from Genie with the catalog endpoint unavailable. Both used isolated in-memory ratings.
+- The SwiftData regression test used an injected clock to verify newest-first ordering, stale action guards, timestamp restoration, and per-film Undo leaving the newest remaining global Undo entry intact. The existing persistence and 200-entry cap tests passed.
+- All 70 localization keys align across English, Spanish, German, and Portuguese. This run did not exercise a populated offline UI with connection loss, injected storage failure, or a complete accessibility audit. Physical device and iOS 17 runtime coverage remain unverified.

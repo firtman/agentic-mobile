@@ -16,6 +16,10 @@ Open a film from the Spotlight or a poster card. Details are fetched from the ca
 
 Swipe shows the most popular films that have no saved choice, one at a time, with the full supplied poster in a neutral frame. Drag right to like, left to dislike, or down for Not seen yet, or use the three equivalent buttons. VoiceOver exposes the same choices as card actions. Fully rated catalog pages are skipped, and choices made in Movie Details update the queue. Undo reverts the latest remaining change in the shared ledger and returns that film to the queue. Network, saved-choice loading, and save failures are shown separately with Retry. When every available film has a choice, Swipe shows a caught-up state with Refresh movies.
 
+## Your choices
+
+Open Your choices from the Swipe toolbar or Genie. The history shows saved snapshots and dates, newest first. Change a choice or undo a film’s latest available change without a catalog connection. Opening full Movie Details fetches the film from the catalog. Swipe’s global Undo and per-film Undo share the same 200-change ledger.
+
 ## Tests
 
 Run from the repository root with the local API running. Replace the destination with an installed iPhone or iPad Simulator.

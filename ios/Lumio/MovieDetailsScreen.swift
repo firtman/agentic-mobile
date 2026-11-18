@@ -296,7 +296,7 @@ struct MovieDetailsScreen: View {
     }
 }
 
-private extension RatingChoice {
+extension RatingChoice {
     var label: LocalizedStringKey {
         switch self {
         case .like: "Like"

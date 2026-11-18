@@ -129,9 +129,9 @@ struct SwipeScreen: View {
     private func actionButton(_ choice: RatingChoice) -> some View {
         Button { rate(choice) } label: {
             VStack(spacing: 6) {
-                LucideIcon(name: choice.swipeIcon)
+                LucideIcon(name: choice.icon)
                     .padding(.top, 4)
-                Text(choice.swipeLabel)
+                Text(choice.label)
                     .editorialFont(.control)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -235,7 +235,7 @@ private struct SwipeCard: View {
             }
             .overlay(alignment: .top) {
                 if let pending {
-                    Text(pending.swipeLabel)
+                    Text(pending.label)
                         .editorialFont(.control)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
@@ -274,23 +274,5 @@ private struct SwipeCard: View {
 private extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
         min(max(self, range.lowerBound), range.upperBound)
-    }
-}
-
-extension RatingChoice {
-    var swipeLabel: LocalizedStringKey {
-        switch self {
-        case .like: "Like"
-        case .dislike: "Dislike"
-        case .unseen: "Not seen yet"
-        }
-    }
-
-    var swipeIcon: String {
-        switch self {
-        case .like: "thumbs-up"
-        case .dislike: "thumbs-down"
-        case .unseen: "eye-off"
-        }
     }
 }

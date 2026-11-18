@@ -3,6 +3,7 @@ import SwiftData
 
 enum LumioRoute: Hashable {
     case movie(String)
+    case history
 }
 
 private enum Destination: String, CaseIterable, Identifiable {
@@ -136,10 +137,19 @@ struct LumioShell: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .editorialNavigationBar(canvas: palette.canvas)
                 } else {
-                    screen(title: destination.title, icon: destination.icon) {}
+                    screen(title: destination.title, icon: destination.icon) {
+                        if destination == .genie {
+                            historyLink
+                        }
+                    }
                 }
             }
             .toolbar {
+                if destination == .swipe {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        historyLink.labelStyle(.iconOnly)
+                    }
+                }
                 settingsToolbar
             }
             .navigationDestination(for: LumioRoute.self) { route in
@@ -147,10 +157,30 @@ struct LumioShell: View {
                 case .movie(let id):
                     MovieDetailsScreen(movieID: id, catalog: catalog, ratings: ratings)
                         .toolbar { settingsToolbar }
+                case .history:
+                    RatingHistoryScreen(ratings: ratings)
+                        .toolbar { settingsToolbar }
                 }
             }
         }
         .id(destination)
+    }
+
+    private var historyLink: some View {
+        NavigationLink(value: LumioRoute.history) {
+            Label {
+                Text("Your choices").editorialFont(.control)
+            } icon: {
+                Image("list-checks")
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Your choices")
+        .accessibilityIdentifier("open-rating-history")
     }
 
     private var settingsToolbar: some ToolbarContent {

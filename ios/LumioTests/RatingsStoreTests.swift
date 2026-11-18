@@ -26,6 +26,40 @@ final class RatingsStoreTests: XCTestCase {
         XCTAssertNil(try reopened.choice(for: first.id))
     }
 
+    func testHistoryEditAndPerFilmUndoPreserveGlobalOrderAndRestoreTimestamp() throws {
+        var now = Date(timeIntervalSince1970: 100)
+        let store = RatingsStore(configuration: ModelConfiguration(isStoredInMemoryOnly: true), now: { now })
+        let first = try movie("first")
+        let second = try movie("second")
+        let firstToken = try XCTUnwrap(store.rate(first, as: .like))
+        now += 10
+        let secondToken = try XCTUnwrap(store.rate(second, as: .unseen))
+
+        let before = try store.history()
+        XCTAssertEqual(before.map(\.id), ["second", "first"])
+        let item = try XCTUnwrap(before.last)
+        now += 10
+        XCTAssertTrue(try store.changeChoice(for: item, to: .dislike))
+        XCTAssertFalse(try store.changeChoice(for: item, to: .unseen))
+        XCTAssertFalse(try store.undoMovie(first.id, expectedID: firstToken))
+
+        let changed = try XCTUnwrap(store.history().first)
+        XCTAssertEqual(changed.id, first.id)
+        XCTAssertEqual(changed.choice, .dislike)
+        XCTAssertEqual(changed.updatedAt, now)
+        XCTAssertTrue(try store.undoMovie(first.id, expectedID: XCTUnwrap(changed.undoID)))
+        let restored = try store.history()
+        XCTAssertEqual(restored.map(\.id), ["second", "first"])
+        XCTAssertEqual(restored.last?.choice, .like)
+        XCTAssertEqual(restored.last?.updatedAt, item.updatedAt)
+
+        XCTAssertTrue(try store.undoMovie(first.id, expectedID: firstToken))
+        XCTAssertEqual(try store.latestUndoID(), secondToken)
+        XCTAssertEqual(try store.ratedIDs(), [second.id])
+        XCTAssertTrue(try store.undoLatest(expectedID: secondToken))
+        XCTAssertTrue(try store.history().isEmpty)
+    }
+
     func testLedgerRetainsOnlyMostRecentTwoHundredChanges() throws {
         let store = RatingsStore(configuration: ModelConfiguration(isStoredInMemoryOnly: true))
         let item = try movie("film")

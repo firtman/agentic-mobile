@@ -40,13 +40,27 @@ func suppliedWebURL(_ value: String?) -> URL? {
 }
 
 struct MoviePoster: View {
-    let movie: Movie
+    let id: String
+    let title: String
+    let posterURL: String?
     let aspect: CGFloat
-    var contentMode: ContentMode = .fill
+    let contentMode: ContentMode
     @State private var image: CGImage?
 
+    init(movie: Movie, aspect: CGFloat, contentMode: ContentMode = .fill) {
+        self.init(id: movie.id, title: movie.title, posterURL: movie.posterUrl, aspect: aspect, contentMode: contentMode)
+    }
+
+    init(id: String, title: String, posterURL: String?, aspect: CGFloat, contentMode: ContentMode = .fill) {
+        self.id = id
+        self.title = title
+        self.posterURL = posterURL
+        self.aspect = aspect
+        self.contentMode = contentMode
+    }
+
     var body: some View {
-        let url = suppliedWebURL(movie.posterUrl)
+        let url = suppliedWebURL(posterURL)
         Color.clear
             .aspectRatio(aspect, contentMode: .fit)
             .overlay {
@@ -80,10 +94,10 @@ struct MoviePoster: View {
             Color(red: 0.22, green: 0.22, blue: 0.30),
             Color(red: 0.28, green: 0.24, blue: 0.17)
         ]
-        let index = movie.id.utf8.reduce(0) { ($0 * 31 + Int($1)) % tones.count }
+        let index = id.utf8.reduce(0) { ($0 * 31 + Int($1)) % tones.count }
         return ZStack {
             tones[index]
-            Text(movie.title)
+            Text(title)
                 .editorialFont(.movieTitle)
                 .foregroundStyle(EditorialPalette(.dark).primary)
                 .multilineTextAlignment(.center)
