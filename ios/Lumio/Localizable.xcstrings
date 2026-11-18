@@ -48,6 +48,29 @@
         }
       }
     },
+    "A little more you.": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un poco más tú."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein bisschen mehr du."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um pouco mais de você."
+          }
+        }
+      }
+    },
     "All genres": {
       "extractionState": "manual",
       "localizations": {
@@ -324,6 +347,29 @@
         }
       }
     },
+    "Couldn’t load your saved choices.": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron cargar tus elecciones guardadas."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine gespeicherte Auswahl konnte nicht geladen werden."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível carregar suas escolhas salvas."
+          }
+        }
+      }
+    },
     "Couldn’t update your choice. Try again.": {
       "extractionState": "manual",
       "localizations": {
@@ -416,6 +462,29 @@
         }
       }
     },
+    "Every available movie has a saved choice. Undo a choice or check for new movies.": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las películas disponibles tienen una elección guardada. Deshaz una elección o busca nuevas películas."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für alle verfügbaren Filme ist eine Auswahl gespeichert. Mache eine Auswahl rückgängig oder suche nach neuen Filmen."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os filmes disponíveis têm uma escolha salva. Desfaça uma escolha ou procure novos filmes."
+          }
+        }
+      }
+    },
     "Explore": {
       "extractionState": "manual",
       "localizations": {
@@ -504,6 +573,29 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais bem avaliados"
+          }
+        }
+      }
+    },
+    "Left to dislike · Down for not seen yet · Right to like": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izquierda: no me gusta · Abajo: no la he visto · Derecha: me gusta"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Links: gefällt mir nicht · Unten: noch nicht gesehen · Rechts: gefällt mir"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquerda: não gostei · Baixo: ainda não vi · Direita: gostei"
           }
         }
       }
@@ -757,6 +849,29 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais antigos primeiro"
+          }
+        }
+      }
+    },
+    "Refresh movies": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar películas"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filme aktualisieren"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar filmes"
           }
         }
       }
@@ -1152,6 +1267,29 @@
         }
       }
     },
+    "View details": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver detalles"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Details ansehen"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver detalhes"
+          }
+        }
+      }
+    },
     "View source": {
       "extractionState": "manual",
       "localizations": {
@@ -1194,6 +1332,52 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua escolha"
+          }
+        }
+      }
+    },
+    "Your choices shape your recommendations.": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus elecciones dan forma a tus recomendaciones."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Auswahl prägt deine Empfehlungen."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas escolhas moldam suas recomendações."
+          }
+        }
+      }
+    },
+    "You’re all caught up.": {
+      "extractionState": "manual",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya estás al día."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist auf dem neuesten Stand."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você está em dia."
           }
         }
       }

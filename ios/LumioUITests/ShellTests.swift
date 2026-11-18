@@ -10,7 +10,7 @@ final class ShellTests: XCTestCase {
         ]
         app.launch()
 
-        for (destination, title) in [("swipe", "Wischen"), ("genie", "Genie"), ("arcade", "Arcade")] {
+        for (destination, title) in [("swipe", "Ein bisschen mehr du."), ("genie", "Genie"), ("arcade", "Arcade")] {
             let button = app.buttons["destination-\(destination)"]
             XCTAssertTrue(button.waitForExistence(timeout: 5))
             button.tap()

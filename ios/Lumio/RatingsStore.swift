@@ -1,4 +1,5 @@
 import Foundation
+import Observation
 import SwiftData
 
 enum RatingChoice: String, CaseIterable, Identifiable {
@@ -61,11 +62,15 @@ final class RatingUndoEntry {
 }
 
 @MainActor
+@Observable
 final class RatingsStore {
-    private var container: ModelContainer?
-    private let configuration: ModelConfiguration
-    private let now: () -> Date
+    @ObservationIgnored private var container: ModelContainer?
+    @ObservationIgnored private let configuration: ModelConfiguration
+    @ObservationIgnored private let now: () -> Date
     private static let undoLimit = 200
+
+    /// Advances after every committed change so screens kept in memory can refresh their view of the ledger.
+    private(set) var revision = 0
 
     init(
         configuration: ModelConfiguration = ModelConfiguration("Ratings", cloudKitDatabase: .none),
@@ -78,6 +83,19 @@ final class RatingsStore {
     func choice(for movieID: String) throws -> RatingChoice? {
         let context = try makeContext()
         return try rating(for: movieID, in: context).flatMap { RatingChoice(rawValue: $0.choice) }
+    }
+
+    func ratedIDs() throws -> Set<String> {
+        let context = try makeContext()
+        return Set(try context.fetch(FetchDescriptor<SavedRating>()).map(\.movieID))
+    }
+
+    /// The token for the newest remaining change, shared by every global Undo control.
+    func latestUndoID() throws -> UUID? {
+        let context = try makeContext()
+        var newest = FetchDescriptor<RatingUndoEntry>(sortBy: [SortDescriptor(\.sequence, order: .reverse)])
+        newest.fetchLimit = 1
+        return try context.fetch(newest).first?.id
     }
 
     /// Returns a token for the committed change. Repeating a choice leaves the ledger unchanged.
@@ -106,6 +124,7 @@ final class RatingsStore {
             context.delete(expired)
         }
         try context.save()
+        revision += 1
         return entry.id
     }
 
@@ -126,6 +145,7 @@ final class RatingsStore {
         }
         context.delete(entry)
         try context.save()
+        revision += 1
         return true
     }
 

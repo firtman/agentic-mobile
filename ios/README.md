@@ -12,6 +12,10 @@ For a physical device, select your local signing team and use `HOST=0.0.0.0 npm 
 
 Open a film from the Spotlight or a poster card. Details are fetched from the catalog on demand. Like, Dislike, and Not seen yet are stored on-device in SwiftData with the rated film’s scoring and history metadata. An accepted change offers Undo. Undo restores the previous choice or removes a first choice. The shared local ledger retains up to 200 changes.
 
+## Swipe
+
+Swipe shows the most popular films that have no saved choice, one at a time, with the full supplied poster in a neutral frame. Drag right to like, left to dislike, or down for Not seen yet, or use the three equivalent buttons. VoiceOver exposes the same choices as card actions. Fully rated catalog pages are skipped, and choices made in Movie Details update the queue. Undo reverts the latest remaining change in the shared ledger and returns that film to the queue. Network, saved-choice loading, and save failures are shown separately with Retry. When every available film has a choice, Swipe shows a caught-up state with Refresh movies.
+
 ## Tests
 
 Run from the repository root with the local API running. Replace the destination with an installed iPhone or iPad Simulator.
@@ -22,7 +26,7 @@ xcodebuild -project ios/Lumio.xcodeproj -scheme Lumio \
   -parallel-testing-enabled NO test
 ```
 
-The URLProtocol unit tests use synthetic responses. The UI suite checks live Explore, empty search and filter reset, Retry with a deliberately unavailable debug endpoint, localized navigation, and the Movie Details rating and Undo flow. Ratings tests use an isolated store.
+The URLProtocol unit tests use synthetic responses. The UI suite checks live Explore, empty search and filter reset, Retry with a deliberately unavailable debug endpoint, localized navigation, the Movie Details rating and Undo flow, and Swipe buttons, gestures, Undo, and details handoff. Ratings tests use an isolated store.
 
 ## Interface
 

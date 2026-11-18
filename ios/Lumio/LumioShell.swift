@@ -33,6 +33,7 @@ struct LumioShell: View {
     let catalog: CatalogClient
     let ratings: RatingsStore
     @State private var explore: ExploreModel
+    @State private var swipe: SwipeModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
     @State private var selection: Destination = .explore
@@ -47,6 +48,7 @@ struct LumioShell: View {
             catalog: catalog,
             savedSort: UserDefaults.standard.string(forKey: "explore.sort")
         ))
+        _swipe = State(initialValue: SwipeModel(catalog: catalog, ratings: ratings))
     }
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
@@ -125,6 +127,11 @@ struct LumioShell: View {
             Group {
                 if destination == .explore {
                     ExploreScreen(model: explore)
+                        .navigationTitle(destination.title)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .editorialNavigationBar(canvas: palette.canvas)
+                } else if destination == .swipe {
+                    SwipeScreen(model: swipe, ratings: ratings)
                         .navigationTitle(destination.title)
                         .navigationBarTitleDisplayMode(.inline)
                         .editorialNavigationBar(canvas: palette.canvas)
