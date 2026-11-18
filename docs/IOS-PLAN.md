@@ -32,3 +32,8 @@ The Android plan records original intent and stage delivery. The approved refine
 - Build with xcodebuild, run the relevant XCTest suite, and verify the stage on iPhone and iPad Simulator in light/dark, large text, and a non-English locale. Verify network success, controlled failure and Retry for networked features. Record actual results and limits in [iOS validation](../validation/ios.md). Track iOS 17 runtime coverage separately from the deployment target.
 - Test paging races, interleaved undo and its retention limit, deterministic Genie scoring, Trivia timing and pause, and Puzzle cancellation using synthetic fixtures and a controllable clock where appropriate. Verify personal persistence across relaunch and app update. Test cold offline launch with history and settings available and catalog Retry visible.
 - For each subsequent owner-approved Android behavior change, record its source commit or decision, iOS behavior, and acceptance case in the applicable stage. If iOS has shipped that stage, record the difference for owner review. Android validation is a source of scenarios for independent iOS checks.
+
+## Delivery record
+
+- Stage 0 was approved and pushed to origin/main as `f347704`. The owner then authorized Stage 1 and selected iPhone 18 Pro for testing.
+- During the Stage 1 review, the owner requested Liquid Glass. Use the native system treatment for iOS 26 and later toolbars, the floating compact navigation bar, and the Explore sort control. Keep the Editorial palette and opaque reading surfaces. Retain the existing navigation and control styling on iOS 17 and 18.

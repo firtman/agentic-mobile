@@ -23,10 +23,27 @@ final class ShellTests: XCTestCase {
     }
 
     @MainActor
-    func testLiveCatalogConnection() {
+    func testLiveExploreLoadsSpotlight() {
         let app = XCUIApplication()
         app.launch()
-        XCTAssertTrue(app.descendants(matching: .any)["catalog-connected"].firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["explore-spotlight"].firstMatch.waitForExistence(timeout: 10))
+    }
+
+    @MainActor
+    func testSearchEmptyStateAndReset() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+        app.launch()
+        let search = app.textFields["explore-search"]
+        XCTAssertTrue(search.waitForExistence(timeout: 10))
+        search.tap()
+        search.typeText("zzzzlumiozzzz\n")
+        XCTAssertTrue(app.descendants(matching: .any)["explore-empty"].firstMatch.waitForExistence(timeout: 10))
+        app.buttons["explore-reset"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["explore-spotlight"].firstMatch.waitForExistence(timeout: 10))
+        let sort = app.buttons["explore-sort"]
+        app.swipeUp()
+        XCTAssertTrue(sort.label.contains("Newest first"))
     }
 
     @MainActor

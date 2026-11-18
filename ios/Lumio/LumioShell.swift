@@ -25,13 +25,20 @@ private enum Destination: String, CaseIterable, Identifiable {
 }
 
 struct LumioShell: View {
-    let catalog: CatalogClient
+    @State private var explore: ExploreModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
     @State private var selection: Destination = .explore
     @State private var paths: [Destination: NavigationPath] = [:]
     @State private var showingSettings = false
     @State private var sidebarVisibility: NavigationSplitViewVisibility = .all
+
+    init(catalog: CatalogClient) {
+        _explore = State(initialValue: ExploreModel(
+            catalog: catalog,
+            savedSort: UserDefaults.standard.string(forKey: "explore.sort")
+        ))
+    }
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
 
@@ -56,14 +63,7 @@ struct LumioShell: View {
             } else {
                 navigation(for: selection)
                     .safeAreaInset(edge: .bottom, spacing: 0) {
-                        HStack(alignment: .top, spacing: 0) {
-                            ForEach(Destination.allCases) { destination in
-                                destinationButton(destination, sidebar: false)
-                            }
-                        }
-                        .padding(.vertical, 4)
-                        .background(palette.raised)
-                        .overlay(alignment: .top) { Rectangle().fill(palette.divider).frame(height: 1) }
+                        compactNavigation
                     }
             }
         }
@@ -81,14 +81,44 @@ struct LumioShell: View {
         }
     }
 
+    private var compactDestinations: some View {
+        HStack(alignment: .top, spacing: 0) {
+            ForEach(Destination.allCases) { destination in
+                destinationButton(destination, sidebar: false)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var compactNavigation: some View {
+        if #available(iOS 26, *) {
+            compactDestinations
+                .padding(.horizontal, 6)
+                .padding(.vertical, 5)
+                .glassEffect(.regular, in: .rect(cornerRadius: 30))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 5)
+        } else {
+            compactDestinations
+                .padding(.vertical, 4)
+                .background(palette.raised)
+                .overlay(alignment: .top) { Rectangle().fill(palette.divider).frame(height: 1) }
+        }
+    }
+
     private func navigation(for destination: Destination) -> some View {
         NavigationStack(path: Binding(
             get: { paths[destination, default: NavigationPath()] },
             set: { paths[destination] = $0 }
         )) {
-            screen(title: destination.title, icon: destination.icon) {
+            Group {
                 if destination == .explore {
-                    CatalogConnection(catalog: catalog)
+                    ExploreScreen(model: explore)
+                        .navigationTitle(destination.title)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .editorialNavigationBar(canvas: palette.canvas)
+                } else {
+                    screen(title: destination.title, icon: destination.icon) {}
                 }
             }
             .toolbar {
@@ -131,8 +161,7 @@ struct LumioShell: View {
         .background(palette.canvas)
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(palette.canvas, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+        .editorialNavigationBar(canvas: palette.canvas)
     }
 
     private func destinationButton(_ destination: Destination, sidebar: Bool) -> some View {

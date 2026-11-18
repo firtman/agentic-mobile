@@ -8,3 +8,15 @@
 - The live local API at http://127.0.0.1:3000/health returned status ok and 9,919 movies. The local server was left running.
 - Verified the bundle includes both variable fonts, the four licence/attribution texts, and all four localizations. All 10 UI string keys align. All 29 Lucide vectors match the pinned geometry, with black strokes for templating. The interim icon is an opaque 1024 × 1024 PNG derived from the approved C raster.
 - Physical device, signing, iOS 17 runtime, complete VoiceOver and iPad multitasking audits remain untested. This stage verifies the app shell and connection check. Feature validation begins with the corresponding later stage.
+
+## Stage 1 · Explore · 2026-11-18
+
+- Built Debug with Xcode 27.2. Ran the nine-case XCTest suite on iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4). Eight cases passed on each device. The search test exposed a keyboard-focus issue. Expanded the search field tap target, changed the Spotlight to show portrait artwork, and reran the search, empty-state, and reset test successfully on both devices.
+- The suite covered the live Spotlight, unavailable-endpoint Retry, preservation of existing cards after a next-page failure, and successful retry with deduplication. Model tests also verified valid restored sort, invalid fallback, and reset to newest first.
+- Visually verified light Explore on the live iPhone 18 Pro Codex tab. Tapping Action changed the Spotlight, and All genres restored the default view. Verified German dark iPad Explore with accessibility-size text and supplied posters.
+- All 28 string keys align across English, Spanish, German, and Portuguese. No film records or poster captures were added to the repository. Physical-device, iOS 17 runtime, and full VoiceOver coverage remain untested.
+
+### Liquid Glass review
+
+- The revised build passed all nine XCTest cases on iPhone 18 Pro (iOS 27.2) and all nine on iPad Pro 11-inch (M4, iPadOS 18.4).
+- Verified the floating Liquid Glass navigation, system Settings control, and glass Sort menu on the live Codex tab. The menu displayed all six choices with Newest first selected. The iPadOS 18.4 run exercised the earlier-OS styling.

@@ -33,11 +33,14 @@ struct EditorialPalette {
 }
 
 enum EditorialTextStyle {
-    case title, body, control, navigation
+    case title, section, movieTitle, body, control, metadata, navigation
 
     var size: CGFloat {
         switch self {
         case .title: 30
+        case .section: 24
+        case .movieTitle: 20
+        case .metadata: 14
         case .body: 17
         case .control: 16
         case .navigation: 13
@@ -47,6 +50,9 @@ enum EditorialTextStyle {
     var relativeTo: Font.TextStyle {
         switch self {
         case .title: .title
+        case .section: .title2
+        case .movieTitle: .title3
+        case .metadata: .subheadline
         case .body, .control: .body
         case .navigation: .footnote
         }
@@ -55,15 +61,17 @@ enum EditorialTextStyle {
     private static let fraunces = loadFont("fraunces_variable")
     private static let dmSans = loadFont("dm_sans_variable")
 
+    private var usesSerif: Bool { self == .title || self == .section || self == .movieTitle }
+
     func font(at size: CGFloat) -> Font {
-        guard let source = self == .title ? Self.fraunces : Self.dmSans else {
-            return .system(size: size, weight: self == .title ? .semibold : .regular,
-                           design: self == .title ? .serif : .default)
+        guard let source = usesSerif ? Self.fraunces : Self.dmSans else {
+            return .system(size: size, weight: usesSerif ? .semibold : .regular,
+                           design: usesSerif ? .serif : .default)
         }
         let font = CTFontCreateWithGraphicsFont(source, size, nil, nil)
         let weight = switch self {
-        case .title, .control: 600.0
-        case .body: 400.0
+        case .title, .section, .movieTitle, .control: 600.0
+        case .body, .metadata: 400.0
         case .navigation: 500.0
         }
         var descriptor = CTFontCopyFontDescriptor(font)
@@ -96,6 +104,16 @@ private struct EditorialFont: ViewModifier {
 extension View {
     func editorialFont(_ style: EditorialTextStyle) -> some View {
         modifier(EditorialFont(style: style))
+    }
+
+    @ViewBuilder
+    func editorialNavigationBar(canvas: Color) -> some View {
+        if #available(iOS 26, *) {
+            self
+        } else {
+            toolbarBackground(canvas, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+        }
     }
 }
 
