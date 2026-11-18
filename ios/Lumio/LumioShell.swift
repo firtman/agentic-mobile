@@ -4,6 +4,7 @@ import SwiftData
 enum LumioRoute: Hashable {
     case movie(String)
     case history
+    case trivia
 }
 
 private enum Destination: String, CaseIterable, Identifiable {
@@ -36,6 +37,7 @@ struct LumioShell: View {
     @State private var explore: ExploreModel
     @State private var swipe: SwipeModel
     @State private var genie: GenieModel
+    @State private var trivia: TriviaModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
     @State private var selection: Destination = .explore
@@ -52,6 +54,7 @@ struct LumioShell: View {
         ))
         _swipe = State(initialValue: SwipeModel(catalog: catalog, ratings: ratings))
         _genie = State(initialValue: GenieModel(repository: repository, ratings: ratings))
+        _trivia = State(initialValue: TriviaModel(repository: repository))
     }
 
     private var palette: EditorialPalette { EditorialPalette(scheme) }
@@ -143,7 +146,7 @@ struct LumioShell: View {
                         selection = .swipe
                     }
                 } else {
-                    screen(title: destination.title, icon: destination.icon) {}
+                    ArcadeScreen(trivia: trivia)
                 }
             }
             .toolbar {
@@ -161,6 +164,9 @@ struct LumioShell: View {
                         .toolbar { settingsToolbar }
                 case .history:
                     RatingHistoryScreen(ratings: ratings)
+                        .toolbar { settingsToolbar }
+                case .trivia:
+                    TriviaScreen(model: trivia, covered: showingSettings)
                         .toolbar { settingsToolbar }
                 }
             }

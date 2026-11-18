@@ -48,3 +48,10 @@
 - Live UI tests opened Genie without preferences, used Start swiping, saved a like in an isolated ratings store, and verified a real recommendation and reason. Next advanced the position, and returning from Movie Details kept the current film.
 - Synthetic tests checked signed feature weights, blank and duplicate features, saved-film exclusion including Unseen, positive-net ranking, reason order, tie-breaks, and the 30-film cap. They also covered the Unseen-only fast path, finite navigation and restart, selected-film retention and removal after recomputation, catalog failure/retry, and shared memory cache reuse.
 - All 86 localization keys align across English, Spanish, German, and Portuguese. The suite did not walk through all 30 live recommendations or inject a SwiftData failure in Genie. Physical device, iOS 17 runtime, and full accessibility coverage remain unverified.
+
+## Stage 6 · Arcade and Trivia · 2026-11-18
+
+- Built Debug with Xcode 27.2 and tested on iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4). The full suite passed 31 of 32 cases on each device. The remaining live test found that the pause panel’s accessibility identifier overrode Resume’s identifier. After adjusting it, the final focused run passed all five Trivia cases on both simulators.
+- The live UI test covered the Arcade hub, explicit start with catalog questions, leaving and resuming a hidden question, the single 50:50, and automatic advancement after feedback. The clock-driven tests covered five valid distinct questions, the 20-second deadline, late taps, four-second feedback, holding, wrong-answer and timeout resets, 750-point perfect rounds, and replay.
+- All 120 string keys align across English, Spanish, German, and Portuguese. The bundled illustration matches the approved Golden Ticket artwork. The full live results/replay path, backgrounding through the Home gesture, Trivia-specific network failure, physical devices, and full accessibility checks were outside this run.
+- Visually verified the Arcade cards and the Golden Ticket welcome screen in the live Codex iPhone 18 Pro tab.

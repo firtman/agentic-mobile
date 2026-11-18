@@ -1,1984 +1,2781 @@
 {
-  "sourceLanguage": "en",
-  "version": "1.0",
-  "strings": {
-    "%@ out of 10": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de 10"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ out of 10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ von 10"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ von 10"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de 10"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de 10"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de 10"
           }
         }
       }
     },
-    "%@ out of 10 · %lld votes": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ de 10 · %2$lld votos"
+    "%@ out of 10 · %lld votes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ von 10 · %2$lld Stimmen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ von 10 · %2$lld Stimmen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de 10 · %2$lld votos"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ de 10 · %2$lld votos"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de 10 · %2$lld votos"
           }
         }
       }
     },
-    "%lld of %lld": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lld de %2$lld"
+    "%lld of %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lld von %2$lld"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lld de %2$lld"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld"
           }
         }
       }
     },
-    "A little more you.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un poco más tú."
+    "%llds left" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch %lld s"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein bisschen mehr du."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quedan %lld s"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um pouco mais de você."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restam %lld s"
           }
         }
       }
     },
-    "Actor you like: %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intérprete que te gusta: %@"
+    "+%lld points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld Punkte"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schauspiel, das dir gefällt: %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld puntos"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Artista de quem você gosta: %@"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld pontos"
           }
         }
       }
     },
-    "All genres": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos los géneros"
+    "5 questions · 20 seconds each" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 Fragen · je 20 Sekunden"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle Genres"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 preguntas · 20 segundos por pregunta"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos os gêneros"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 perguntas · 20 segundos cada"
           }
         }
       }
     },
-    "Arcade": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+    "A" : {
+
+    },
+    "A little cinema knowledge. A streak worth chasing." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein bisschen Filmwissen. Wie viele Treffer schaffst du in Folge?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un poco de cine y una racha que vale la pena conseguir."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um pouco de cinema e uma sequência que vale a pena buscar."
+          }
+        }
+      }
+    },
+    "A little more you." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein bisschen mehr du."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un poco más tú."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um pouco mais de você."
+          }
+        }
+      }
+    },
+    "Actor you like: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schauspiel, das dir gefällt: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intérprete que te gusta: %@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artista de quem você gosta: %@"
+          }
+        }
+      }
+    },
+    "All genres" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Genres"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos los géneros"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os gêneros"
+          }
+        }
+      }
+    },
+    "Arcade" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arcade"
+          }
+        }
+      }
+    },
+    "B" : {
+
+    },
+    "Back to Arcade" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück zu Arcade"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a Arcade"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar ao Arcade"
+          }
+        }
+      }
+    },
+    "Best streak: %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beste Serie: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejor racha: %lld"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melhor sequência: %lld"
+          }
+        }
+      }
+    },
+    "C" : {
+
+    },
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "Cast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Besetzung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reparto"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elenco"
+          }
+        }
+      }
+    },
+    "Catalog" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katalog"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catálogo"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catálogo"
+          }
+        }
+      }
+    },
+    "Change choice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl ändern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar elección"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alterar escolha"
+          }
+        }
+      }
+    },
+    "Change choice for %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl für %@ ändern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar elección para %@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alterar escolha para %@"
+          }
+        }
+      }
+    },
+    "Choice saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl gespeichert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elección guardada"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha salva"
+          }
+        }
+      }
+    },
+    "Choice undone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl rückgängig gemacht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elección deshecha"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha desfeita"
+          }
+        }
+      }
+    },
+    "Chosen for you" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Für dich ausgewählt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegidas para ti"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolhidos para você"
+          }
+        }
+      }
+    },
+    "Clear search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suche löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar búsqueda"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar busca"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "Coming soon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demnächst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximamente"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em breve"
+          }
+        }
+      }
+    },
+    "Correct answer: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richtige Antwort: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Respuesta correcta: %@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resposta correta: %@"
+          }
+        }
+      }
+    },
+    "Correct: %lld of %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richtig: %1$lld von %2$lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aciertos: %1$lld de %2$lld"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acertos: %1$lld de %2$lld"
+          }
+        }
+      }
+    },
+    "Couldn’t connect to the catalog." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbindung zum Katalog fehlgeschlagen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo conectar con el catálogo."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível conectar ao catálogo."
+          }
+        }
+      }
+    },
+    "Couldn’t load genres." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genres konnten nicht geladen werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron cargar los géneros."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar os gêneros."
+          }
+        }
+      }
+    },
+    "Couldn’t load more movies." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weitere Filme konnten nicht geladen werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron cargar más películas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar mais filmes."
+          }
+        }
+      }
+    },
+    "Couldn’t load your choice." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl konnte nicht geladen werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo cargar tu elección."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar sua escolha."
+          }
+        }
+      }
+    },
+    "Couldn’t load your saved choices." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine gespeicherte Auswahl konnte nicht geladen werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron cargar tus elecciones guardadas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar suas escolhas salvas."
+          }
+        }
+      }
+    },
+    "Couldn’t update your choice. Try again." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl konnte nicht geändert werden. Versuche es erneut."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo actualizar tu elección. Inténtalo de nuevo."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível atualizar sua escolha. Tente novamente."
           }
+        }
+      }
+    },
+    "D" : {
+
+    },
+    "Dataset source" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelle des Datensatzes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuente de los datos"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonte dos dados"
+          }
+        }
+      }
+    },
+    "Director" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dirección"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direção"
+          }
+        }
+      }
+    },
+    "Director you like: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regie, die dir gefällt: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dirección que te gusta: %@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direção de que você gosta: %@"
+          }
+        }
+      }
+    },
+    "Dislike" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gefällt mir nicht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No me gusta"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não gostei"
+          }
+        }
+      }
+    },
+    "Every available movie has a saved choice. Undo a choice or check for new movies." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Für alle verfügbaren Filme ist eine Auswahl gespeichert. Mache eine Auswahl rückgängig oder suche nach neuen Filmen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas las películas disponibles tienen una elección guardada. Deshaz una elección o busca nuevas películas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os filmes disponíveis têm uma escolha salva. Desfaça uma escolha ou procure novos filmes."
+          }
+        }
+      }
+    },
+    "Explore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entdecken"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar"
+          }
+        }
+      }
+    },
+    "Finding recommendations…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empfehlungen werden gesucht…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscando recomendaciones…"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscando recomendações…"
+          }
+        }
+      }
+    },
+    "Genie" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genie"
+          }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genie"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arcade"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genie"
           }
         }
       }
     },
-    "Cancel": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancelar"
+    "Genre you like: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genre, das dir gefällt: %@"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abbrechen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Género que te gusta: %@"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancelar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gênero de que você gosta: %@"
           }
         }
       }
     },
-    "Cast": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reparto"
+    "Genres" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genres"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Besetzung"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Géneros"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elenco"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gêneros"
           }
         }
       }
     },
-    "Catalog": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Catálogo"
+    "Give Genie a starting point" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib Genie einen Ausgangspunkt"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Katalog"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dale a Genie un punto de partida"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Catálogo"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dê um ponto de partida a Genie"
           }
         }
       }
     },
-    "Change choice": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cambiar elección"
+    "Good try" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gut versucht"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl ändern"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buen intento"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alterar escolha"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boa tentativa"
           }
         }
       }
     },
-    "Change choice for %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cambiar elección para %@"
+    "Highest rated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am besten bewertet"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl für %@ ändern"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejor valoradas"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alterar escolha para %@"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais bem avaliados"
           }
         }
       }
     },
-    "Choice saved": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elección guardada"
+    "Keep reading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiterlesen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl gespeichert"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguir leyendo"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha salva"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar lendo"
           }
         }
       }
     },
-    "Choice undone": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elección deshecha"
+    "Left to dislike · Down for not seen yet · Right to like" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links: gefällt mir nicht · Unten: noch nicht gesehen · Rechts: gefällt mir"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl rückgängig gemacht"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izquierda: no me gusta · Abajo: no la he visto · Derecha: me gusta"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha desfeita"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esquerda: não gostei · Baixo: ainda não vi · Direita: gostei"
           }
         }
       }
     },
-    "Chosen for you": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elegidas para ti"
+    "Let’s play" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los geht’s"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Für dich ausgewählt"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡A jugar!"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolhidos para você"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vamos jogar"
           }
         }
       }
     },
-    "Clear search": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Borrar búsqueda"
+    "Like" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gefällt mir"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suche löschen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me gusta"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limpar busca"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gostei"
           }
         }
       }
     },
-    "Close": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerrar"
+    "Like or dislike a few films to get your first picks." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewerte ein paar Filme, um erste Empfehlungen zu erhalten."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schließen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marca algunas películas que te gusten o no para recibir tus primeras sugerencias."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fechar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diga se gostou de alguns filmes para receber as primeiras sugestões."
           }
         }
       }
     },
-    "Couldn’t connect to the catalog.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudo conectar con el catálogo."
+    "Load more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehr laden"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verbindung zum Katalog fehlgeschlagen."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargar más"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível conectar ao catálogo."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregar mais"
           }
         }
       }
     },
-    "Couldn’t load genres.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudieron cargar los géneros."
+    "Loading movie…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film wird geladen…"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genres konnten nicht geladen werden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando película…"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível carregar os gêneros."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando filme…"
           }
         }
       }
     },
-    "Couldn’t load more movies.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudieron cargar más películas."
+    "Loading movies…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filme werden geladen…"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weitere Filme konnten nicht geladen werden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando películas…"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível carregar mais filmes."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando filmes…"
           }
         }
       }
     },
-    "Couldn’t load your choice.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudo cargar tu elección."
+    "Loading questions…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fragen werden geladen…"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl konnte nicht geladen werden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando preguntas…"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível carregar sua escolha."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando perguntas…"
           }
         }
       }
+    },
+    "Loading your choices…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl wird geladen…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando tus elecciones…"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando suas escolhas…"
+          }
+        }
+      }
+    },
+    "Lumio" : {
+
     },
-    "Couldn’t load your saved choices.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudieron cargar tus elecciones guardadas."
+    "Most popular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beliebteste"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine gespeicherte Auswahl konnte nicht geladen werden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más populares"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível carregar suas escolhas salvas."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais populares"
           }
         }
       }
     },
-    "Couldn’t update your choice. Try again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudo actualizar tu elección. Inténtalo de nuevo."
+    "Movie details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filmdetails"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl konnte nicht geändert werden. Versuche es erneut."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles de la película"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível atualizar sua escolha. Tente novamente."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalhes do filme"
           }
         }
       }
     },
-    "Dataset source": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fuente de los datos"
+    "Movie information" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filminformationen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quelle des Datensatzes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información de la película"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fonte dos dados"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informações do filme"
           }
         }
       }
     },
-    "Director": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dirección"
+    "Newest first" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neueste zuerst"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regie"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más recientes primero"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Direção"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais recentes primeiro"
           }
         }
       }
     },
-    "Director you like: %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dirección que te gusta: %@"
+    "Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiter"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regie, die dir gefällt: %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Direção de que você gosta: %@"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximo"
           }
         }
       }
     },
-    "Dislike": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No me gusta"
+    "No matches yet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine passenden Filme"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gefällt mir nicht"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no hay coincidencias"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não gostei"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda sem sugestões"
           }
         }
       }
     },
-    "Every available movie has a saved choice. Undo a choice or check for new movies.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todas las películas disponibles tienen una elección guardada. Deshaz una elección o busca nuevas películas."
+    "No movies match these filters." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Filme entsprechen diesen Filtern."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Für alle verfügbaren Filme ist eine Auswahl gespeichert. Mache eine Auswahl rückgängig oder suche nach neuen Filmen."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguna película coincide con estos filtros."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos os filmes disponíveis têm uma escolha salva. Desfaça uma escolha ou procure novos filmes."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum filme corresponde a estes filtros."
           }
         }
       }
     },
-    "Explore": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Explorar"
+    "No saved choices yet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine Auswahl gespeichert"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entdecken"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no hay elecciones guardadas"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Explorar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não há escolhas salvas"
           }
         }
       }
     },
-    "Finding recommendations…": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscando recomendaciones…"
+    "Not seen yet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch nicht gesehen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Empfehlungen werden gesucht…"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no la vi"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscando recomendações…"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não vi"
           }
         }
       }
     },
-    "Genie": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genie"
+    "Oldest first" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Älteste zuerst"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genie"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más antiguas primero"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genie"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais antigos primeiro"
           }
         }
       }
     },
-    "Genre you like: %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Género que te gusta: %@"
+    "One 50:50 · Streak bonus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein 50:50-Joker · Serienbonus"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genre, das dir gefällt: %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un 50:50 · Bonificación por racha"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gênero de que você gosta: %@"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um 50:50 · Bônus por sequência"
           }
         }
       }
     },
-    "Genres": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Géneros"
+    "Pause" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausieren"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genres"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausa"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gêneros"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausar"
           }
         }
       }
     },
-    "Give Genie a starting point": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dale a Genie un punto de partida"
+    "Play again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut spielen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gib Genie einen Ausgangspunkt"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar de nuevo"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dê um ponto de partida a Genie"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jogar novamente"
           }
         }
       }
     },
-    "Highest rated": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mejor valoradas"
+    "Play Trivia" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filmquiz spielen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Am besten bewertet"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar a Trivia"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais bem avaliados"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jogar Trivia"
           }
         }
       }
     },
-    "Left to dislike · Down for not seen yet · Right to like": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Izquierda: no me gusta · Abajo: no la he visto · Derecha: me gusta"
+    "Poster Puzzle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poster-Puzzle"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Links: gefällt mir nicht · Unten: noch nicht gesehen · Rechts: gefällt mir"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puzle de póster"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esquerda: não gostei · Baixo: ainda não vi · Direita: gostei"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quebra-cabeça de pôster"
           }
         }
       }
     },
-    "Like": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Me gusta"
+    "Put a movie poster back together." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setze ein Filmplakat wieder zusammen."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gefällt mir"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vuelve a armar un póster de película."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gostei"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monte um pôster de filme."
           }
         }
       }
     },
-    "Like or dislike a few films to get your first picks.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marca algunas películas que te gusten o no para recibir tus primeras sugerencias."
+    "Question %lld of %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frage %1$lld von %2$lld"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bewerte ein paar Filme, um erste Empfehlungen zu erhalten."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pregunta %1$lld de %2$lld"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diga se gostou de alguns filmes para receber as primeiras sugestões."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pergunta %1$lld de %2$lld"
           }
         }
       }
     },
-    "Load more": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargar más"
+    "Rate a movie in Swipe or Movie Details to see it here." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewerte einen Film unter „Wischen“ oder in den Filmdetails, damit er hier erscheint."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mehr laden"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Califica una película en Deslizar o en sus detalles para verla aquí."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carregar mais"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avalie um filme em Deslizar ou nos detalhes para vê-lo aqui."
           }
         }
       }
     },
-    "Loading movies…": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargando películas…"
+    "Rate more films so Genie can find a better match." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewerte mehr Filme, damit Genie passendere Vorschläge findet."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filme werden geladen…"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Califica más películas para que Genie encuentre opciones más afines."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carregando filmes…"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avalie mais filmes para que Genie encontre sugestões melhores."
           }
         }
       }
     },
-    "Loading movie…": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargando película…"
+    "Refresh movies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filme aktualisieren"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Film wird geladen…"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar películas"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carregando filme…"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualizar filmes"
           }
         }
       }
     },
-    "Loading your choices…": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargando tus elecciones…"
+    "Release year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erscheinungsjahr"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl wird geladen…"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Año de estreno"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carregando suas escolhas…"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ano de lançamento"
           }
         }
       }
     },
-    "Most popular": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Más populares"
+    "Reset filters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter zurücksetzen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beliebteste"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer filtros"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais populares"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redefinir filtros"
           }
         }
       }
     },
-    "Movie details": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detalles de la película"
+    "Restart picks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorschläge neu starten"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filmdetails"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver al inicio"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detalhes do filme"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar ao início"
           }
         }
       }
     },
-    "Movie information": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Información de la película"
+    "Resume" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsetzen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filminformationen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reanudar"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Informações do filme"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retomar"
           }
         }
       }
     },
-    "Newest first": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Más recientes primero"
+    "Resume when you’re ready." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mach weiter, wenn du bereit bist."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neueste zuerst"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continúa cuando quieras."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais recentes primeiro"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue quando estiver pronto."
           }
         }
       }
     },
-    "Next": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Siguiente"
+    "Retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut versuchen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weiter"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reintentar"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Próximo"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar novamente"
           }
         }
       }
     },
-    "No matches yet": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todavía no hay coincidencias"
+    "Retry genres" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genres erneut laden"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noch keine passenden Filme"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reintentar géneros"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ainda sem sugestões"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar carregar gêneros novamente"
           }
         }
       }
     },
-    "No movies match these filters.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ninguna película coincide con estos filtros."
+    "Return to round" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück zur Runde"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keine Filme entsprechen diesen Filtern."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a la ronda"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhum filme corresponde a estes filtros."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar à rodada"
           }
         }
       }
     },
-    "No saved choices yet": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todavía no hay elecciones guardadas"
+    "Round complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Runde beendet"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noch keine Auswahl gespeichert"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ronda terminada"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ainda não há escolhas salvas"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rodada concluída"
           }
         }
       }
     },
-    "Not seen yet": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aún no la vi"
+    "Round paused" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Runde pausiert"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noch nicht gesehen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ronda en pausa"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ainda não vi"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rodada pausada"
           }
         }
       }
     },
-    "Oldest first": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Más antiguas primero"
+    "Runtime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laufzeit"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Älteste zuerst"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duración"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais antigos primeiro"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duração"
           }
         }
       }
     },
-    "Rate a movie in Swipe or Movie Details to see it here.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Califica una película en Deslizar o en sus detalles para verla aquí."
+    "Save choice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl speichern"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bewerte einen Film unter „Wischen“ oder in den Filmdetails, damit er hier erscheint."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar elección"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avalie um filme em Deslizar ou nos detalhes para vê-lo aqui."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar escolha"
           }
         }
       }
     },
-    "Rate more films so Genie can find a better match.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Califica más películas para que Genie encuentre opciones más afines."
+    "Score: %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Punkte: %lld"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bewerte mehr Filme, damit Genie passendere Vorschläge findet."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puntos: %lld"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avalie mais filmes para que Genie encontre sugestões melhores."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pontos: %lld"
           }
         }
       }
     },
-    "Refresh movies": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actualizar películas"
+    "Search movies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filme suchen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filme aktualisieren"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar películas"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atualizar filmes"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar filmes"
           }
         }
       }
     },
-    "Release year": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Año de estreno"
+    "See results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ergebnisse ansehen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erscheinungsjahr"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver resultados"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ano de lançamento"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver resultados"
           }
         }
       }
     },
-    "Reset filters": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Restablecer filtros"
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filter zurücksetzen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Redefinir filtros"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurações"
           }
         }
       }
     },
-    "Restart picks": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Volver al inicio"
+    "Sort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortieren"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vorschläge neu starten"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voltar ao início"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar"
           }
         }
       }
     },
-    "Retry": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reintentar"
+    "Source attribution" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quellenangaben"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erneut versuchen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos de las fuentes"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tentar novamente"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos das fontes"
           }
         }
       }
     },
-    "Retry genres": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reintentar géneros"
+    "Source rating" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewertung der Quelle"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Genres erneut laden"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puntuación de la fuente"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tentar carregar gêneros novamente"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nota da fonte"
           }
         }
       }
     },
-    "Runtime": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duración"
+    "Spotlight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Rampenlicht"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Laufzeit"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En primer plano"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duração"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em destaque"
           }
         }
       }
     },
-    "Save choice": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar elección"
+    "Start swiping" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit dem Wischen beginnen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl speichern"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empezar a deslizar"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salvar escolha"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Começar a deslizar"
           }
         }
       }
     },
-    "Search movies": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar películas"
+    "Streak: %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serie: %lld"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filme suchen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Racha: %lld"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar filmes"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sequência: %lld"
           }
         }
       }
     },
-    "Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes"
+    "Swipe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wischen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einstellungen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deslizar"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Configurações"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deslizar"
           }
         }
       }
     },
-    "Sort": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordenar"
+    "Test your movie knowledge in five timed questions. Questions are in English." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teste dein Filmwissen mit fünf Fragen auf Zeit. Die Fragen sind auf Englisch."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sortieren"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pon a prueba tus conocimientos con cinco preguntas cronometradas en inglés."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordenar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teste seu conhecimento de cinema com cinco perguntas cronometradas em inglês."
           }
         }
       }
     },
-    "Source attribution": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Créditos de las fuentes"
+    "That’s right!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richtig!"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quellenangaben"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Correcto!"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Créditos das fontes"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acertou!"
           }
         }
       }
     },
-    "Source rating": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Puntuación de la fuente"
+    "There aren’t enough questions for a round." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt nicht genug Fragen für eine Runde."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bewertung der Quelle"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay suficientes preguntas para una ronda."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nota da fonte"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não há perguntas suficientes para uma rodada."
           }
         }
       }
     },
-    "Spotlight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En primer plano"
+    "This change can no longer be undone." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Änderung kann nicht mehr rückgängig gemacht werden."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Im Rampenlicht"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este cambio ya no se puede deshacer."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em destaque"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta alteração não pode mais ser desfeita."
           }
         }
       }
     },
-    "Start swiping": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Empezar a deslizar"
+    "This choice has changed. Close and try again." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Auswahl hat sich geändert. Schließe das Fenster und versuche es erneut."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit dem Wischen beginnen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta elección cambió. Cierra y vuelve a intentarlo."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Começar a deslizar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta escolha mudou. Feche e tente novamente."
           }
         }
       }
     },
-    "Swipe": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deslizar"
+    "This movie is unavailable." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Film ist nicht verfügbar."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wischen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta película no está disponible."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deslizar"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este filme está indisponível."
           }
         }
       }
     },
-    "This change can no longer be undone.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este cambio ya no se puede deshacer."
+    "Time’s up" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Zeit ist um"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese Änderung kann nicht mehr rückgängig gemacht werden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se acabó el tiempo"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esta alteração não pode mais ser desfeita."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O tempo acabou"
           }
         }
       }
     },
-    "This choice has changed. Close and try again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esta elección cambió. Cierra y vuelve a intentarlo."
+    "Title A–Z" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel A–Z"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese Auswahl hat sich geändert. Schließe das Fenster und versuche es erneut."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título A–Z"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esta escolha mudou. Feche e tente novamente."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título A–Z"
           }
         }
       }
     },
-    "This movie is unavailable.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esta película no está disponible."
+    "Title Z–A" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel Z–A"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dieser Film ist nicht verfügbar."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título Z–A"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este filme está indisponível."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título Z–A"
           }
         }
       }
     },
-    "Title A–Z": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Título A–Z"
+    "Trivia" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filmquiz"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Titel A–Z"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trivia"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Título A–Z"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trivia"
           }
         }
       }
     },
-    "Title Z–A": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Título Z–A"
+    "Undo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rückgängig"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Titel Z–A"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deshacer"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Título Z–A"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desfazer"
           }
         }
       }
     },
-    "Undo": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deshacer"
+    "Undo choice for %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl für %@ rückgängig machen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rückgängig"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deshacer elección para %@"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desfazer"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desfazer escolha para %@"
           }
         }
       }
     },
-    "Undo choice for %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deshacer elección para %@"
+    "View details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details ansehen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl für %@ rückgängig machen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver detalles"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desfazer escolha para %@"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver detalhes"
           }
         }
       }
     },
-    "View details": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver detalles"
+    "View source" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelle ansehen"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Details ansehen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver fuente"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver detalhes"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver fonte"
           }
         }
       }
     },
-    "View source": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver fuente"
+    "Why this film?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warum dieser Film?"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quelle ansehen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Por qué esta película?"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver fonte"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por que este filme?"
           }
         }
       }
     },
-    "Why this film?": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¿Por qué esta película?"
+    "You’re all caught up." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist auf dem neuesten Stand."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Warum dieser Film?"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya estás al día."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Por que este filme?"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você está em dia."
           }
         }
       }
     },
-    "Your choice": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu elección"
+    "You’ve reached the end. Rate more films for new picks." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist am Ende. Bewerte mehr Filme für neue Vorschläge."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llegaste al final. Califica más películas para obtener nuevas sugerencias."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sua escolha"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você chegou ao fim. Avalie mais filmes para receber novas sugestões."
           }
         }
       }
     },
-    "Your choices": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus elecciones"
+    "Your choice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu elección"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas escolhas"
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sua escolha"
           }
         }
       }
     },
-    "Your choices shape your recommendations.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus elecciones dan forma a tus recomendaciones."
+    "Your choices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Auswahl prägt deine Empfehlungen."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus elecciones"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas escolhas moldam suas recomendações."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suas escolhas"
           }
         }
       }
     },
-    "Your likes and dislikes help Genie find films for you.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que te gusta y lo que no te gusta ayuda a Genie a encontrar películas para ti."
+    "Your choices shape your recommendations." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Auswahl prägt deine Empfehlungen."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Vorlieben und Abneigungen helfen Genie, passende Filme zu finden."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus elecciones dan forma a tus recomendaciones."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seus gostos ajudam Genie a encontrar filmes para você."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suas escolhas moldam suas recomendações."
           }
         }
       }
     },
-    "You’re all caught up.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ya estás al día."
+    "Your likes and dislikes help Genie find films for you." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Vorlieben und Abneigungen helfen Genie, passende Filme zu finden."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du bist auf dem neuesten Stand."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lo que te gusta y lo que no te gusta ayuda a Genie a encontrar películas para ti."
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Você está em dia."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seus gostos ajudam Genie a encontrar filmes para você."
           }
         }
       }
     },
-    "You’ve reached the end. Rate more films for new picks.": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Llegaste al final. Califica más películas para obtener nuevas sugerencias."
+    "Your ticket to movie night" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Ticket für den Filmabend"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du bist am Ende. Bewerte mehr Filme für neue Vorschläge."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu entrada para una noche de cine"
           }
         },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Você chegou ao fim. Avalie mais filmes para receber novas sugestões."
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seu ingresso para uma noite de cinema"
           }
         }
       }
     }
-  }
+  },
+  "version" : "1.0"
 }

@@ -24,6 +24,12 @@ Open Your choices from the Swipe toolbar or Genie. The history shows saved snaps
 
 Genie uses the shared local ratings ledger and fetches the full catalog into process memory when the user has a like or dislike. It presents one ranked movie at a time with matching reasons, a position indicator, and an explicit restart. The app keeps the current pick on return when that film is still eligible. Review or edit saved choices from the Genie toolbar.
 
+## Arcade and Trivia
+
+Open Trivia from Arcade and start from the illustrated welcome screen. A round samples five validated questions from the shared in-memory catalog. Source questions remain in English. Back navigation, opening Settings, and leaving the active app pause the round. Return and tap Resume to continue. The round lasts for the current app process. Poster Puzzle is shown as coming soon.
+
+The bundled Golden Ticket illustration is decorative artwork from the approved Trivia direction. See [artwork provenance](../design/previews/assets/trivia/README.md).
+
 ## Tests
 
 Run from the repository root with the local API running. Replace the destination with an installed iPhone or iPad Simulator.
