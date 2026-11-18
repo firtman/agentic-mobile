@@ -77,16 +77,18 @@ class ExploreViewModelTest {
         val repository = Repository().apply { load = { _, offset -> page(offset, 50, "a") } }
         val saved = SavedStateHandle()
         val vm = ExploreViewModel(repository, saved)
-        runCurrent(); vm.loadMore(); runCurrent()
+        runCurrent()
+        assertEquals(MovieSort.YEAR_DESC, vm.state.value.filters.sort)
+        vm.loadMore(); runCurrent()
         vm.selectGenre("Drama"); runCurrent()
-        vm.sort(MovieSort.YEAR_DESC); runCurrent()
+        vm.sort(MovieSort.TITLE_ASC); runCurrent()
         vm.search("film"); advanceTimeBy(300); runCurrent()
         assertEquals(listOf(0, 1, 0, 0, 0), repository.calls.map { it.second })
         assertEquals("Drama", repository.calls.last().first.genre)
-        assertEquals(MovieSort.YEAR_DESC, repository.calls.last().first.sort)
+        assertEquals(MovieSort.TITLE_ASC, repository.calls.last().first.sort)
         val restored = ExploreViewModel(repository, saved)
         runCurrent()
-        assertEquals(ExploreFilters(query = "film", genre = "Drama", sort = MovieSort.YEAR_DESC), restored.state.value.filters)
+        assertEquals(ExploreFilters(query = "film", genre = "Drama", sort = MovieSort.TITLE_ASC), restored.state.value.filters)
         assertEquals(restored.state.value.filters, repository.calls.last().first)
     }
 

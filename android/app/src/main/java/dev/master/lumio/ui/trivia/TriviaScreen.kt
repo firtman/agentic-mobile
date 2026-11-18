@@ -1,6 +1,15 @@
 package dev.master.lumio.ui.trivia
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.shape.GenericShape
+import androidx.compose.ui.layout.ContentScale
 import dev.master.lumio.ui.theme.LocalLumioDark
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -9,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -18,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import kotlinx.coroutines.flow.first
 import dev.master.lumio.R
 import dev.master.lumio.data.TriviaQuestion
 import dev.master.lumio.domain.*
@@ -40,15 +49,33 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
         latestVisibility(lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED))
         onDispose { latestVisibility(false); lifecycle.removeObserver(observer) }
     }
-    LaunchedEffect(lifecycle) {
-        lifecycle.currentStateFlow.first { it.isAtLeast(Lifecycle.State.RESUMED) }
-        start()
+
+    val scroll = rememberScrollState()
+    val round = (state as? TriviaState.Playing)?.round
+    LaunchedEffect(round?.index, round?.phase, round?.paused) {
+        if (round?.phase != TriviaPhase.FEEDBACK || round.paused) scroll.scrollTo(0)
+    }
+    LaunchedEffect(round?.phase, scroll.maxValue) {
+        if (round?.phase == TriviaPhase.FEEDBACK && !round.paused) scroll.animateScrollTo(scroll.maxValue)
     }
     val pane = stringResource(R.string.trivia)
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp).semantics { paneTitle = pane },
+    Column(Modifier.fillMaxSize().verticalScroll(scroll).padding(20.dp).semantics { paneTitle = pane },
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         when (state) {
-            TriviaState.Ready, TriviaState.Loading -> {
+            TriviaState.Ready -> {
+                TriviaArtwork()
+                Text(stringResource(R.string.trivia_welcome), style = MaterialTheme.typography.displaySmall)
+                Text(stringResource(R.string.trivia_welcome_hint), style = MaterialTheme.typography.bodyLarge)
+                TriviaTicket {
+                    Text(stringResource(R.string.trivia_ticket_rules), style = MaterialTheme.typography.titleMedium)
+                }
+                Button(onClick = start, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(16.dp)) {
+                    Icon(painterResource(R.drawable.lucide_play), null)
+                    Spacer(Modifier.width(12.dp))
+                    Text(stringResource(R.string.trivia_lets_play))
+                }
+            }
+            TriviaState.Loading -> {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
                 Text(stringResource(R.string.loading_trivia))
             }
@@ -64,17 +91,38 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
             is TriviaState.Playing -> {
                 val round = state.round
                 if (round.phase == TriviaPhase.RESULTS) {
+                    TriviaArtwork()
+                    Text(stringResource(if (round.correctCount == round.questions.size) R.string.trivia_perfect else R.string.trivia_finish_cheer),
+                        color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.titleLarge)
                     Text(stringResource(R.string.round_complete), style = MaterialTheme.typography.headlineLarge,
                         modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-                    Text(stringResource(R.string.trivia_points, round.score), style = MaterialTheme.typography.headlineMedium)
+                    val animatedScore by animateIntAsState(round.score, label = "score")
+                    TriviaTicket {
+                        Text(stringResource(R.string.trivia_points, animatedScore), style = MaterialTheme.typography.displaySmall)
+                        Text(stringResource(R.string.trivia_correct_total, round.correctCount, round.questions.size))
+                    }
                     Text(stringResource(R.string.trivia_correct_total, round.correctCount, round.questions.size))
                     Text(stringResource(R.string.trivia_best_streak, round.bestStreak))
                     Button(onClick = again) { Text(stringResource(R.string.play_again)) }
                     OutlinedButton(onClick = back) { Text(stringResource(R.string.back_to_arcade)) }
                 } else {
-                    Text(stringResource(R.string.trivia_question_count, round.index + 1, round.questions.size), style = MaterialTheme.typography.titleMedium)
-                    Text(stringResource(R.string.trivia_points, round.score))
-                    Text(stringResource(R.string.trivia_streak, round.streak))
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                        Text(stringResource(R.string.trivia_question_count, round.index + 1, round.questions.size), style = MaterialTheme.typography.titleMedium)
+                        if (!round.paused) OutlinedButton(onClick = fifty,
+                            enabled = !round.fiftyUsed && round.phase == TriviaPhase.QUESTION) {
+                            Text(stringResource(if (round.fiftyUsed) R.string.fifty_used else R.string.fifty_fifty))
+                        }
+                    }
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        repeat(round.questions.size) { index ->
+                            Surface(Modifier.weight(1f).height(6.dp), shape = RoundedCornerShape(3.dp),
+                                color = if (index <= round.index) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant) {}
+                        }
+                    }
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(stringResource(R.string.trivia_points, round.score), style = MaterialTheme.typography.titleLarge)
+                        Text(stringResource(R.string.trivia_streak, round.streak), color = MaterialTheme.colorScheme.secondary)
+                    }
                     if (round.paused) {
                         Text(stringResource(R.string.trivia_paused), style = MaterialTheme.typography.headlineLarge)
                         Text(stringResource(R.string.trivia_pause_hint))
@@ -95,9 +143,13 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
                                 modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.secondary,
                                 trackColor = MaterialTheme.colorScheme.outlineVariant)
                         }
-                        key(round.index) {
-                            Text(round.question.question, style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                        TriviaTicket {
+                            Text(stringResource(R.string.trivia_ticket_label), style = MaterialTheme.typography.labelLarge,
+                                color = MaterialTheme.colorScheme.secondary)
+                            AnimatedContent(targetState = round.index, label = "question") { index ->
+                                Text(round.questions[index].question, style = MaterialTheme.typography.bodyLarge,
+                                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                            }
                         }
                         val feedback = round.phase == TriviaPhase.FEEDBACK
                         round.question.options.forEachIndexed { index, option ->
@@ -109,26 +161,32 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
                                     wrong -> MaterialTheme.colorScheme.error
                                     else -> MaterialTheme.colorScheme.onSurface
                                 }
+                                val animatedAccent by animateColorAsState(accent, label = "answer feedback")
                                 OutlinedButton(onClick = { answer(index) }, enabled = !feedback,
-                                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-                                    shape = RoundedCornerShape(8.dp), border = BorderStroke(if (correct || wrong) 2.dp else 1.dp, accent),
+                                    modifier = Modifier.fillMaxWidth().heightIn(min = 60.dp).animateContentSize(),
+                                    shape = RoundedCornerShape(16.dp), border = BorderStroke(if (correct || wrong) 2.dp else 1.dp, animatedAccent),
                                     colors = ButtonDefaults.outlinedButtonColors(contentColor = accent, disabledContentColor = accent)) {
-                                    Text("${('A'.code + index).toChar()} · $option", Modifier.fillMaxWidth())
+                                    Text("${('A'.code + index).toChar()}", style = MaterialTheme.typography.titleLarge)
+                                    Spacer(Modifier.width(16.dp))
+                                    Text(option, Modifier.weight(1f))
+                                    if (correct || wrong) {
+                                        Spacer(Modifier.width(8.dp))
+                                        Icon(painterResource(if (correct) R.drawable.lucide_check else R.drawable.lucide_x),
+                                            stringResource(if (correct) R.string.trivia_correct else R.string.trivia_incorrect), Modifier.size(24.dp))
+                                    }
                                 }
                             }
                         }
-                        if (!feedback) {
-                            OutlinedButton(onClick = fifty, enabled = !round.fiftyUsed,
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface)) {
-                                Text(stringResource(if (round.fiftyUsed) R.string.fifty_used else R.string.fifty_fifty))
-                            }
-                        } else {
+                        AnimatedVisibility(visible = feedback) {
+                          Column(Modifier.fillMaxWidth().animateContentSize(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                             val correct = round.selected == round.question.answerIndex
                             Text(stringResource(when {
                                 round.selected == null -> R.string.trivia_timeout
                                 correct -> R.string.trivia_correct
                                 else -> R.string.trivia_incorrect
                             }), style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                            Text(stringResource(if (correct) R.string.trivia_correct_cheer else R.string.trivia_try_cheer),
+                                style = MaterialTheme.typography.bodyLarge)
                             Text(stringResource(R.string.trivia_answer, round.question.options[round.question.answerIndex]))
                             Text(stringResource(R.string.trivia_earned, round.earned))
                             Text(stringResource(if (round.holdFeedback) R.string.reveal_held else R.string.reveal_countdown,
@@ -137,13 +195,38 @@ fun TriviaScreen(state: TriviaState, start: () -> Unit, retry: () -> Unit, answe
                                 colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface)) {
                                 Text(stringResource(R.string.keep_reading))
                             }
-                            Button(onClick = next) { Text(stringResource(if (round.index == round.questions.lastIndex) R.string.see_results else R.string.next_question)) }
+                            Button(onClick = next, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(16.dp)) {
+                                Text(stringResource(if (round.index == round.questions.lastIndex) R.string.see_results else R.string.next_question))
+                            }
+                          }
                         }
                     }
                 }
             }
         }
     }
+}
+
+/** Editorial ticket silhouette, inspired by the saved Golden Ticket direction. */
+private val TicketShape = GenericShape { size, _ ->
+    val notch = size.width * 0.035f
+    moveTo(0f, 0f); lineTo(size.width, 0f); lineTo(size.width, size.height / 2 - notch)
+    quadraticTo(size.width - notch * 2, size.height / 2, size.width, size.height / 2 + notch)
+    lineTo(size.width, size.height); lineTo(0f, size.height); lineTo(0f, size.height / 2 + notch)
+    quadraticTo(notch * 2, size.height / 2, 0f, size.height / 2 - notch)
+    close()
+}
+
+@Composable private fun TriviaTicket(content: @Composable ColumnScope.() -> Unit) {
+    Surface(Modifier.fillMaxWidth().animateContentSize(), shape = TicketShape,
+        color = MaterialTheme.colorScheme.surfaceContainer) {
+        Column(Modifier.padding(horizontal = 28.dp, vertical = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp), content = content)
+    }
+}
+
+@Composable private fun TriviaArtwork() {
+    Image(painterResource(R.drawable.trivia_ticket), null,
+        Modifier.fillMaxWidth().height(180.dp).clip(RoundedCornerShape(16.dp)), contentScale = ContentScale.Crop)
 }
 
 @Preview(showBackground = true, widthDp = 400, heightDp = 900)

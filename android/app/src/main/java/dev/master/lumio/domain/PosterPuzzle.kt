@@ -6,21 +6,28 @@ import kotlin.random.Random
 
 /** Tap any two positions to swap; every permutation is solvable (this is not a sliding puzzle). */
 data class PuzzleBoard(val tiles: List<Int>, val selected: Int? = null, val moves: Int = 0) {
-    init { require(tiles.size == 9 && tiles.toSet() == (0..8).toSet()); require(selected == null || selected in 0..8) }
+    val dimension: Int get() = kotlin.math.sqrt(tiles.size.toDouble()).toInt()
+    init { require(tiles.size in listOf(9, 16, 36) && tiles.toSet() == tiles.indices.toSet()); require(selected == null || selected in tiles.indices) }
     val correct: Int get() = tiles.withIndex().count { it.index == it.value }
-    val complete: Boolean get() = correct == 9
+    val complete: Boolean get() = correct == tiles.size
     fun choose(position: Int): PuzzleBoard {
         if (position !in tiles.indices || complete) return this
         val first = selected ?: return copy(selected = position)
         if (first == position) return copy(selected = null)
+        return swap(first, position)
+    }
+    fun swap(first: Int, position: Int): PuzzleBoard {
+        if (complete || first !in tiles.indices || position !in tiles.indices || first == position) return this
         val swapped = tiles.toMutableList().apply { this[first] = tiles[position]; this[position] = tiles[first] }
         return copy(tiles = swapped, selected = null, moves = moves + 1)
     }
     companion object {
-        fun shuffled(random: Random): PuzzleBoard {
-            val tiles = (0..8).shuffled(random).toMutableList()
+        fun shuffled(random: Random, dimension: Int = 3): PuzzleBoard {
+            require(dimension in listOf(3, 4, 6))
+            val positions = (0 until dimension * dimension).toList()
+            val tiles = positions.shuffled(random).toMutableList()
             // Never serve an already-completed puzzle, even if the random permutation is identity.
-            if (tiles == (0..8).toList()) { tiles[0] = 1; tiles[1] = 0 }
+            if (tiles == positions) { tiles[0] = 1; tiles[1] = 0 }
             return PuzzleBoard(tiles)
         }
     }

@@ -26,6 +26,7 @@ class PuzzleViewModel(private val catalog: suspend () -> Catalog, private val ra
     val state = mutableState.asStateFlow()
     private var loadJob: Job? = null
     private var previousId: String? = null
+    private var dimension = 3
     private var nextId = 0L
     private val failedPosters = mutableSetOf<String>()
 
@@ -42,7 +43,7 @@ class PuzzleViewModel(private val catalog: suspend () -> Catalog, private val ra
                 if (movie == null) mutableState.value = PuzzleState.Unavailable
                 else {
                     previousId = movie.id
-                    mutableState.value = PuzzleState.Playing(PuzzleSession(++nextId, movie, PuzzleBoard.shuffled(random)))
+                    mutableState.value = PuzzleState.Playing(PuzzleSession(++nextId, movie, PuzzleBoard.shuffled(random, dimension)))
                 }
             } catch (e: CancellationException) { throw e }
             catch (_: Exception) { mutableState.value = PuzzleState.Error }
@@ -55,6 +56,21 @@ class PuzzleViewModel(private val catalog: suspend () -> Catalog, private val ra
         val board = old.board.choose(position)
         mutableState.value = PuzzleState.Playing(old.copy(board = board))
         if (board.moves > old.board.moves) cues.tryEmit(if (board.complete) GameCue.COMPLETE else GameCue.SWAP)
+    }
+
+    fun swap(first: Int, second: Int) {
+        val old = (state.value as? PuzzleState.Playing)?.session ?: return
+        if (old.reference || old.poster != PuzzlePoster.READY) return
+        val board = old.board.swap(first, second)
+        mutableState.value = PuzzleState.Playing(old.copy(board = board))
+        if (board.moves > old.board.moves) cues.tryEmit(if (board.complete) GameCue.COMPLETE else GameCue.SWAP)
+    }
+
+    fun difficulty(size: Int) {
+        if (size !in listOf(3, 4, 6) || size == dimension) return
+        dimension = size
+        mutableState.update { if (it is PuzzleState.Playing)
+            it.copy(session = it.session.copy(board = PuzzleBoard.shuffled(random, dimension), reference = false)) else it }
     }
 
     fun toggleReference() {

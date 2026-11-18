@@ -93,8 +93,8 @@ fun SwipeScreen(state: SwipeUiState, rate: (RatingValue) -> Unit, undo: () -> Un
                                 modifier = Modifier.weight(1f).heightIn(min = 80.dp),
                                 contentPadding = PaddingValues(8.dp), shape = RoundedCornerShape(8.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(
-                                    containerColor = if (value == RatingValue.LIKE) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
-                                    contentColor = if (value == RatingValue.LIKE) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface)) {
+                                    containerColor = MaterialTheme.colorScheme.surface,
+                                    contentColor = MaterialTheme.colorScheme.onSurface)) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                     Icon(painterResource(choiceIcon(value)), null, Modifier.size(24.dp))
                                     Text(stringResource(choiceLabel(value)), textAlign = androidx.compose.ui.text.style.TextAlign.Center)
@@ -136,11 +136,11 @@ private fun SwipeCard(movie: Movie, enabled: Boolean, rate: (RatingValue) -> Uni
         )
     }) {
         // No timed transitions or fling. With system animations disabled, even drag transforms stop.
-        MoviePoster(movie, Modifier.fillMaxWidth().height(300.dp).graphicsLayer {
+        MoviePoster(movie, Modifier.fillMaxWidth().height(360.dp).graphicsLayer {
             translationX = if (reduceMotion) 0f else drag.x.coerceIn(-size.width / 3, size.width / 3)
             translationY = if (reduceMotion) 0f else drag.y.coerceIn(-size.height / 4, size.height / 4)
             rotationZ = if (reduceMotion) 0f else (drag.x / 50).coerceIn(-8f, 8f)
-        })
+        }, contentScale = androidx.compose.ui.layout.ContentScale.Fit)
         if (choice != null) Surface(Modifier.align(Alignment.TopCenter).padding(16.dp),
             color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(8.dp)) {
             Text(labels.getValue(choice), Modifier.padding(12.dp), style = MaterialTheme.typography.titleMedium)

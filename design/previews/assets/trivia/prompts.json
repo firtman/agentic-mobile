@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "status": "exploratory",
+  "prompts": [
+    "Use case: stylized-concept. Asset type: wide 3:2 hero art for Lumio movie trivia game, Cinema Spotlight option. Create a premium cinematic still life: an exquisitely rendered coral-red cinema projector with two film reels, dramatic warm ivory light beam crossing a charcoal black room, a few floating film frames. Tangible matte clay and brushed metal, refined playful 3D art, low camera angle, hero centered, deep black negative space at edges. Palette #1D1C1A #F47B65 #F7F2E8. Art only. No text, no letters, no logos, no UI, no watermark. Original artwork, not a real movie poster.",
+    "Use case: stylized-concept. Asset type: wide 3:2 hero art for Lumio movie trivia game, Arcade Rush option. Create a delightfully punchy retro arcade diorama: coral chunky joystick, cream tactile arcade buttons, a small coral lightning-shaped sculptural token suspended, scattered round game coins, a short checkerboard platform. Bold isometric 3D collectible toy render. Warm ivory background #F7F2E8, ink #242320 outlines/details and coral #F47B65 primary, subtle sage details. Crisp shadows, high-end playful mobile game craft. Art only. No text, no letters, no numbers, no logos, no UI, no watermark.",
+    "Use case: stylized-concept. Asset type: wide 3:2 hero art for Lumio movie trivia game, Golden Ticket option. A charming dimensional paper-craft still life: one large unbranded coral cinema admission ticket with curved edge notches floating above a fan of cream tickets, a little folded paper star, a curled cinema film strip, beautifully cut thick paper, tactile embossing, restrained handcrafted collage. Warm cream #F7F2E8 backdrop, coral #F47B65 and ink #242320, subtle warm ochre detail. Sophisticated editorial meets playful mobile game. Art only. No text, no letters, no numbers, no logos, no UI, no watermark."
+  ]
+}

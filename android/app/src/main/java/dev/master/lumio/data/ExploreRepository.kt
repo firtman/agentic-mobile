@@ -8,7 +8,7 @@ enum class MovieSort(val field: String, val order: String) {
 }
 data class ExploreFilters(
     val query: String = "", val genre: String? = null,
-    val sort: MovieSort = MovieSort.TITLE_ASC,
+    val sort: MovieSort = MovieSort.YEAR_DESC,
 )
 interface ExploreRepository {
     suspend fun genres(): List<String>

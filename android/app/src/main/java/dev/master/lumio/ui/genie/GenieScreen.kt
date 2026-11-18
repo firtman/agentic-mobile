@@ -2,10 +2,11 @@ package dev.master.lumio.ui.genie
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -22,14 +23,22 @@ import dev.master.lumio.ui.theme.LumioTheme
 @Composable
 fun GenieScreen(state: GenieState, retry: () -> Unit, openDetails: (String) -> Unit,
                 startSwiping: () -> Unit, openHistory: () -> Unit) {
+    var selectedId by rememberSaveable { mutableStateOf<String?>(null) }
+    val listState = rememberLazyListState()
+    val activeId = (state as? GenieState.Content)?.recommendations?.let { picks ->
+        picks.firstOrNull { it.movie.id == selectedId }?.movie?.id ?: picks.firstOrNull()?.movie?.id
+    }
+    LaunchedEffect(activeId) { listState.scrollToItem(0) }
     val pane = stringResource(R.string.genie_recommendations)
-    LazyColumn(Modifier.fillMaxSize().semantics { paneTitle = pane },
+    LazyColumn(Modifier.fillMaxSize().semantics { paneTitle = pane }, state = listState,
         contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Column(Modifier.widthIn(max = 680.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Icon(painterResource(R.drawable.lucide_sparkles), null, tint = MaterialTheme.colorScheme.secondary)
-                Text(stringResource(R.string.genie_heading), style = MaterialTheme.typography.headlineLarge)
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Icon(painterResource(R.drawable.lucide_sparkles), null, tint = MaterialTheme.colorScheme.secondary)
+                    Text(stringResource(R.string.genie_heading), style = MaterialTheme.typography.headlineLarge)
+                }
                 Text(stringResource(R.string.genie_intro), style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
                 TextButton(onClick = openHistory,
@@ -63,8 +72,28 @@ fun GenieScreen(state: GenieState, retry: () -> Unit, openDetails: (String) -> U
             is GenieState.Content -> {
                 item { Text(stringResource(R.string.genie_selection), Modifier.widthIn(max = 680.dp).fillMaxWidth(),
                     style = MaterialTheme.typography.titleMedium) }
-                items(state.recommendations, key = { it.movie.id }) { recommendation ->
-                    RecommendationCard(recommendation) { openDetails(recommendation.movie.id) }
+                val index = state.recommendations.indexOfFirst { it.movie.id == selectedId }.coerceAtLeast(0)
+                val recommendation = state.recommendations.getOrNull(index)
+                if (recommendation != null) {
+                    item {
+                        RecommendationCard(recommendation) { openDetails(recommendation.movie.id) }
+                    }
+                    item {
+                        Column(Modifier.widthIn(max = 680.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Text(stringResource(R.string.genie_position, index + 1, state.recommendations.size),
+                                Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                            if (index < state.recommendations.lastIndex) {
+                                Button(onClick = { selectedId = state.recommendations[index + 1].movie.id }) {
+                                    Text(stringResource(R.string.genie_next))
+                                }
+                            } else {
+                                Text(stringResource(R.string.genie_end))
+                                OutlinedButton(onClick = { selectedId = state.recommendations.first().movie.id }) {
+                                    Text(stringResource(R.string.genie_restart))
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -86,7 +115,7 @@ fun GenieScreen(state: GenieState, retry: () -> Unit, openDetails: (String) -> U
         color = MaterialTheme.colorScheme.surfaceContainer) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                MoviePoster(movie, Modifier.width(88.dp).aspectRatio(2f / 3f))
+                MoviePoster(movie, Modifier.width(120.dp).aspectRatio(2f / 3f), contentScale = androidx.compose.ui.layout.ContentScale.Fit)
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(movie.title, style = MaterialTheme.typography.headlineSmall)
                     if (movie.year > 0) Text(movie.year.toString(), color = MaterialTheme.colorScheme.onSurfaceVariant)

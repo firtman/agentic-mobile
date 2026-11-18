@@ -41,6 +41,34 @@ class PuzzleViewModelTest {
         assertEquals(size, cues.size)
     }
 
+    @Test fun difficultyResetsBoardAndDragRespectsArtworkAndReference() = runTest(dispatcher) {
+        val vm = PuzzleViewModel({ catalog }, Random(1))
+        vm.start(); runCurrent()
+        vm.difficulty(4)
+        assertEquals(16, session(vm).board.tiles.size)
+        vm.swap(0, 1)
+        assertEquals(0, session(vm).board.moves)
+        vm.posterLoaded(session(vm).id)
+        vm.swap(0, 1)
+        assertEquals(1, session(vm).board.moves)
+        vm.toggleReference()
+        vm.swap(0, 1)
+        assertEquals(1, session(vm).board.moves)
+        vm.difficulty(6)
+        assertFalse(session(vm).reference)
+        assertNull(session(vm).board.selected)
+        assertEquals(0, session(vm).board.moves)
+        assertEquals(36, session(vm).board.tiles.size)
+        val board = session(vm).board
+        vm.difficulty(6); vm.difficulty(5)
+        assertEquals(board, session(vm).board)
+        vm.posterFailed(session(vm).id)
+        vm.swap(0, 1)
+        assertEquals(board, session(vm).board)
+        vm.nextPuzzle(); runCurrent()
+        assertEquals(36, session(vm).board.tiles.size)
+    }
+
     @Test fun lazyStartCreatesUnsolvedBoardAndRepeatedStartRetainsIt() = runTest(dispatcher) {
         var calls = 0
         val vm = PuzzleViewModel({ calls++; catalog }, Random(1))

@@ -35,7 +35,7 @@ class ExploreViewModel(
     private val restored = ExploreFilters(
         query = savedState["query"] ?: "",
         genre = savedState["genre"],
-        sort = MovieSort.entries.find { it.name == savedState.get<String>("sort") } ?: MovieSort.TITLE_ASC,
+        sort = MovieSort.entries.find { it.name == savedState.get<String>("sort") } ?: MovieSort.YEAR_DESC,
     )
     private val mutableState = MutableStateFlow(ExploreUiState(filters = restored))
     val state = mutableState.asStateFlow()

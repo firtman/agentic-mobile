@@ -46,7 +46,7 @@ import java.net.URI
 
 /** Decorative artwork; the surrounding card supplies the movie title to accessibility services. */
 @Composable
-fun MoviePoster(movie: Movie, modifier: Modifier = Modifier) {
+fun MoviePoster(movie: Movie, modifier: Modifier = Modifier, contentScale: ContentScale = ContentScale.Crop) {
     val url = remember(movie.posterUrl) {
         runCatching { URI(movie.posterUrl) }.getOrNull()?.let { uri ->
             movie.posterUrl.takeIf {
@@ -83,7 +83,7 @@ fun MoviePoster(movie: Movie, modifier: Modifier = Modifier) {
             AsyncImage(
                 model = url,
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = contentScale,
                 onLoading = { loaded = false },
                 onSuccess = { loaded = true },
                 onError = { loaded = false },

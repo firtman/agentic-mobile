@@ -52,6 +52,27 @@ class PosterPuzzleTest {
         }
     }
 
+    @Test fun everyDifficultySupportsDragAndTapAndCanBeSolved() {
+        for (size in listOf(3, 4, 6)) repeat(30) { seed ->
+            var board = PuzzleBoard.shuffled(Random(seed), size)
+            assertEquals(size, board.dimension)
+            assertEquals(size * size, board.tiles.size)
+            assertFalse(board.complete)
+            assertEquals(board, board.swap(-1, 0))
+            assertEquals(board, board.swap(0, size * size))
+            assertEquals(board, board.swap(0, 0))
+            assertEquals(board.choose(0).choose(1), board.swap(0, 1))
+            while (!board.complete) {
+                val position = board.tiles.indices.first { board.tiles[it] != it }
+                val previous = board
+                board = board.swap(position, board.tiles.indexOf(position))
+                assertEquals(previous.moves + 1, board.moves)
+            }
+            assertEquals(size * size, board.correct)
+            assertEquals(board, board.swap(0, 1))
+        }
+    }
+
     @Test fun posterUrlRequiresValidHttpHostAndIsNeverRewritten() {
         val valid = listOf("https://example.org/path?a=1", "http://example.org:8080/poster.png", "HTTPS://example.org/p")
         valid.forEach { assertEquals(it, suppliedPosterUrl(movie("m", it))) }

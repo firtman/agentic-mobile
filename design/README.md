@@ -13,6 +13,7 @@ Open these standalone HTML files in a modern browser:
 
 - [Colors and typography](previews/lumio-editorial-foundations.html): appearance selector, palette, and type specimen.
 - [UI icon family](previews/lumio-icon-family.html): appearance and size selectors, plus navigation selection states.
+- [Trivia design directions](previews/lumio-trivia-directions.html): exploratory Cinema Spotlight, Arcade Rush, and Golden Ticket; playable opening, questions, feedback, pause, and results with automatic progression. These layouts await owner selection.
 
 [Preview sources and usage notes](previews/README.md) explain dependencies, limitations, and maintenance. Preview controls demonstrate styling; they do not implement app navigation or save personal movie preferences.
 
@@ -46,3 +47,8 @@ Stage 7 activates the native Poster Puzzle card and adds tile selection, referen
 
 
 Stage 8 adds native Settings with appearance and game sound choices, bundled font/icon notices and catalog attribution. Light and German dark/large-text preview sources live with `SettingsScreen.kt`. Stages 7 and 8 were approved for commit and push on November 17, 2026; this does not approve exploratory design directions.
+
+
+## Android discovery and Arcade refinements — approved November 18, 2026
+
+The owner requested native refinements after reviewing the running app. [Implementation notes](../docs/ANDROID-REFINEMENTS.md) describe newest-first Explore, full-poster Swipe, focused Genie, the ticket-inspired Trivia adaptation and draggable 3×3/4×4/6×6 puzzles. The Trivia direction reuses the saved Golden Ticket artwork and question-card idea from the [editable three-direction preview](previews/sources/lumio-trivia-directions.html); the original [standalone browser export](previews/lumio-trivia-directions.html) remains an exploratory comparison, not an exact replica of the native implementation. [Native welcome capture](previews/assets/trivia/android-welcome.png) documents the implemented adaptation; native composables remain the editable implementation source. The owner approved the completed native refinement set on November 18, 2026; the approved identity remains unchanged. See [validation](../validation/android.md) for actual checks and limits.

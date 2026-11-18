@@ -1,5 +1,12 @@
 package dev.master.lumio.ui.puzzle
 
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.zIndex
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
@@ -34,11 +41,12 @@ import kotlin.math.max
 fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choose: (Int) -> Unit,
                  reference: () -> Unit, next: () -> Unit, posterFailed: (Long) -> Unit,
                  posterLoaded: (Long) -> Unit, retryPoster: () -> Unit,
-                 details: (String) -> Unit, back: () -> Unit) {
+                 details: (String) -> Unit, back: () -> Unit, swap: (Int, Int) -> Unit = { _, _ -> },
+                 difficulty: (Int) -> Unit = {}) {
     LaunchedEffect(Unit) { start() }
     val pane = stringResource(R.string.poster_puzzle)
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp).semantics { paneTitle = pane },
-        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
         when (state) {
             PuzzleState.Ready, PuzzleState.Loading -> {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
@@ -60,7 +68,7 @@ fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choos
                     ImageRequest.Builder(context).data(session.movie.posterUrl)
                         .size(900, 1350).build()
                 }
-                // One decoded painter is shared by all nine tiles; global disk cache is disabled.
+                // One decoded painter is shared by all tiles; global disk cache is disabled.
                 val painter = rememberAsyncImagePainter(request)
                 val imageState by painter.state.collectAsState()
                 LaunchedEffect(imageState, session.id) {
@@ -73,10 +81,23 @@ fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choos
                 val ready = session.poster == PuzzlePoster.READY && imageState is AsyncImagePainter.State.Success
                 Text(session.movie.title, style = MaterialTheme.typography.headlineMedium)
                 if (session.movie.year > 0) Text(session.movie.year.toString(), color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text(stringResource(R.string.puzzle_instructions), Modifier.widthIn(max = 520.dp).fillMaxWidth())
-                Text(stringResource(R.string.puzzle_progress, session.board.correct), style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-                Text(stringResource(R.string.puzzle_moves, session.board.moves))
+                Text(stringResource(R.string.puzzle_difficulty), style = MaterialTheme.typography.titleMedium)
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    listOf(3, 4, 6).forEach { size ->
+                        FilterChip(selected = session.board.dimension == size, onClick = { difficulty(size) },
+                            label = { Text("$size × $size") }, modifier = Modifier.heightIn(min = 48.dp),
+                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Coral,
+                                selectedLabelColor = Ink, containerColor = MaterialTheme.colorScheme.surface,
+                                labelColor = MaterialTheme.colorScheme.onSurface))
+                    }
+                }
+                Text(stringResource(R.string.puzzle_difficulty_hint), style = MaterialTheme.typography.bodySmall)
+                Text(stringResource(R.string.puzzle_instructions), Modifier.widthIn(max = 520.dp).fillMaxWidth(), style = MaterialTheme.typography.bodyMedium)
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(stringResource(R.string.puzzle_progress, session.board.correct, session.board.tiles.size), style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                    Text(stringResource(R.string.puzzle_moves, session.board.moves))
+                }
                 if (session.poster == PuzzlePoster.FAILED || imageState is AsyncImagePainter.State.Error) {
                     Text(stringResource(R.string.puzzle_poster_error), color = MaterialTheme.colorScheme.error)
                     OutlinedButton(onClick = retryPoster) { Text(stringResource(R.string.retry)) }
@@ -89,7 +110,7 @@ fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choos
                         Canvas(Modifier.widthIn(max = 320.dp).fillMaxWidth().aspectRatio(2f / 3f).semantics { contentDescription = label }) {
                             drawPuzzleArtwork(painter, size)
                         }
-                    } else PuzzleGrid(session, painter, choose)
+                    } else PuzzleGrid(session, painter, choose, swap)
                     if (session.board.complete) {
                         Text(stringResource(R.string.puzzle_complete), style = MaterialTheme.typography.headlineMedium,
                             modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
@@ -116,31 +137,62 @@ fun PuzzleScreen(state: PuzzleState, start: () -> Unit, retry: () -> Unit, choos
     }
 }
 
-@Composable private fun PuzzleGrid(session: PuzzleSession, painter: Painter, choose: (Int) -> Unit) {
-    Column(Modifier.widthIn(max = 320.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        repeat(3) { row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                repeat(3) { col ->
-                    val position = row * 3 + col
+/** The board owns the drag so scrolling cannot steal a started tile gesture. Tap swapping remains available. */
+@Composable private fun PuzzleGrid(session: PuzzleSession, painter: Painter, choose: (Int) -> Unit, swap: (Int, Int) -> Unit) {
+    val dimension = session.board.dimension
+    var boardSize by remember { mutableStateOf(IntSize.Zero) }
+    var source by remember(session.id, dimension) { mutableStateOf<Int?>(null) }
+    var origin by remember { mutableStateOf(Offset.Zero) }
+    var delta by remember { mutableStateOf(Offset.Zero) }
+    val latestSwap by rememberUpdatedState(swap)
+    fun position(point: Offset): Int? {
+        if (boardSize.width <= 0 || boardSize.height <= 0 || point.x < 0 || point.y < 0 ||
+            point.x >= boardSize.width || point.y >= boardSize.height) return null
+        val col = (point.x / boardSize.width * dimension).toInt()
+        val row = (point.y / boardSize.height * dimension).toInt()
+        return row * dimension + col
+    }
+    val hovered = if (source != null) position(origin + delta) else null
+    Column(Modifier.widthIn(max = 360.dp).fillMaxWidth().onSizeChanged { boardSize = it }
+        .pointerInput(session.id, dimension, session.board.complete) {
+            if (!session.board.complete) detectDragGestures(
+                onDragStart = { origin = it; delta = Offset.Zero; source = position(it) },
+                onDragCancel = { source = null; delta = Offset.Zero },
+                onDragEnd = {
+                    val from = source
+                    val target = position(origin + delta)
+                    source = null; delta = Offset.Zero
+                    if (from != null && target != null) latestSwap(from, target)
+                },
+                onDrag = { change, amount -> change.consume(); delta += amount }
+            )
+        }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        repeat(dimension) { row ->
+            Row(Modifier.zIndex(if (source?.div(dimension) == row) 1f else 0f), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                repeat(dimension) { col ->
+                    val position = row * dimension + col
                     val tile = session.board.tiles[position]
-                    val selected = session.board.selected == position
+                    val selected = session.board.selected == position || source == position
                     val label = stringResource(R.string.puzzle_tile, tile + 1, position + 1)
                     val selectedText = stringResource(if (selected) R.string.selection_active else R.string.puzzle_not_selected)
                     Surface(modifier = Modifier.weight(1f).aspectRatio(2f / 3f)
+                        .zIndex(if (source == position) 1f else 0f)
+                        .offset { if (source == position) IntOffset(delta.x.toInt(), delta.y.toInt()) else IntOffset.Zero }
                         .selectable(selected, enabled = !session.board.complete, role = Role.Button, onClick = { choose(position) })
                         .semantics { contentDescription = label; stateDescription = selectedText },
-                        shape = RoundedCornerShape(4.dp), border = if (selected) BorderStroke(3.dp, Coral) else null) {
+                        shape = RoundedCornerShape(4.dp), border = if (selected || hovered == position) BorderStroke(3.dp, Coral) else null) {
                         Box {
                             Canvas(Modifier.fillMaxSize().clearAndSetSemantics {}) {
-                                val full = Size(size.width * 3, size.height * 3)
+                                val full = Size(size.width * dimension, size.height * dimension)
                                 clipRect {
-                                    translate(-(tile % 3) * size.width, -(tile / 3) * size.height) {
+                                    translate(-(tile % dimension) * size.width, -(tile / dimension) * size.height) {
                                         drawPuzzleArtwork(painter, full)
                                     }
                                 }
                             }
-                            if (selected) Surface(Modifier.align(Alignment.TopEnd).padding(4.dp), color = Coral, shape = RoundedCornerShape(4.dp)) {
-                                Icon(painterResource(R.drawable.lucide_check), null, Modifier.size(24.dp), tint = Ink)
+                            if (selected) Surface(Modifier.align(Alignment.TopEnd).padding(2.dp),
+                                color = Coral, shape = RoundedCornerShape(4.dp)) {
+                                Icon(painterResource(R.drawable.lucide_check), null, Modifier.size(20.dp), tint = Ink)
                             }
                         }
                     }

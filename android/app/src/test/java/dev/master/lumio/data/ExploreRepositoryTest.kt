@@ -20,6 +20,6 @@ class ExploreRepositoryTest {
         repository.movies(ExploreFilters("  Alien  ", "Horror", MovieSort.YEAR_DESC), 48)
         repository.movies(ExploreFilters(query = "   "), 0)
         assertEquals(listOf("Alien", "Horror", "year", "desc", 24, 48), calls[0])
-        assertEquals(listOf(null, null, "title", "asc", 24, 0), calls[1])
+        assertEquals(listOf(null, null, "year", "desc", 24, 0), calls[1])
     }
 }

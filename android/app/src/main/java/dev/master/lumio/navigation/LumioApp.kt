@@ -174,7 +174,7 @@ private val destinations = listOf(
                     PuzzleScreen(state, puzzle::start, puzzle::retry, puzzle::choose, puzzle::toggleReference,
                         puzzle::nextPuzzle, puzzle::posterFailed, puzzle::posterLoaded, puzzle::retryPoster, { id ->
                             if (nav.currentDestination?.hasRoute<PosterPuzzle>() == true) nav.navigate(MovieDetails(id))
-                        }, { nav.navigateUp() })
+                        }, { nav.navigateUp() }, puzzle::swap, puzzle::difficulty)
                 }
                 composable<Settings> { SettingsScreen(preferences, settingsModel::appearance, settingsModel::sound, settingsModel::retry) }
             }

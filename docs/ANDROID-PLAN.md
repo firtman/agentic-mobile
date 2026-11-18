@@ -133,3 +133,7 @@ Poster Puzzle implemented locally: full-screen 3×3 tap-two-tiles swap game from
 ## Stage 8 implementation status — 2026-11-17
 
 Authorized by the owner while stage 7 remains pending. Settings adds System / Light / Dark appearance, game sound, bundled font/icon licences and catalog source notices/links. Preferences DataStore stores only settings on device; catalog data remains memory-only. Theme changes apply across the app, including Trivia feedback colours. Sound events cover Trivia feedback/timeouts and Puzzle swaps/completion, use media volume, and do not replay on navigation. Read/write errors have explicit feedback. See `validation/android.md` for actual checks and limitations. The owner approved stages 7 and 8 for commit and push on 2026-11-17. The owner then instructed not to do stage 9; it remains unstarted and requires new direction.
+
+## Scoped owner refinements — 2026-11-17
+
+After stages 7/8 approval and the instruction not to start Stage 9, the owner authorized newest-first Explore, full-poster/neutral-action Swipe, focused Genie, a Trivia redesign using the earlier design ideas, and draggable Puzzle pieces with 3×3/4×4/6×6 sizes. The owner approved these completed refinements for commit and push on November 18, 2026; see [behavior and design notes](ANDROID-REFINEMENTS.md) and [actual validation](../validation/android.md). Stage 9 and iOS remain unstarted.
