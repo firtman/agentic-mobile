@@ -92,6 +92,8 @@ Install the base toolchain, choose Codex, Claude Code, or Antigravity, and add t
 | Google's official Android skills | [Skills repository](https://github.com/android/skills), [documentation](https://developer.android.com/tools/agents/android-skills) |
 | Community Android emulator plugin for Codex | [mttmcknn/android-emulator-plugin](https://github.com/mttmcknn/android-emulator-plugin), with a live device panel and agent inspection/control |
 | Community Android emulator plugin for Claude | [tiwiz/android-emulator-plugin-claude](https://github.com/tiwiz/android-emulator-plugin-claude), a Claude-oriented fork; follow its current host and installation requirements |
+| Community AppStore Connect skill | [https://github.com/rorkai/app-store-connect-cli-skills](https://github.com/rorkai/app-store-connect-cli-skills) |
+
 
 The community emulator plugins are independent projects, not official Google, OpenAI, or Anthropic plugins. They complement the SDK/emulator installation. A physical device with USB debugging can also be used.
 

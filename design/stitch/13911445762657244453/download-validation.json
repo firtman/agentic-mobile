@@ -1,0 +1,89 @@
+{
+  "files": [
+    {
+      "screen": "arcade",
+      "file": "screens/arcade/screen.html",
+      "bytes": 27466,
+      "sha256": "b7ed08f55db6a7acca7db2913e862692299d958071c97525f875841d279db8c2"
+    },
+    {
+      "screen": "arcade",
+      "file": "screens/arcade/screen.png",
+      "bytes": 252935,
+      "sha256": "e6e0194f8cc75aa09763c1a7d40e77adca84d52eb7b24d9f215e2d6cecbd04de",
+      "width": 780,
+      "height": 2508
+    },
+    {
+      "screen": "explore",
+      "file": "screens/explore/screen.html",
+      "bytes": 18478,
+      "sha256": "0bb87fb9deacf1b505faff5e3a88ec34d9d8626e3cb39c35e6d772a8c97e80d1"
+    },
+    {
+      "screen": "explore",
+      "file": "screens/explore/screen.png",
+      "bytes": 1276118,
+      "sha256": "ddb0eda6ae64dd9390ccac71d307edf87d8cbd14eb7be8cf3b1c51800921abed",
+      "width": 780,
+      "height": 2616
+    },
+    {
+      "screen": "film-details",
+      "file": "screens/film-details/screen.html",
+      "bytes": 14467,
+      "sha256": "c0ee34779320896e8103430fd988bbb2ac05a7313ae11de565897e02ad47f2c1"
+    },
+    {
+      "screen": "film-details",
+      "file": "screens/film-details/screen.png",
+      "bytes": 867405,
+      "sha256": "fc50102e67522e7474eb4630a7b1118dac425f9d2a212b4f355f7a265960da1a",
+      "width": 780,
+      "height": 2528
+    },
+    {
+      "screen": "genie-recommendations",
+      "file": "screens/genie-recommendations/screen.html",
+      "bytes": 18410,
+      "sha256": "3737980f336148e5bbe9ab7ca818559e7aa8998551b7b80fd11110b087ab7971"
+    },
+    {
+      "screen": "genie-recommendations",
+      "file": "screens/genie-recommendations/screen.png",
+      "bytes": 1607885,
+      "sha256": "a10c688b67ce9f330deec6c863bd424e7a8381081ddfb4ba3b919c132ba9a430",
+      "width": 780,
+      "height": 3972
+    },
+    {
+      "screen": "settings",
+      "file": "screens/settings/screen.html",
+      "bytes": 15823,
+      "sha256": "9f08fead600c3de1298ad569ef4ef882b4040b96b0efe39b274780acf3b7cb21"
+    },
+    {
+      "screen": "settings",
+      "file": "screens/settings/screen.png",
+      "bytes": 175686,
+      "sha256": "fd63bb1a68945785843b35d85b2c617a933f7f01ba89e1ea1153894c891f32fd",
+      "width": 780,
+      "height": 2184
+    },
+    {
+      "screen": "swipe",
+      "file": "screens/swipe/screen.html",
+      "bytes": 15858,
+      "sha256": "bf0f56049c2e6b49a71891c3c9261a351973d82dbbff5a093de022b77a1f76d5"
+    },
+    {
+      "screen": "swipe",
+      "file": "screens/swipe/screen.png",
+      "bytes": 689276,
+      "sha256": "662066047a2ead5742e7f1c5ae6249b80f02da0b427cfd075e3a16fe3f6e7070",
+      "width": 780,
+      "height": 2010
+    }
+  ],
+  "errors": []
+}

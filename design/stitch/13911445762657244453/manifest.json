@@ -1,0 +1,127 @@
+{
+  "projectTitle": "Lumio Film Discovery App",
+  "projectId": "13911445762657244453",
+  "retrievedDate": "2026-11-17",
+  "screens": [
+    {
+      "id": "05620f5a87624207bdcd52009675bccc",
+      "slug": "settings",
+      "deviceType": "MOBILE",
+      "height": "2184",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/05620f5a87624207bdcd52009675bccc:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/05620f5a87624207bdcd52009675bccc/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/05620f5a87624207bdcd52009675bccc",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c22f9cf4302dea652d81dee3d:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/05620f5a87624207bdcd52009675bccc/fileEntries/screenshot"
+      },
+      "title": "Settings - Lumio",
+      "width": "780"
+    },
+    {
+      "id": "81d134fa932d41098f2f02fa22ea00d4",
+      "slug": "film-details",
+      "deviceType": "MOBILE",
+      "height": "2528",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/81d134fa932d41098f2f02fa22ea00d4:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/81d134fa932d41098f2f02fa22ea00d4/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/81d134fa932d41098f2f02fa22ea00d4",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c2368093c00303eed7126f8a1:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/81d134fa932d41098f2f02fa22ea00d4/fileEntries/screenshot"
+      },
+      "title": "Film Details - Lumio",
+      "width": "780"
+    },
+    {
+      "id": "48c527db61a34742a46d2e5024f36fa4",
+      "slug": "arcade",
+      "deviceType": "MOBILE",
+      "height": "2508",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/48c527db61a34742a46d2e5024f36fa4:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/48c527db61a34742a46d2e5024f36fa4/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/48c527db61a34742a46d2e5024f36fa4",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c2458d0ee034a4e22c50818b4:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/48c527db61a34742a46d2e5024f36fa4/fileEntries/screenshot"
+      },
+      "title": "Arcade - Lumio",
+      "width": "780"
+    },
+    {
+      "id": "9e8742089b804bfeacd9599cf39fdbc1",
+      "slug": "genie-recommendations",
+      "deviceType": "MOBILE",
+      "height": "3972",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/9e8742089b804bfeacd9599cf39fdbc1:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/9e8742089b804bfeacd9599cf39fdbc1/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/9e8742089b804bfeacd9599cf39fdbc1",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c23f6e04f020cc0da340b51a9:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/9e8742089b804bfeacd9599cf39fdbc1/fileEntries/screenshot"
+      },
+      "title": "Genie Recommendations - Lumio",
+      "width": "780"
+    },
+    {
+      "id": "159239ddfde1447aa65176fbd8150c08",
+      "slug": "explore",
+      "deviceType": "MOBILE",
+      "height": "2616",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/159239ddfde1447aa65176fbd8150c08:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/159239ddfde1447aa65176fbd8150c08/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/159239ddfde1447aa65176fbd8150c08",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c23a455fa02a9957dcf3436d5:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/159239ddfde1447aa65176fbd8150c08/fileEntries/screenshot"
+      },
+      "title": "Explore - Lumio",
+      "width": "780"
+    },
+    {
+      "id": "91db4b9ac3304deba68e1048ee98e268",
+      "slug": "swipe",
+      "deviceType": "MOBILE",
+      "height": "2010",
+      "htmlCode": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/91db4b9ac3304deba68e1048ee98e268:download",
+        "mimeType": "text/html",
+        "name": "projects/13911445762657244453/screens/91db4b9ac3304deba68e1048ee98e268/fileEntries/html"
+      },
+      "name": "projects/13911445762657244453/screens/91db4b9ac3304deba68e1048ee98e268",
+      "screenType": "DESIGN",
+      "screenshot": {
+        "downloadUrl": "https://stitch.googleapis.com/v1/projects/13911445762657244453/files/screenshot_0006607c23b5eda2053b6bf13519d83e:download",
+        "mimeType": "image/png",
+        "name": "projects/13911445762657244453/screens/91db4b9ac3304deba68e1048ee98e268/fileEntries/screenshot"
+      },
+      "title": "Swipe - Lumio",
+      "width": "780"
+    }
+  ]
+}
