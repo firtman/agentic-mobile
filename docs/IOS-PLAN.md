@@ -37,3 +37,4 @@ The Android plan records original intent and stage delivery. The approved refine
 
 - Stage 0 was approved and pushed to origin/main as `f347704`. The owner then authorized Stage 1 and selected iPhone 18 Pro for testing.
 - During the Stage 1 review, the owner requested Liquid Glass. Use the native system treatment for iOS 26 and later toolbars, the floating compact navigation bar, and the Explore sort control. Keep the Editorial palette and opaque reading surfaces. Retain the existing navigation and control styling on iOS 17 and 18.
+- Stage 1, including Liquid Glass, was approved and pushed to origin/main as `e52a0e1`. The owner then authorized Stage 2 and requested review on the existing iPhone 18 Pro simulator tab.

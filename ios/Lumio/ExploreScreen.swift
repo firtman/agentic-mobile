@@ -183,31 +183,35 @@ struct ExploreScreen: View {
             let layout = typeSize.isAccessibilitySize
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
                 : AnyLayout(HStackLayout(alignment: .top, spacing: 14))
-            layout {
-                MoviePoster(movie: movie, aspect: 2.0 / 3)
-                    .frame(width: typeSize.isAccessibilitySize ? 120 : 104)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                VStack(alignment: .leading, spacing: 7) {
-                    movieCaption(movie, style: .section)
-                    if let synopsis = movie.synopsis, !synopsis.isEmpty {
-                        Text(synopsis)
-                            .editorialFont(.body)
-                            .foregroundStyle(palette.secondary)
-                            .lineLimit(3)
-                    }
-                    if let source = suppliedWebURL(movie.sourceUrl) {
-                        Link("View source", destination: source)
+            NavigationLink(value: LumioRoute.movie(movie.id)) {
+                layout {
+                    MoviePoster(movie: movie, aspect: 2.0 / 3)
+                        .frame(width: typeSize.isAccessibilitySize ? 120 : 104)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    VStack(alignment: .leading, spacing: 7) {
+                        movieCaption(movie, style: .section)
+                        if let synopsis = movie.synopsis, !synopsis.isEmpty {
+                            Text(synopsis)
+                                .editorialFont(.body)
+                                .foregroundStyle(palette.secondary)
+                                .lineLimit(3)
+                        }
+                        Text("Movie details")
                             .editorialFont(.control)
-                            .frame(minHeight: 44)
+                            .foregroundStyle(palette.accent)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background(palette.raised)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12).strokeBorder(palette.divider)
+                        .allowsHitTesting(false)
+                }
+                .contentShape(RoundedRectangle(cornerRadius: 12))
             }
-            .padding(12)
-            .background(palette.raised)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .overlay { RoundedRectangle(cornerRadius: 12).strokeBorder(palette.divider) }
-            .accessibilityElement(children: .contain)
+            .buttonStyle(.plain)
             .accessibilityIdentifier("explore-spotlight")
         }
     }
@@ -229,13 +233,16 @@ struct ExploreScreen: View {
                 spacing: 20
             ) {
                 ForEach(model.movies) { movie in
-                    VStack(alignment: .leading, spacing: 6) {
-                        MoviePoster(movie: movie, aspect: 2.0 / 3)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                        movieCaption(movie, style: .movieTitle)
+                    NavigationLink(value: LumioRoute.movie(movie.id)) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            MoviePoster(movie: movie, aspect: 2.0 / 3)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                            movieCaption(movie, style: .movieTitle)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityElement(children: .combine)
+                    .buttonStyle(.plain)
                     .accessibilityIdentifier("explore-movie")
                 }
             }

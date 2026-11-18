@@ -8,6 +8,10 @@ From the repository root, verify the local API at http://127.0.0.1:3000/health. 
 
 For a physical device, select your local signing team and use `HOST=0.0.0.0 npm --prefix api start` on the Mac. Set the Debug app target’s `LUMIO_API_BASE_URL` build setting to the Mac’s LAN address and port. Keep this override local and allow local network access when prompted. Debug can also read the same named environment variable from the Xcode run scheme. Release uses the HTTPS testing endpoint. [Apple’s local networking transport setting](https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowslocalnetworking)
 
+## Movie details and choices
+
+Open a film from the Spotlight or a poster card. Details are fetched from the catalog on demand. Like, Dislike, and Not seen yet are stored on-device in SwiftData with the rated film’s scoring and history metadata. An accepted change offers Undo. Undo restores the previous choice or removes a first choice. The shared local ledger retains up to 200 changes.
+
 ## Tests
 
 Run from the repository root with the local API running. Replace the destination with an installed iPhone or iPad Simulator.
@@ -18,7 +22,7 @@ xcodebuild -project ios/Lumio.xcodeproj -scheme Lumio \
   -parallel-testing-enabled NO test
 ```
 
-The URLProtocol unit tests use synthetic responses. The UI suite checks live Explore, empty search and filter reset, Retry with a deliberately unavailable debug endpoint, and localized navigation.
+The URLProtocol unit tests use synthetic responses. The UI suite checks live Explore, empty search and filter reset, Retry with a deliberately unavailable debug endpoint, localized navigation, and the Movie Details rating and Undo flow. Ratings tests use an isolated store.
 
 ## Interface
 

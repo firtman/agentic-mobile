@@ -42,6 +42,7 @@ func suppliedWebURL(_ value: String?) -> URL? {
 struct MoviePoster: View {
     let movie: Movie
     let aspect: CGFloat
+    var contentMode: ContentMode = .fill
     @State private var image: CGImage?
 
     var body: some View {
@@ -53,7 +54,7 @@ struct MoviePoster: View {
                     GeometryReader { geometry in
                         Image(decorative: image, scale: 1)
                             .resizable()
-                            .scaledToFill()
+                            .aspectRatio(contentMode: contentMode)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .clipped()
                     }
@@ -61,6 +62,7 @@ struct MoviePoster: View {
                     fallback
                 }
             }
+            .background(EditorialPalette(.dark).subtle)
             .clipped()
             .accessibilityHidden(true)
             .task(id: url) {

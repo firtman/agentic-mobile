@@ -1,4 +1,9 @@
 import SwiftUI
+import SwiftData
+
+enum LumioRoute: Hashable {
+    case movie(String)
+}
 
 private enum Destination: String, CaseIterable, Identifiable {
     case explore, swipe, genie, arcade
@@ -25,6 +30,8 @@ private enum Destination: String, CaseIterable, Identifiable {
 }
 
 struct LumioShell: View {
+    let catalog: CatalogClient
+    let ratings: RatingsStore
     @State private var explore: ExploreModel
     @Environment(\.colorScheme) private var scheme
     @Environment(\.horizontalSizeClass) private var width
@@ -33,7 +40,9 @@ struct LumioShell: View {
     @State private var showingSettings = false
     @State private var sidebarVisibility: NavigationSplitViewVisibility = .all
 
-    init(catalog: CatalogClient) {
+    init(catalog: CatalogClient, ratings: RatingsStore) {
+        self.catalog = catalog
+        self.ratings = ratings
         _explore = State(initialValue: ExploreModel(
             catalog: catalog,
             savedSort: UserDefaults.standard.string(forKey: "explore.sort")
@@ -63,7 +72,9 @@ struct LumioShell: View {
             } else {
                 navigation(for: selection)
                     .safeAreaInset(edge: .bottom, spacing: 0) {
-                        compactNavigation
+                        if paths[selection, default: NavigationPath()].isEmpty {
+                            compactNavigation
+                        }
                     }
             }
         }
@@ -122,20 +133,31 @@ struct LumioShell: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showingSettings = true
-                    } label: {
-                        LucideIcon(name: "settings-2")
-                            .frame(minWidth: 44, minHeight: 44)
-                            .contentShape(Rectangle())
-                    }
-                    .accessibilityLabel("Settings")
-                    .accessibilityIdentifier("settings")
+                settingsToolbar
+            }
+            .navigationDestination(for: LumioRoute.self) { route in
+                switch route {
+                case .movie(let id):
+                    MovieDetailsScreen(movieID: id, catalog: catalog, ratings: ratings)
+                        .toolbar { settingsToolbar }
                 }
             }
         }
         .id(destination)
+    }
+
+    private var settingsToolbar: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                showingSettings = true
+            } label: {
+                LucideIcon(name: "settings-2")
+                    .frame(minWidth: 44, minHeight: 44)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Settings")
+            .accessibilityIdentifier("settings")
+        }
     }
 
     private func screen<Content: View>(
@@ -191,5 +213,7 @@ struct LumioShell: View {
 }
 
 #Preview {
-    LumioShell(catalog: .configured())
+    LumioShell(catalog: .configured(), ratings: RatingsStore(
+        configuration: ModelConfiguration(isStoredInMemoryOnly: true)
+    ))
 }

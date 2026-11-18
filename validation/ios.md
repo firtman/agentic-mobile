@@ -20,3 +20,9 @@
 
 - The revised build passed all nine XCTest cases on iPhone 18 Pro (iOS 27.2) and all nine on iPad Pro 11-inch (M4, iPadOS 18.4).
 - Verified the floating Liquid Glass navigation, system Settings control, and glass Sort menu on the live Codex tab. The menu displayed all six choices with Newest first selected. The iPadOS 18.4 run exercised the earlier-OS styling.
+
+## Stage 2 · Movie details and ratings · 2026-11-18
+
+- Built Debug with Xcode 27.2. All 12 XCTest cases passed on both iPhone 18 Pro (iOS 27.2) and iPad Pro 11-inch (M4, iPadOS 18.4). The live UI test opened details from Spotlight and a grid card, saved Like and Dislike, restored Like with Undo, and verified the restored choice after returning to Explore and reopening the same film.
+- The SwiftData tests used a disposable on-disk store to check reopening, Unseen, repeated-choice no-ops, stale Undo rejection, previous-value restoration, and undoing a first choice. A separate test verified the 200-entry cap. Simulator UI tests used an isolated memory store.
+- All 52 localization keys align across English, Spanish, German, and Portuguese. Physical device, iOS 17 runtime, full VoiceOver, two-column landscape layout, and an injected details-specific request failure were outside this validation run. Existing catalog Retry checks passed on both simulators.
